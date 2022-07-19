@@ -2,7 +2,7 @@ import dbConnect from 'src/utils/dbConnect.js';
 import User from 'src/models/User';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import RefreshToken from 'src/models/FreshToken';
+import RefreshToken from 'src/models/RefreshToken';
 import { serialize } from 'cookie';
 
 async function handler(req, res) {
@@ -62,7 +62,7 @@ async function handler(req, res) {
         }
       } catch (error) {
         console.log(error);
-        return res.status(500).json(errordsadas);
+        return res.status(500).json(error);
       }
       break;
 
