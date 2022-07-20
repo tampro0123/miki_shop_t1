@@ -1,9 +1,12 @@
 import dbConnect from 'src/utils/dbConnect.js';
 import User from 'src/models/User';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import RefreshToken from 'src/models/RefreshToken';
 import { serialize } from 'cookie';
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "src/hooks/generateToken";
 
 async function handler(req, res) {
   const { method } = req;
@@ -28,17 +31,9 @@ async function handler(req, res) {
         }
         if (user && validPassword) {
           const { password, ...userInfo } = user;
-          const data = req.body;
-          const userHash = {
-            _id: user._id,
-            role: user.role,
-          };
-          const accessToken = jwt.sign(userHash, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '30s',
-          });
-          const refreshToken = jwt.sign(userHash, process.env.REFRESH_TOKEN_SECRET, {
-            expiresIn: '1y',
-          });
+
+          const accessToken = generateAccessToken(user);
+          const refreshToken = generateRefreshToken(user);
           const newRefreshToken = new RefreshToken({
             userId: user._id,
             refreshToken,
