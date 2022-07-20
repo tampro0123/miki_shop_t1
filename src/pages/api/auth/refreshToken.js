@@ -52,7 +52,7 @@ const refreshTokenHandler = async (req, res) => {
       } catch (err) {
         return res.status(500).json({
           err: err,
-          message: "co loi roi d c m!",
+          message: "Error at RefreshToken",
         });
       }
       break;
