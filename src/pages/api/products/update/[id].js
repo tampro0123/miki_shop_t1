@@ -21,7 +21,7 @@ const updateHandler = async (req, res) => {
   const { id } = req.query;
 
   switch (method) {
-    case 'PATCH':
+    case 'PATCH' :
       const { name, image, price, description, category } = req.body;
       const options = {
         upload_preset: 'products',
