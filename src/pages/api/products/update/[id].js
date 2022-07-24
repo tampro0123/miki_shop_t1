@@ -40,7 +40,7 @@ const updateHandler = async (req, res) => {
           price,
           description,
           category,
-        });
+        }, {new: true});
         return res.status(201).json({
           success: true,
           message: 'Product successfully created!',
