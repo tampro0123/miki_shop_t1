@@ -1,11 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import {Button} from "../components/Button";
+import Button from 'src/components/Button';
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {
-  return (
-      <>
-          <Button content='Tìm hiểu thêm'/>
-      </>
-  );
+  return <Button secondary>Tìm hiểu thêm</Button>;
 }
