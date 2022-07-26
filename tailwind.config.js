@@ -16,6 +16,7 @@ module.exports = {
         '3rd-text': '#B78D71',
         'price-text': '#92715A',
         'btn': '#251C17',
+        'Neutral/2': '#626262',
       },
       spacing: {
         '8': '8px',
@@ -25,6 +26,9 @@ module.exports = {
       borderRadius: {
         '8': '8px',
         '16': '16px',
+      },
+      fontSize: {
+        '32': '32px',
       },
     },
   },

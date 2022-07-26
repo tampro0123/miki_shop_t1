@@ -5,7 +5,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
 @layer components {
-  body {
-    @apply max-w-[1440px] mx-auto font-mon bg-bgr text-base font-medium;
-  }
+    body {
+        @apply max-w-[1440px] mx-auto font-mon bg-bgr text-base font-medium;
+    }
+    h2 {
+        @apply font-plf;
+    }
+    .container {
+        @apply px-[150px] mt-[120px] 
+    }
+    .text_ACenter {
+        @apply absolute w-full text-center;
+    }
+    .hover-btn-primary {
+        @apply hover:transition hover:bg-white hover:text-btn hover:outline hover:outline-btn hover:outline-2;
+    }
 }
