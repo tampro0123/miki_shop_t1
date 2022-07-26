@@ -1,6 +1,6 @@
 import React from 'react';
-import { Logo } from 'src/components/Icons';
-import imgRe from 'src/assets/Register/Register.jpg';
+import { Logo } from 'src/components/icons';
+import imgRegister from 'src/assets/Register/Register.jpg';
 import { RegisterFormSection } from 'src/sections/auth';
 import Image from 'next/image';
 
@@ -9,7 +9,7 @@ const register = () => {
     <div className="flex justify-center">
       <div className="flex w-[1136px] h-[852px] overflow-hidden">
         {/* Img */}
-        <Image height={852} width={646} src={imgRe} alt="a" />
+        <Image height={852} width={646} src={imgRegister} alt="imgRegister" />
         {/* Content */}
         <div className="w-[490px] bg-bgr-auth">
           <div className="flex items-center flex-col mt-14">
