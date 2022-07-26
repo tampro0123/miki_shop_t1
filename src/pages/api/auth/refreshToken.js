@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "src/hooks/generateToken";
+} from "src/utils/generateToken";
 import cookie from "cookie";
 
 dbConnect();

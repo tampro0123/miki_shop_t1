@@ -6,7 +6,7 @@ import { serialize } from 'cookie';
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "src/hooks/generateToken";
+} from "src/utils/generateToken";
 
 async function handler(req, res) {
   const { method } = req;
