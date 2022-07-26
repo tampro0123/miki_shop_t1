@@ -18,6 +18,15 @@ module.exports = {
         'border-1': '#6E5544',
         msgEr: '#d2311b',
       },
+      spacing: {
+        8: '8px',
+        16: '16px',
+        24: '24px',
+      },
+      borderRadius: {
+        8: '8px',
+        16: '16px',
+      },
     },
   },
   plugins: [],
