@@ -45,6 +45,9 @@ export default function Footer() {
           <AboutUs title='Dịch vụ khách hàng' arr={['Thanh toán', 'Cẩm nang sử dụng', 'Câu hỏi thường gặp']} />
         </div>
       </div>
+      <div className="flex justify-center items-center py-[16px]">
+        <p>MikiShop © 2022</p>
+      </div>
     </footer>
   )
 }
