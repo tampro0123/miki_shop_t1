@@ -11,5 +11,5 @@ const RefreshTokenSchema = new Schema(
   }
 );
 
-module.exports = mongoose.models.RefreshToken || mongoose.model('RefreshToken', RefreshSchema);
+module.exports = mongoose.models.RefreshToken || mongoose.model('RefreshToken', RefreshTokenSchema);
 
