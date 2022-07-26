@@ -9,7 +9,7 @@ import {
   TextField,
   CheckBoxRulesField,
 } from 'src/components/HookForm';
-import Button from 'src/components/Button';
+import Button from 'src/components/button';
 import { FacebookColor, GoogleColor } from 'src/components/Icons';
 
 export function LoginFormSection() {
