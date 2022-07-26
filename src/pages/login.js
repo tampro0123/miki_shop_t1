@@ -1,10 +1,10 @@
 import React from 'react';
 import { Logo } from 'src/components/Icons';
-import imgRe from 'src/assets/Register/Register.jpg';
-import { RegisterFormSection } from 'src/sections/auth';
+import imgRe from 'src/assets/Login/Login.jpg';
+import { LoginFormSection } from 'src/sections/auth';
 import Image from 'next/image';
 
-const register = () => {
+const login = () => {
   return (
     <div className="flex justify-center">
       <div className="flex w-[1136px] h-[852px] overflow-hidden">
@@ -16,12 +16,12 @@ const register = () => {
             <Logo />
             <h1 className="font-plf font-bold text-[40px] leading-[48px]">MIKI JEWELRY</h1>
           </div>
-          <h3 className="text-xl leading-7 font-bold ml-10 mt-[72px]">Đăng ký tài khoản</h3>
-          <RegisterFormSection />
+          <h3 className="text-xl leading-7 font-bold ml-10 mt-[72px]">Đăng nhập</h3>
+          <LoginFormSection />
         </div>
       </div>
     </div>
   );
 };
 
-export default register;
+export default login;
