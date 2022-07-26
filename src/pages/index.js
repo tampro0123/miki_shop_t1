@@ -7,6 +7,11 @@ export default function Home() {
   return (
     <Page title="Home">
       <Header />
+      <HeroSection/>
+      <AboutSection/>
+      <BestSeller/>
+      <LatestAlbum/>
+      <Products/>
       <Footer />
     </Page>
   );
