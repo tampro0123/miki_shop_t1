@@ -14,9 +14,10 @@ module.exports = {
         '2nd-text': '#272727',
         '3rd-text': '#B78D71',
         'price-text': '#92715A',
-        btn: '#251C17',
+        'btn': '#251C17',
+        'Neutral/2': '#626262',
         'border-1': '#6E5544',
-        msgEr: '#d2311b',
+        'msgEr': '#d2311b',
       },
       spacing: {
         8: '8px',
@@ -26,6 +27,9 @@ module.exports = {
       borderRadius: {
         8: '8px',
         16: '16px',
+      },
+      fontSize: {
+        '32': '32px',
       },
     },
   },

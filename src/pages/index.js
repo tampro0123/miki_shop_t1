@@ -1,7 +1,18 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Button from 'src/components/Button';
+import Page from 'src/components/Page';
+import Footer from 'src/layouts/Footer';
+import Header from '../layouts/header/Header.js';
+
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {
-  return <Button secondary>Tìm hiểu thêm</Button>;
+  return (
+    <Page title="Home">
+      <Header />
+      <HeroSection/>
+      <AboutSection/>
+      <BestSeller/>
+      <LatestAlbum/>
+      <Products/>
+      <Footer />
+    </Page>
+  );
 }
