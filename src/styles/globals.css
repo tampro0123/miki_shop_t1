@@ -21,3 +21,9 @@
         @apply hover:transition hover:bg-white hover:text-btn hover:outline hover:outline-btn hover:outline-2;
     }
 }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}

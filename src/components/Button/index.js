@@ -7,6 +7,8 @@ function Button({
   //Style
   primary = false,
   secondary = false,
+  text = false,
+  outline = false,
   //Other Style
   className,
   //classHover
@@ -44,14 +46,18 @@ function Button({
 
   //Style Btn
   if (primary) {
-    var classes = 'text-white bg-btn';
+    var classes = 'text-white py-2 px-[46px] bg-btn border-[1px] border-transparent';
   } else if (secondary) {
-    var classes = 'text-primary-text bg-white';
+    var classes = 'text-primary-text border-[1px] border-white py-2 px-[46px] bg-white border-[1px] border-transparent';
+  } else if (text) {
+    var classes = 'px-0 py-0 inline-flex text-3rd-text border-[1px] border-transparent';
+  } else if (outline) {
+    var classes = 'rounded-[40px] border-[1px] border-border-1 flex w-full px-[32px] py-[8px]';
   }
   return (
     <Component
       {...props}
-      className={`rounded-lg py-2 px-[46px] leading-6 text-base flex items-center justify-center cursor-pointer font-bold ${classes} ${className} hover:${classHover}`}
+      className={`rounded-lg leading-6 text-base flex items-center justify-center cursor-pointer font-bold ${classes} ${className} ${classHover}`}
     >
       {leftIcon && <span className={styleLeftIcon}>{leftIcon}</span>}
       <span className={styleContent}>{children}</span>
