@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import Button from 'src/components/Button';
+import Button from 'src/components/button';
 
 export function CheckBoxRulesField({
   name,

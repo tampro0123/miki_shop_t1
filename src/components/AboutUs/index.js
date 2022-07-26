@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 export default function AboutUs({title, arr}) {
   return (
@@ -10,7 +9,7 @@ export default function AboutUs({title, arr}) {
                     return (
                     <li key = {item}>
                         <Link href=''>
-                            <a href =''>{item}</a>
+                            <a href ='' className="hover:text-3rd-text duration-500">{item}</a>
                         </Link>
                     </li>
                     )
