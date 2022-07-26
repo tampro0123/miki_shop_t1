@@ -4,12 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
-@layer base {
-    img {
-        position: relative;
-    }
-}
-
 @layer components {
     body {
         @apply max-w-[1440px] mx-auto font-mon bg-bgr text-base font-medium;
