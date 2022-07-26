@@ -1,15 +1,14 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import {Button} from "../components/Button";
-import Header from "../layouts/header/Header.js";
-import Footer  from 'src/layouts/footer/Footer';
+import Page from 'src/components/Page';
+import Footer from 'src/layouts/Footer';
+import Header from '../layouts/header/Header.js';
+
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {
-  return ( 
-      <>
-          <Header />
-          <Footer />
-      </>
-  );
-}  
+  return (
+    <Page title="Home">
+      <Header />
 
+      <Footer />
+    </Page>
+  );
+}
