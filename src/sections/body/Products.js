@@ -11,7 +11,7 @@ export default function Products() {
     <div className="container mb-[120px] flex justify-between text-white font-bold text-2xl">
       <div className="flex-col w-[80%] ">
         <div className="flex">
-          <div className="relative pr-[20px] mb-[31px]">
+          <div className="relative pr-[20px] mb-[31px] drop-shadow-product">
             <p className="text_ACenter top-3/4 ">Nhẫn</p>
             <Image
               src={Ring}
@@ -24,7 +24,7 @@ export default function Products() {
               className="-z-10 rounded-tl-16"
             />
           </div>
-          <div className="relative pr-[20px]">
+          <div className="relative pr-[20px] drop-shadow-product">
             <p className="text_ACenter top-3/4">Đồng hồ</p>
             <Image
               src={Watch}
@@ -34,15 +34,15 @@ export default function Products() {
               height="254"
               alt="ring"
               placeholder="blur"
-              className="-z-10"
+              className="-z-10 rounded-sm"
             />
           </div>
           <div className="flex items-center">
-            <h2 className="text-5xl min-w-full text-center leading-[48px] font-bold pl-[20px] text-primary-text">Miki jewelry</h2>
+            <h2 className="drop-shadow-product text-5xl min-w-full text-center leading-[48px] font-bold pl-[20px] text-primary-text">Miki jewelry</h2>
           </div>
         </div>
         <div className=" flex">
-          <div className="relative pr-[20px]">
+          <div className="relative pr-[20px] drop-shadow-product">
             <p className="text_ACenter top-3/4">Lắc tay</p>
             <Image
               src={Bangles}
@@ -54,7 +54,7 @@ export default function Products() {
               className="-z-10 rounded-bl-16"
             />
           </div>
-          <div className="relative pr-[20px]">
+          <div className="relative pr-[20px] drop-shadow-product">
             <p className="text_ACenter top-3/4">Dây chuyền</p>
             <Image
               src={NeckLace}
@@ -64,12 +64,12 @@ export default function Products() {
               height="254"
               alt="ring"
               placeholder="blur"
-              className="-z-10 min-h-[254px]"
+              className="-z-10 min-h-[254px] rounded-sm"
             />
           </div>
         </div>
       </div>
-      <div className="relative">
+      <div className="relative drop-shadow-product">
         <p className="text_ACenter top-[480px]">Bông tai</p>
         <Image
           src={EarRing}

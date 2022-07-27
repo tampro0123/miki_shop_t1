@@ -8,7 +8,7 @@ export default function Header() {
             <ul className = 'flex justify-between gap-[42px]'>
                 <li>
                     <Link href =''>
-                        <a href ='' className ='text-16 hover:text-3rd-text duration-500'>Trang chủ</a>
+                        <a href ='' className ='text-16 hover:text-3rd-text duration-500 font-bold'>Trang chủ</a>
                     </Link>
                 </li>
                 <li className = 'flex items-center'>
