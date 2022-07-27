@@ -31,6 +31,9 @@ module.exports = {
       fontSize: {
         '32': '32px',
       },
+      dropShadow: {
+        'product': '0px 4px 52px rgba(15, 15, 15, 0.25)',
+      }
     },
   },
   plugins: [],
