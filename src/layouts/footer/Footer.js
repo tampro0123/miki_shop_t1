@@ -1,6 +1,6 @@
-import AboutUs from '../../components/aboutUs/index.js'
+import AboutUs from 'src/components/aboutUs/index.js'
 import Link from 'next/link'
-import { ArrowRightIcon,Twitter , FaceBook, Instagram, TikTok, Pinterest } from '../../components/Icons/index.js'
+import { ArrowRightIcon,Twitter , FaceBook, Instagram, TikTok, Pinterest } from 'src/components/Icons/index.js'
 export default function Footer() {
   return (
     <footer className="px-[154px] mt-[120px]">
