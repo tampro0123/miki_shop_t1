@@ -1,6 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { schema } from 'src/components/HookForm/schemaYup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { schema } from 'src/components/hook-form/schemaYup';
 import {
   CheckBoxField,
   FormProviderBox,
@@ -8,7 +9,7 @@ import {
   SelectField,
   TextField,
   CheckBoxRulesField,
-} from 'src/components/HookForm';
+} from 'src/components/hook-form';
 import Button from 'src/components/button';
 import { FacebookColor, GoogleColor } from 'src/components/Icons';
 
