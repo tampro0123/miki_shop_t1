@@ -6,7 +6,8 @@ import Button from 'src/components/Button';
 export default function LatestAlbum() {
   return (
     <div className="bg-[#c6997b] h-[732px] w-full relative mt-[120px] text-white overflow-hidden">
-      <Image className="z-10 absolute left-[280px] " src={BestSeller} alt="nice girl" height='732' width='1440' objectFit='contain'
+      <Image src={BestSeller} alt="nice girl" layout='fixed' width='1440' height='732px' objectFit='contain'
+      className="z-10 absolute bottom-0 translate-x-[278px] "
       />
       <div className="absolute top-[109px] left-[152px] w-[540px] h-[483px] border-solid rounded-8 divide-white border-[6px]">
         <h1 className="pl-[56px] pt-[44px] text-5xl font-medium  ">Bộ sưu tập mới nhất</h1>
