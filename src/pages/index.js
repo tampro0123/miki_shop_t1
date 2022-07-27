@@ -7,9 +7,6 @@ import LatestAlbum from 'src/sections/body/LatestAlbum.js';
 import Products from 'src/sections/body/Products.js';
 import Header from 'src/layouts/Header';
 
-import Page from 'src/components/Page';
-import Footer from 'src/layouts/footer/index.js';
-import Header from 'src/layouts/Header/index.js';
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {
   return (
