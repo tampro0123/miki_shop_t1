@@ -18,6 +18,7 @@ module.exports = {
         'Neutral/2': '#626262',
         'border-1': '#6E5544',
         'msgEr': '#d2311b',
+        'bg-header': '#FFF9F6'
       },
       spacing: {
         8: '8px',

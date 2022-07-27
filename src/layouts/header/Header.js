@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import { CaretDown , LogoIcon , SearchIcon , Favorite , CartIcon , UserIcon } from '../../components/Icons/icons.js'
+import { CaretDown , LogoIcon , SearchIcon , Favorite , CartIcon , UserIcon } from 'src/components/Icons/icons.js'
 export default function Header() {
   return (
-    <header className='flex justify-between py-[24px] px-[152px] bg-bgr'>
+    <header className='flex justify-between py-[24px] px-[152px]'>
         <div>
             <ul className = 'flex justify-between gap-[42px]'>
                 <li>
@@ -11,13 +11,14 @@ export default function Header() {
                         <a href ='' className ='text-16 hover:text-3rd-text duration-500'>Trang chủ</a>
                     </Link>
                 </li>
-                <li className = 'flex items-center '>
+                <li className = 'flex items-center'>
                     <Link href =''>
                         <a href ='' className ='mr-2 text-16 hover:text-3rd-text duration-500'>Sản phẩm</a>
                     </Link>
                     <Link href =''>
                         <CaretDown classNameIcon ='cursor-pointer hover:scale-90 duration-300 '/> 
-                    </Link>
+                    </Link>   
+                        
                 </li>
                 <li>
                     <Link href =''>
