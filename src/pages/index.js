@@ -8,7 +8,6 @@ import Products from 'src/sections/body/Products.js';
 import Header from 'src/layouts/Header';
 import CircleBgr from 'src/components/circles';
 
-
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {
   return (
@@ -31,4 +30,3 @@ export default function Home() {
     </Page>
   );
 }
-
