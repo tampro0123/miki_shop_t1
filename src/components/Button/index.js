@@ -39,6 +39,7 @@ function Button({
       onClick: () => router.push(to),
       ...passProps,
     };
+    Component = 'div';
   } else if (href) {
     props.href = href;
     Component = 'a';
