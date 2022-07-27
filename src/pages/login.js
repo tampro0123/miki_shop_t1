@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from 'src/components/icons';
+import { LogoIcon } from 'src/components/icons';
 import imgLogin from 'src/assets/Login/Login.jpg';
 import { LoginFormSection } from 'src/sections/auth';
 import Image from 'next/image';
@@ -13,7 +13,7 @@ const login = () => {
         {/* Content */}
         <div className="w-[490px] bg-bgr-auth">
           <div className="flex items-center flex-col mt-14">
-            <Logo />
+            <LogoIcon />
             <h1 className="font-plf font-bold text-[40px] leading-[48px]">MIKI JEWELRY</h1>
           </div>
           <h3 className="text-xl leading-7 font-bold ml-10 mt-[72px]">Đăng nhập</h3>

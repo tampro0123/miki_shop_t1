@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import Button from 'src/components/Button';
-import { FacebookColor, GoogleColor } from 'src/components/Icons';
+import { FacebookColor, GoogleColor } from 'src/components/icons';
 
 export function LoginFormSection() {
   // create schema validate form
