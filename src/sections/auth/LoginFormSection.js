@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { schema } from 'src/components/hook-form/schemaYup';
 import {
   CheckBoxField,
   FormProviderBox,
@@ -10,8 +9,8 @@ import {
   TextField,
   CheckBoxRulesField,
 } from 'src/components/hook-form';
-import Button from 'src/components/button';
-import { FacebookColor, GoogleColor } from 'src/components/Icons';
+import Button from 'src/components/Button';
+// import { FacebookColor, GoogleColor } from 'src/components/icons';
 
 export function LoginFormSection() {
   // create schema validate form
@@ -84,7 +83,7 @@ export function LoginFormSection() {
         <div className="mt-6 flex w-full">
           <Button href="https://m.facebook.com/login" outline className="mr-4">
             <div className="flex items-center">
-              <FacebookColor />
+              {/* <FacebookColor /> */}
               <h1 className="ml-4">Facebook</h1>
             </div>
           </Button>
@@ -94,7 +93,7 @@ export function LoginFormSection() {
             outline
           >
             <div className="flex items-center">
-              <GoogleColor />
+              {/* <GoogleColor /> */}
               <h1 className="ml-4">Google</h1>
             </div>
           </Button>
