@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-<<<<<<< HEAD
 import { schema } from 'src/components/HookForm/schemaYup';
 import {
   CheckBoxField,
@@ -10,11 +9,6 @@ import {
   TextField,
   CheckBoxRulesField,
 } from 'src/components/HookForm';
-=======
-import * as yup from 'yup';
-import { useRouter } from 'next/router';
-import { FormProviderBox, TextField } from 'src/components/hook-form';
->>>>>>> devuser
 import Button from 'src/components/button';
 
 export function RegisterFormSection() {
