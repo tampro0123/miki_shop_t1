@@ -8,7 +8,7 @@ import Watch from 'public/static/Home/ProductsSection/watch.png';
 
 export default function Products() {
   return (
-    <div className="container mb-[120px] flex justify-between text-white font-bold text-2xl">
+    <div className="container flex justify-between text-white font-bold text-2xl">
       <div className="flex-col w-[80%] ">
         <div className="flex">
           <div className="relative pr-[20px] mb-[31px] drop-shadow-product">

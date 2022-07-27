@@ -33,6 +33,9 @@ module.exports = {
       },
       dropShadow: {
         'product': '0px 4px 52px rgba(15, 15, 15, 0.25)',
+      },
+      boxShadow: {
+        product: '0px 0px 60px 10px rgba(15, 15, 15, 0.1)',
       }
     },
   },

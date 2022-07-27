@@ -1,4 +1,4 @@
-export const CircleFull = () => (
+export const CircleFull = ({width, height}) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="1041" height="1041" viewBox="0 0 1041 1041" fill="none">
     <circle cx="520.5" cy="520.5" r="520.5" fill="#B78D71" fill-opacity="0.15" />
     <circle cx="520.5" cy="520.5" r="416.5" fill="#B78D71" fill-opacity="0.1" />

@@ -21,10 +21,10 @@ export default function Home() {
       <Products />
       <Footer />
       <CircleBgr 
-      CFull1={'w-[1041px] top-[655px] left-[1078px]'}
-      CFull2={'w-[551px] h-[551px] translate-x-[-929px] translate-y-[-1138px]'}
-      CFull3={'w-[551px] h-[551px] top-[3774px] right-[-344px]'}
-      CDash3={'w-[551px] h-[551px] top-[1160px] left-[-462px]'}
+      CFull1={'top-[655px] left-[1078px]'}
+      CFull2={'translate-x-[-929px] translate-y-[-1138px]'}
+      CFull3={'scale-50 top-[3662px] right-[-672px]'}
+      CDash3={'top-[1160px] left-[-462px]'}
       />
       </div>
     </Page>

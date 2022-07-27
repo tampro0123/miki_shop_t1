@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRightIcon,Twitter , FaceBook, Instagram, TikTok, Pinterest } from '../../components/Icons/index.js'
 export default function Footer() {
   return (
-    <footer className="px-[154px]">
+    <footer className="px-[154px] mt-[120px]">
       <div className ='grid grid-cols-2 pb-[40px]'>
         <div>
           <h3 className="text-[32px] line-[40px] font-bold text-primary-text mb-[40px]">Đăng kí để nhận khuyến mãi</h3>
