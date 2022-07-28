@@ -32,7 +32,8 @@ export default function Header() {
                 <LogoIcon classNameIcon ='cursor-pointer'/>
             </Link>
             <Link href=''>
-                <h1 className='cursor-pointer font-plf text-[40px] font-bold mt-[12px] text-primary-text leading-10 text-center'>MIKI JEWELLRY</h1>
+                <h1 className='cursor-pointer font-plf text-[40px] 
+                font-bold mt-[12px] text-primary-text leading-10 text-center'>MIKI JEWELLRY</h1>
             </Link>
         </div>
         <div className ="flex gap-[25px]">
