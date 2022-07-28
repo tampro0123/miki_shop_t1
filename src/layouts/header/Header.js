@@ -7,29 +7,29 @@ export default function Header() {
         <div>
             <ul className = 'flex justify-between gap-[42px]'>
                 <li>
-                    <Link href =''>
+                    <Link href ='/'>
                         <a href ='' className ='text-16 hover:text-3rd-text duration-500 font-bold'>Trang chủ</a>
                     </Link>
                 </li>
                 <li className = 'flex items-center'>
-                    <Link href =''>
+                    <Link href ='/'>
                         <a href ='' className ='mr-2 text-16 hover:text-3rd-text duration-500'>Sản phẩm</a>
                     </Link>
-                    <Link href =''>
+                    <Link href ='/'>
                         <CaretDown classNameIcon ='cursor-pointer hover:scale-90 duration-300 '/> 
                     </Link>   
                         
                 </li>
                 <li>
-                    <Link href =''>
+                    <Link href ='/'>
                         <a href ='' className ='text-16 hover:text-3rd-text duration-500'>Về chúng tôi</a>
                     </Link>
                 </li>
             </ul>
         </div>
         <div className ='flex flex-col items-center'>
-            <Link href =''>        
-                <LogoIcon classNameIcon ='cursor-pointer'/>
+            <Link href ='/'>        
+                <LogoIcon classNameIcon ='cursor-pointer'/> 
             </Link>
             <Link href=''>
                 <h1 className='cursor-pointer font-plf text-[40px] 
@@ -41,13 +41,13 @@ export default function Header() {
                 <input placeholder="Tìm kiếm" type="text" className="h-[32px] text-[14px] px-[5px] border-0 outline-0 "/> 
                 <SearchIcon classNameIcon ='cursor-pointer hover:scale-90 duration-300 '/>
             </div>
-            <Link href =''>
+            <Link href ='/'>
                 <Favorite classNameIcon ='cursor-pointer hover:scale-90 duration-300 '/>
             </Link>
-            <Link href =''>
+            <Link href ='/'>
                 <CartIcon classNameIcon ='cursor-pointer hover:scale-90 duration-300 '/>   
             </Link>
-            <Link href =''>
+            <Link href ='/'>
                 <UserIcon classNameIcon ='cursor-pointer hover:scale-90 duration-300 '/>
             </Link>
         </div>
