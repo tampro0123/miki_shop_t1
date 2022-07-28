@@ -8,8 +8,8 @@ export default function AboutUs({title, arr}) {
                 arr.map((item) =>{
                     return (
                     <li key = {item}>
-                        <Link href=''>
-                            <a href ='' className="hover:text-3rd-text duration-500">{item}</a>
+                        <Link href="/">
+                            <a className="hover:text-3rd-text duration-500">{item}</a>
                         </Link>
                     </li>
                     )
