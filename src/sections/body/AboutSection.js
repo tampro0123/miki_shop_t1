@@ -13,12 +13,12 @@ export default function AboutSection() {
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim
           velit mollit. Exercitation veniam consequat sunt nostrud amet.
         </p>
-        <Button primary className="mt-[94px] hover-btn-primary">
+        <Button primary className="mt-[94px] hover-btn-primary relative z-10">
           Tìm hiểu thêm
         </Button>
       </div>
       <div className="w-[48%]">
-        <Image src={AboutImg} placeholder="empty" width="548" height="537px" objectFit="cover" className="rounded-16" />
+        <Image src={AboutImg} placeholder="empty" width="548" height="537px" objectFit="cover" className="rounded-16 relative z-10" />
       </div>
     </div>
   );

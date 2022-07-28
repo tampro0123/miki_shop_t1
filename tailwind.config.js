@@ -8,7 +8,7 @@ module.exports = {
         plf: ['Playfair Display'],
       },
       colors: {
-        bgr: '#f5f5f5',
+        bgr: '#FFF9F6',
         'bgr-auth': '#fff9f6',
         'primary-text': '#272727',
         '2nd-text': '#272727',
@@ -18,6 +18,7 @@ module.exports = {
         'Neutral/2': '#626262',
         'border-1': '#6E5544',
         'msgEr': '#d2311b',
+
       },
       spacing: {
         8: '8px',
@@ -31,6 +32,12 @@ module.exports = {
       fontSize: {
         '32': '32px',
       },
+      dropShadow: {
+        'product': '0px 4px 52px rgba(15, 15, 15, 0.25)',
+      },
+      boxShadow: {
+        product: '0px 0px 60px 10px rgba(15, 15, 15, 0.1)',
+      }
     },
   },
   plugins: [],

@@ -6,13 +6,16 @@
 
 @layer components {
     body {
-        @apply max-w-[1440px] mx-auto font-mon bg-bgr text-base font-medium;
+        @apply font-mon bg-bgr text-base font-medium z-10 relative;
+    }
+    .app {
+        @apply max-w-[1440px] mx-auto overflow-hidden relative;
     }
     h2 {
         @apply font-plf;
     }
     .container {
-        @apply px-[150px] mt-[120px] 
+        @apply px-[150px] mt-[120px] ;
     }
     .text_ACenter {
         @apply absolute w-full text-center;

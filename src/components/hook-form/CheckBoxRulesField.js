@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import Button from 'src/components/Button';
+import Button from 'src/components/button';
 
 export function CheckBoxRulesField({
   name,
@@ -24,7 +24,8 @@ export function CheckBoxRulesField({
         <div className={styleLabelItem} htmlFor={name}>
           Tôi đã đọc và đồng ý với các{' '}
           <Button text className={'font-medium'}>
-            điều khoản chính sách
+            {' '}
+            điều khoản chính sách{' '}
           </Button>{' '}
           của Miki Jewelry
         </div>
