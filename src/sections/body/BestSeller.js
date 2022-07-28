@@ -13,8 +13,13 @@ export default function BestSeller() {
         </Button>
       </div>
       <div className="flex justify-between mt-[70px] ">
-        <div className="w-[22%] text-center font-bold relative z-10 ">
-            <div className='hover:shadow-product hover:scale-[1.01] rounded-16'>
+        <div className="w-[22%] text-center font-bold relative z-10 flex flex-col-reverse">
+          <Button primary className="w-full mt-6 hover-btn-primary peer ">
+            Thêm vào giỏ hàng
+          </Button>
+          <p className="text-price-text mt-[6px]">355.000đ</p>
+          <p className="text-[20px] mt-6">Lira Earrings</p>
+            <div className='hover:shadow-product hover:scale-[1.01] rounded-16 peer-hover:shadow-product'>
                 <Image
                     src={productImg}
                     alt="Best seller product"
@@ -25,14 +30,14 @@ export default function BestSeller() {
                     className='rounded-16'
                 />
             </div>
-          <p className="text-[20px] mt-6">Lira Earrings</p>
-          <p className="text-price-text mt-[6px]">355.000đ</p>
-          <Button primary className="w-full mt-4 hover-btn-primary">
+        </div>
+        <div className="w-[22%] text-center font-bold relative z-10 flex flex-col-reverse">
+          <Button primary className="w-full mt-6 hover-btn-primary peer ">
             Thêm vào giỏ hàng
           </Button>
-        </div>
-        <div className="w-[22%] text-center font-bold relative z-10 ">
-            <div className='hover:shadow-product hover:scale-[1.01] rounded-16'>
+          <p className="text-price-text mt-[6px]">355.000đ</p>
+          <p className="text-[20px] mt-6">Lira Earrings</p>
+            <div className='hover:shadow-product hover:scale-[1.01] rounded-16 peer-hover:shadow-product'>
                 <Image
                     src={productImg}
                     alt="Best seller product"
@@ -43,14 +48,14 @@ export default function BestSeller() {
                     className='rounded-16'
                 />
             </div>
-          <p className="text-[20px] mt-6">Lira Earrings</p>
-          <p className="text-price-text mt-[6px]">355.000đ</p>
-          <Button primary className="w-full mt-4 hover-btn-primary">
+        </div>
+        <div className="w-[22%] text-center font-bold relative z-10 flex flex-col-reverse">
+          <Button primary className="w-full mt-6 hover-btn-primary peer ">
             Thêm vào giỏ hàng
           </Button>
-        </div>
-        <div className="w-[22%] text-center font-bold relative z-10 ">
-            <div className='hover:shadow-product hover:scale-[1.01] rounded-16'>
+          <p className="text-price-text mt-[6px]">355.000đ</p>
+          <p className="text-[20px] mt-6">Lira Earrings</p>
+            <div className='hover:shadow-product hover:scale-[1.01] rounded-16 peer-hover:shadow-product'>
                 <Image
                     src={productImg}
                     alt="Best seller product"
@@ -61,14 +66,14 @@ export default function BestSeller() {
                     className='rounded-16'
                 />
             </div>
-          <p className="text-[20px] mt-6">Lira Earrings</p>
-          <p className="text-price-text mt-[6px]">355.000đ</p>
-          <Button primary className="w-full mt-4 hover-btn-primary">
+        </div>
+        <div className="w-[22%] text-center font-bold relative z-10 flex flex-col-reverse">
+          <Button primary className="w-full mt-6 hover-btn-primary peer ">
             Thêm vào giỏ hàng
           </Button>
-        </div>
-        <div className="w-[22%] text-center font-bold relative z-10 ">
-            <div className='hover:shadow-product hover:scale-[1.01] rounded-16'>
+          <p className="text-price-text mt-[6px]">355.000đ</p>
+          <p className="text-[20px] mt-6">Lira Earrings</p>
+            <div className='hover:shadow-product hover:scale-[1.01] rounded-16 peer-hover:shadow-product'>
                 <Image
                     src={productImg}
                     alt="Best seller product"
@@ -79,13 +84,7 @@ export default function BestSeller() {
                     className='rounded-16'
                 />
             </div>
-          <p className="text-[20px] mt-6">Lira Earrings</p>
-          <p className="text-price-text mt-[6px]">355.000đ</p>
-          <Button primary className="w-full mt-4 hover-btn-primary">
-            Thêm vào giỏ hàng
-          </Button>
         </div>
-        
       </div>
     </div>
   );
