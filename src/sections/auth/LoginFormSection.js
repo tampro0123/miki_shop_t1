@@ -1,11 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+
 import * as yup from 'yup';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import Button from 'src/components/Button';
 import { FacebookColor, GoogleColor } from 'src/components/icons';
+import axios from 'axios';
 
 export function LoginFormSection() {
+  const router = useRouter();
+
   // create schema validate form
   const schema = yup.object().shape({
     email: yup
@@ -27,7 +32,20 @@ export function LoginFormSection() {
   // Handle Submit
   const onSubmit = (data) => {
     if (data) {
+      const res = axios({
+        method: 'POST',
+        url: '/api/auth/login',
+        data: {
+          email: data.email,
+          password: data.password,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       console.log(data);
+      setTimeout(() => router.push('/'), 3000);
+      // setTimeout(() => router.push('/login'), 3000);
       reset();
     }
   };

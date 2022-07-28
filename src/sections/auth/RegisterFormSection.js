@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import Button from 'src/components/Button';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
+import axios from 'axios';
 
 export function RegisterFormSection() {
   const router = useRouter();
@@ -46,6 +47,19 @@ export function RegisterFormSection() {
   // Handle Submit
   const onSubmit = (data) => {
     if (data) {
+      const res = axios({
+        method: 'POST',
+        url: '/api/auth/register',
+        data: {
+          username: `${data.firstName} ${data.lastName}`,
+          email: data.email,
+          birthday: data.dateOfBirth,
+          password: data.password,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       console.log(data);
       setTimeout(() => router.push('/login'), 3000);
       reset();

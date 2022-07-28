@@ -7,6 +7,7 @@ async function handler(req, res) {
   switch (method) {
     case 'POST':
       const { email, password, username, birthday } = req.body;
+      console.log(email, password, username, birthday);
       try {
         await dbConnect();
         const currentUser = await User.findOne({ email }).lean();
@@ -15,10 +16,11 @@ async function handler(req, res) {
         const passwordHash = await bcrypt.hash(password, salt);
         const newUser = new User({ email, password: passwordHash, username, birthday });
         const user = await newUser.save();
-        return res.status(201).json('Đăng ký thành công');
+
+        return res.status(201).json({ message: 'Đăng ký thành công', success: true });
       } catch (error) {
         console.log(error);
-        return res.status(500).json(error);
+        return res.status(500).json({ success: false, message: 'Request Lỗi!' });
       }
       break;
     default:
