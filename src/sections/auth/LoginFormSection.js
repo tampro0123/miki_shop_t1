@@ -44,7 +44,8 @@ export function LoginFormSection() {
         },
       });
       console.log(data);
-      setTimeout(() => router.push('/'), 3000);
+      // xử lý logic khi đăng nhập thành công hoặc thất bại nha
+      // setTimeout(() => router.push('/'), 3000);
       // setTimeout(() => router.push('/login'), 3000);
       reset();
     }
