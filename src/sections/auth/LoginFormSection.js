@@ -20,7 +20,7 @@ export function LoginFormSection() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         'Email không tồn tại'
       ),
-    password: yup.string().trim().required('Vui lòng nhập mật khẩu').min(6, 'Nhập mật khẩu có ít nhất 6 kí tự'),
+    password: yup.string().trim().required('Vui lòng nhập mật khẩu').min(8, 'Nhập mật khẩu có ít nhất 8 kí tự'),
   });
   // get method from react hook form
   const methods = useForm({
@@ -98,7 +98,7 @@ export function LoginFormSection() {
           name="password"
           styleInput={style.lgInput}
           styleMessage={style.message}
-          placeholder="Nhập mật khẩu từ 6 đến 8 kí tự"
+          placeholder="Nhập mật khẩu ít nhất 8 kí tự"
           type="password"
           passwordErr={errPassword}
         />

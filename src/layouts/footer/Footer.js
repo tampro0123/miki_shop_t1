@@ -29,7 +29,7 @@ export default function Footer() {
       </div>
       <div className ='pt-[40px] border-t-[1px] border-t-#6E5544 grid grid-cols-[1.5fr,2fr]'>
         <div className ='max-w-[400px]'>
-          <Link href =''>
+          <Link href ='/'>
             <h1 className ='font-plf text-[48px] cursor-pointer font-bold text-primary-text mb-[28px]'>MIKI JEWLLERY</h1>
           </Link>
           <ul className='grid gap-[10px]'>
