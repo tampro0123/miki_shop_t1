@@ -1,6 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
-export function TextField({ name, label, styleLabel, styleInput, styleMessage, className, ...passProps }) {
+export function TextField({ name, label, styleLabel, styleInput,
+   styleMessage, className, passwordErr, userNameErr , ...passProps }) {
   const {
     register,
     formState: { errors },
@@ -12,7 +13,7 @@ export function TextField({ name, label, styleLabel, styleInput, styleMessage, c
         {label}
       </label>
       <input className={styleInput} {...register(name)} {...passProps} />
-      <span className={styleMessage}>{errors[name]?.message}</span>
+      <span className={styleMessage}>{errors[name]?.message || userNameErr || passwordErr}</span>
     </div>
   );
 }

@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-
+import { useState } from "react";
 import * as yup from 'yup';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import Button from 'src/components/Button';
 import { FacebookColor, GoogleColor } from 'src/components/icons';
 import axios from 'axios';
-
 export function LoginFormSection() {
   const router = useRouter();
-
+  const [errUserName, setErrUserName] = useState(undefined)
+  const [errPassword, setErrPassword] = useState(undefined)
   // create schema validate form
   const schema = yup.object().shape({
     email: yup
@@ -43,21 +43,45 @@ export function LoginFormSection() {
           'Content-Type': 'application/json',
         },
       });
-      console.log(data);
+  
       // xử lý logic khi đăng nhập thành công hoặc thất bại nha
+      res.then( 
+        value => {
+          setErrUserName(undefined)
+          setErrPassword(undefined)
+        }
+      )
+      let userNameErr 
+      let passwordErr
+      res.catch(value =>{
+        let checkUserName =  value?.response?.data?.userNameSucc
+        let checkPassword = value?.response?.data?.passwordSucc
+        if(checkUserName == false){
+          userNameErr = setErrUserName(value?.response?.data?.message)
+        }else{
+          userNameErr = setErrUserName(undefined)
+        }
+        if(checkPassword == false){
+          passwordErr = setErrPassword(value?.response?.data?.message)
+        }else{
+          passwordErr = setErrPassword(undefined)
+        }
+        return userNameErr, passwordErr
+      })
+
       // setTimeout(() => router.push('/'), 3000);
       // setTimeout(() => router.push('/login'), 3000);
       reset();
     }
   };
-
+  
   // Style Input
   const style = {
     smInput: 'w-[128px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid',
     lgInput: 'w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]',
     message: 'text-msgEr text-sm',
   };
-
+  
   // UI
   return (
     <div>
@@ -67,6 +91,7 @@ export function LoginFormSection() {
           styleInput={style.lgInput}
           styleMessage={style.message}
           placeholder="Nhập email hoặc số điện thoại"
+          userNameErr={errUserName}
         />
 
         <TextField
@@ -76,6 +101,7 @@ export function LoginFormSection() {
           styleMessage={style.message}
           placeholder="Nhập mật khẩu từ 6 đến 8 kí tự"
           type="password"
+          passwordErr ={errPassword}
         />
 
         <Button to="/forgot-password" text className="text-sm leading-[22px] font-medium text-black">
