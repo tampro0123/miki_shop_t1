@@ -49,6 +49,7 @@ export function LoginFormSection() {
         value => {
           setErrUserName(undefined)
           setErrPassword(undefined)
+          return setTimeout(() => router.push('/'), 2000);
         }
       )
       let userNameErr 
