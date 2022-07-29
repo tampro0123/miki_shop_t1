@@ -61,8 +61,8 @@ export function RegisterFormSection() {
         },
       });
       console.log(data);
-      setTimeout(() => router.push('/login'), 3000);
-      reset();
+      // setTimeout(() => router.push('/login'), 3000);
+      // reset();
     }
   };
 
