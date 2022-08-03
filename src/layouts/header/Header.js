@@ -16,7 +16,7 @@ export default function Header() {
               <a className="mr-2 text-16 hover:text-3rd-text duration-500">Sản phẩm</a>
             </Link>
 
-            <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 py-[4px]" />
+            <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300" />
           </li>
           <li className ='py-[4px]'>
             <Link href="/">
