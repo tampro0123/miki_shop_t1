@@ -4,21 +4,21 @@ import { CaretDown, LogoIcon, SearchIcon, Favorite, CartIcon, UserIcon } from 's
 export default function Header() {
   return (
     <header className="flex justify-between py-[24px] px-[152px]">
-      <div>
+      <div className ='flex items-end'>
         <ul className="flex justify-between gap-[42px]">
-          <li>
+          <li className ='py-[4px]'>
             <Link href="/">
               <a className="text-16 hover:text-3rd-text duration-500 font-bold">Trang chủ</a>
             </Link>
           </li>
-          <li className="flex items-center">
+          <li className="flex items-center py-[4px]">
             <Link href="/">
               <a className="mr-2 text-16 hover:text-3rd-text duration-500">Sản phẩm</a>
             </Link>
 
-            <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
+            <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 py-[4px]" />
           </li>
-          <li>
+          <li className ='py-[4px]'>
             <Link href="/">
               <a className="text-16 hover:text-3rd-text duration-500">Về chúng tôi</a>
             </Link>
@@ -37,23 +37,18 @@ export default function Header() {
           </h1>
         </Link>
       </div>
-      <div className="flex gap-[25px]">
+      <div className="flex gap-[25px] items-end">
         <div className="flex items-center h-[40px] border-[1px] border-primary-text bg-white px-[15px] rounded-8">
           <input placeholder="Tìm kiếm" type="text" className="h-[32px] text-[14px] px-[5px] border-0 outline-0 " />
           <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
         </div>
-        <Link href="/">
-          <a>
-            <Favorite classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
-          </a>
-        </Link>
-        <Link href="/">
-          <a>
+        <Link href="/" >
+          <a className='py-[4px]'>
             <CartIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </a>
         </Link>
         <Link href="/">
-          <a>
+          <a className='py-[4px]'>
             <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </a>
         </Link>
