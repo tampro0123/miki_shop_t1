@@ -13,6 +13,9 @@ const ProductHandler = async (req, res) => {
     case 'GET':
       try {
         const product = await Products.findById(id);
+
+        if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+
         return res.status(201).json({
           success: true,
           product: product,
