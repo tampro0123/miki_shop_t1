@@ -46,4 +46,4 @@ const ProductHandler = async (req, res) => {
 };
 
 //protect roles
-export default withAuth(withRoles(ProductHandler, 'admin'));
+export default ProductHandler;
