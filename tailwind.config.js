@@ -8,7 +8,7 @@ module.exports = {
         plf: ['Playfair Display'],
       },
       colors: {
-        bgr: '#FFF9F6',
+        "bgr": '#FFF9F6',
         'bgr-auth': '#fff9f6',
         'primary-text': '#272727',
         '2nd-text': '#272727',
