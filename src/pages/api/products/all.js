@@ -9,8 +9,8 @@ const handler = async (req, res) => {
     switch (method) {
         case "GET":
           try {
-            const users = await Products.find({});
-            return res.status(200).json(users);
+            const product = await Products.find({});
+            return res.status(200).json(product);
           } catch (err) {
             return res.status(500).json(err);
           }
