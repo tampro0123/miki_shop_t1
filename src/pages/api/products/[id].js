@@ -4,16 +4,18 @@ import withRoles from 'src/middlewares/withRoles';
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
 
-dbConnect();
-
 const ProductHandler = async (req, res) => {
   const { method } = req;
   const { id } = req.query;
+  await dbConnect();
 
   switch (method) {
     case 'GET':
       try {
         const product = await Products.findById(id);
+
+        if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+
         return res.status(201).json({
           success: true,
           product: product,
@@ -47,4 +49,4 @@ const ProductHandler = async (req, res) => {
 };
 
 //protect roles
-export default withAuth(withRoles(ProductHandler, 'admin'));
+export default ProductHandler;

@@ -24,6 +24,7 @@ export function LoginFormSection() {
   });
   // get method from react hook form
   const methods = useForm({
+    reValidateMode: 'onBlur',
     resolver: yupResolver(schema),
   });
 

@@ -6,8 +6,6 @@ import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
 import dbConnect from 'src/utils/dbConnect.js';
 
-dbConnect();
-
 //Set file limit size
 export const config = {
   api: {
@@ -20,7 +18,8 @@ export const config = {
 const ProductHandler = async (req, res) => {
   const { method } = req;
   const _id = new mongoose.Types.Object();
-
+  await dbConnect();
+  
   switch (method) {
     case 'POST':
       try {

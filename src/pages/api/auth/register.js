@@ -11,7 +11,7 @@ async function handler(req, res) {
       try {
         await dbConnect();
         const currentUser = await User.findOne({ email }).lean();
-        if (currentUser) return res.status(409).json({ success: false, message: 'Email đã tồn tại' });
+        if (currentUser) return res.status(409).json({ success: false, message: 'Email đã tồn tại', errEmail:false });
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const newUser = new User({ email, password: passwordHash, username, birthday });
