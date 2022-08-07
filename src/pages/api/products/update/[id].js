@@ -5,8 +5,6 @@ import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
 import dbConnect from 'src/utils/dbConnect.js';
 
-dbConnect();
-
 //Set file limit size
 export const config = {
   api: {
@@ -19,6 +17,7 @@ export const config = {
 const updateHandler = async (req, res) => {
   const { method } = req;
   const { id } = req.query;
+  await dbConnect();
 
   switch (method) {
     case 'PATCH' :

@@ -4,11 +4,10 @@ import withRoles from 'src/middlewares/withRoles';
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
 
-dbConnect();
-
 const ProductHandler = async (req, res) => {
   const { method } = req;
   const { id } = req.query;
+  await dbConnect();
 
   switch (method) {
     case 'GET':
