@@ -42,18 +42,13 @@ export default function Header() {
           <input placeholder="Tìm kiếm" type="text" className="h-[32px] text-[14px] px-[5px] border-0 outline-0 " />
           <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
         </div>
-        <Link href="/" passHref>
-          <a>
-            <Favorite classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
-          </a>
-        </Link>
-        <Link href="/" passHref>
-          <a>
+        <Link href="/">
+          <a className="py-[4px]">
             <CartIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </a>
         </Link>
-        <Link href="/" passHref>
-          <a>
+        <Link href="/">
+          <a className="py-[4px]">
             <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </a>
         </Link>
