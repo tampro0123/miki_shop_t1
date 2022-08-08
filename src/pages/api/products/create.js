@@ -19,7 +19,7 @@ const ProductHandler = async (req, res) => {
   const { method } = req;
   const _id = new mongoose.Types.Object();
   await dbConnect();
-  
+
   switch (method) {
     case 'POST':
       try {
@@ -34,29 +34,31 @@ const ProductHandler = async (req, res) => {
         };
 
         //upload image to cloudinary
-        const result = await cloudinary.uploader.upload(image, options);
-        imageArray.push({ id: _id, src: result.secure_url });
-
-        const subImageUpload = subImage.length ? (await Promise.all(subImage.map((element) => {
+        if (subImage.length > 0) {
+          for (const element of subImage) {
             const _id = new mongoose.Types.ObjectId();
             const options = {
-              upload_preset: "products",
+              upload_preset: 'test-uploads',
               overwrite: true,
               public_id: _id,
             };
-            return cloudinary.uploader.upload(element, options)
-          }))).map(response => ({id: _id, src: response.secure_url})) : [];
-          //create new Product with image from cloudinary response
+            const result = await cloudinary.uploader.upload(element, options);
+            imageArray.push({ id: _id, src: result.secure_url });
+          }
+        }
+        const result = await cloudinary.uploader.upload(image, options);
+        imageArray.unshift({ id: _id, src: result.secure_url });
 
-          await Products.create({
-            _id,
-            name,
-            image: [{id: _id, src: result.secure_url}, ...subImageUpload ],
-            price,
-            description,
-            category,
-          });
-  
+        //create new Product with image from cloudinary response
+        await Products.create({
+          _id,
+          name,
+          image: imageArray,
+          price,
+          description,
+          category,
+        });
+
         return res.status(201).json({
           success: true,
           message: 'Product created successfully!',
