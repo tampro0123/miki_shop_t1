@@ -24,7 +24,7 @@ export default function Products() {
               className="-z-10 rounded-tl-16"
             />
           </div>
-          <div className="relative pr-[20px] drop-shadow-product">
+          <div className="relative pr-[20px] drop-shadow-product h-[254px]">
             <p className="text_ACenter top-3/4">Đồng hồ</p>
             <Image
               src={Watch}
@@ -70,7 +70,7 @@ export default function Products() {
         </div>
       </div>
       <div className="relative drop-shadow-product">
-        <p className="text_ACenter top-[480px]">Bông tai</p>
+        <p className="text_ACenter top-[492px]">Bông tai</p>
         <Image
           src={EarRing}
           layout="fixed"
