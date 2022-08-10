@@ -23,7 +23,7 @@ const ProductHandler = async (req, res) => {
   switch (method) {
     case 'POST':
       try {
-        const { name, image, subImage, description, price, category } = req.body;
+        const { name, image, subImage, description, category, storage } = req.body;
         const imageArray = [];
 
         //cloudinary options
@@ -54,9 +54,9 @@ const ProductHandler = async (req, res) => {
           _id,
           name,
           image: imageArray,
-          price,
           description,
           category,
+          storage
         });
 
         return res.status(201).json({
