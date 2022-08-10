@@ -35,7 +35,7 @@ const refreshTokenHandler = async (req, res) => {
             const newAccessToken = generateAccessToken(user);
             const newRefreshToken = generateRefreshToken(user);
             
-            await RefreshToken.remove({});
+            await RefreshToken.findOneAndDelete({ refreshToken });
             await RefreshToken.create({ userId: user._id, refreshToken: newRefreshToken });
             res.setHeader(
               "Set-Cookie",

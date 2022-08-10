@@ -19,11 +19,12 @@ const ProductHandler = async (req, res) => {
   const { method } = req;
   const _id = new mongoose.Types.Object();
   await dbConnect();
-  
+
   switch (method) {
     case 'POST':
       try {
-        const { name, image, description, price, category } = req.body;
+        const { name, image, subImage, description, category, storage } = req.body;
+        const imageArray = [];
 
         //cloudinary options
         const options = {
@@ -33,19 +34,31 @@ const ProductHandler = async (req, res) => {
         };
 
         //upload image to cloudinary
+        if (subImage.length > 0) {
+          for (const element of subImage) {
+            const _id = new mongoose.Types.ObjectId();
+            const options = {
+              upload_preset: 'test-uploads',
+              overwrite: true,
+              public_id: _id,
+            };
+            const result = await cloudinary.uploader.upload(element, options);
+            imageArray.push({ id: _id, src: result.secure_url });
+          }
+        }
         const result = await cloudinary.uploader.upload(image, options);
-        const imageUrl = result.data.secure_url;
+        imageArray.unshift({ id: _id, src: result.secure_url });
 
         //create new Product with image from cloudinary response
-        const newProduct = await Products.create({
+        await Products.create({
           _id,
           name,
-          image: imageUrl,
+          images: imageArray,
           description,
-          price,
           category,
+          storage
         });
-        await newProduct.save();
+
         return res.status(201).json({
           success: true,
           message: 'Product created successfully!',

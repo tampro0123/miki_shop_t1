@@ -4,12 +4,12 @@ import dbConnect from 'src/utils/dbConnect.js';
 
 const commentHandler = async (req, res) => {
   const { method } = req;
-  const { userId, content, targetId } = req.body;
+  const { userId, content, rate, targetId } = req.body;
+  await dbConnect();
 
   switch (method) {
     case 'POST':
       try {
-        await dbConnect();
         await Comment.findByIdAndUpdate(targetId, { isReplied: true });
         const result = await Comment.create({ user: userId, content, targetId });
 
