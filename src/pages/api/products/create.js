@@ -5,7 +5,6 @@ import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
 import dbConnect from 'src/utils/dbConnect.js';
 
-
 //Set file limit size
 export const config = {
   api: {
@@ -23,9 +22,8 @@ const ProductHandler = async (req, res) => {
     case 'POST':
       try {
         const { name, image, subImage, description, category, storage } = req.body;
-        // console.log(name, image, subImage, description, category, storage)
-        const imageArray = [];
         const _id = new mongoose.Types.ObjectId();
+        const imageArray = [];
         //cloudinary options
         const options = {
           upload_preset: 'products',
