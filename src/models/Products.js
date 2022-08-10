@@ -9,7 +9,7 @@ const ProductSchema = new Schema(
     rating: { type: String },
     price: { type: Number, required: true },
     category: { type: String, required: true},
-    quantity: { type: Array, required: true },
+    quantity: { type: Array},
   },
   {
     timestamps: true,

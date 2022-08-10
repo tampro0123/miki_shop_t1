@@ -63,10 +63,7 @@ export function RegisterFormSection() {
         },
       });
       console.log(data);
-<<<<<<< HEAD
-      setTimeout(() => router.push('/login'), 3000);
-      // reset();
-=======
+
       res.then(data => {
         setErrMail(undefined)
         setTimeout(() => router.push('/login'), 3000);
@@ -83,7 +80,7 @@ export function RegisterFormSection() {
       })
       // setTimeout(() => router.push('/login'), 3000);
       reset();
->>>>>>> aa237c0bb282e3850433525a9e386bbb3b09e894
+
     }
   };
 
