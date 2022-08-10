@@ -53,7 +53,7 @@ const ProductHandler = async (req, res) => {
         await Products.create({
           _id,
           name,
-          image: imageArray,
+          images: imageArray,
           description,
           category,
           storage
