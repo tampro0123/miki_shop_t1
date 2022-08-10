@@ -16,5 +16,5 @@ const ProductSchema = new Schema(
   }
 );
 
-module.exports = mongoose.models.ProductToken || mongoose.model('ProductToken', ProductSchema);
+module.exports = mongoose.models.Product || mongoose.model('Product', ProductSchema);
 

@@ -1,10 +1,11 @@
-import mongoose from 'mongoose';
 import withAuth from 'src/middlewares/withAuth';
 import withRoles from 'src/middlewares/withRoles';
 
 import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
 import dbConnect from 'src/utils/dbConnect.js';
+
+const mongoose = require('mongoose');
 
 //Set file limit size
 export const config = {
@@ -17,13 +18,13 @@ export const config = {
 
 const ProductHandler = async (req, res) => {
   const { method } = req;
-  const _id = new mongoose.Types.Object();
   await dbConnect();
 
   switch (method) {
     case 'POST':
       try {
         const { name, image, subImage, description, category, storage } = req.body;
+        const _id = new mongoose.Types.ObjectId();
         const imageArray = [];
 
         //cloudinary options
@@ -38,7 +39,7 @@ const ProductHandler = async (req, res) => {
           for (const element of subImage) {
             const _id = new mongoose.Types.ObjectId();
             const options = {
-              upload_preset: 'test-uploads',
+              upload_preset: 'products',
               overwrite: true,
               public_id: _id,
             };
