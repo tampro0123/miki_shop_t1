@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
 import withAuth from 'src/middlewares/withAuth';
 import withRoles from 'src/middlewares/withRoles';
-
+const mongoose = require('mongoose');
 import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
 import dbConnect from 'src/utils/dbConnect.js';
+
 
 //Set file limit size
 export const config = {
@@ -17,14 +17,15 @@ export const config = {
 
 const ProductHandler = async (req, res) => {
   const { method } = req;
-  const _id = new mongoose.Types.Object();
   await dbConnect();
-  
+
   switch (method) {
     case 'POST':
       try {
-        const { name, image, description, price, category } = req.body;
-
+        const { name, image, subImage, description, category, storage } = req.body;
+        // console.log(name, image, subImage, description, category, storage)
+        const imageArray = [];
+        const _id = new mongoose.Types.ObjectId();
         //cloudinary options
         const options = {
           upload_preset: 'products',
@@ -33,19 +34,30 @@ const ProductHandler = async (req, res) => {
         };
 
         //upload image to cloudinary
+        if (subImage.length > 0) {
+          for (const element of subImage) {
+            const _id = new mongoose.Types.ObjectId();
+            const options = {
+              upload_preset: 'products',
+              overwrite: true,
+              public_id: _id,
+            };
+            const result = await cloudinary.uploader.upload(element, options);
+            imageArray.push({ id: _id, src: result.secure_url });
+          }
+        }
         const result = await cloudinary.uploader.upload(image, options);
-        const imageUrl = result.data.secure_url;
-
+        imageArray.unshift({ id: _id, src: result.secure_url });
         //create new Product with image from cloudinary response
-        const newProduct = await Products.create({
+        await Products.create({
           _id,
           name,
-          image: imageUrl,
+          images: imageArray,
           description,
-          price,
           category,
+          storage
         });
-        await newProduct.save();
+
         return res.status(201).json({
           success: true,
           message: 'Product created successfully!',
@@ -53,7 +65,7 @@ const ProductHandler = async (req, res) => {
       } catch (error) {
         return res.status(500).json({
           success: false,
-          message: error,
+          message: "Error",
         });
       }
 
@@ -64,4 +76,4 @@ const ProductHandler = async (req, res) => {
 };
 
 //protect roles
-export default withAuth(withRoles(ProductHandler, 'admin'));
+export default ProductHandler;

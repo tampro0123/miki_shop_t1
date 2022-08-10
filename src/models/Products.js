@@ -5,11 +5,10 @@ const ProductSchema = new Schema(
   {
     name: { type: String, required: true},
     description: { type: String, required: true },
-    image: { type: Array, required: true },
-    rating: { type: String },
-    price: { type: Number, required: true },
+    images: { type: Array, required: true },
+    rating: { type: Object, default: { rate: "", count: 0}},
     category: { type: String, required: true},
-    quantity: { type: Array},
+    storage: { type: Array },
   },
   {
     timestamps: true,
@@ -17,5 +16,5 @@ const ProductSchema = new Schema(
   }
 );
 
-module.exports = mongoose.models.ProductToken || mongoose.model('ProductToken', ProductSchema);
+module.exports = mongoose.models.Products || mongoose.model('Products', ProductSchema);
 
