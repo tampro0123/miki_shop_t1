@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 export  function TextArea({ name, label, styleLabel, styleInput,
-    styleMessage, className, passwordErr, userNameErr , mailErr, ...passProps }) {
+    styleMessage, className, ...passProps }) {
     const {
         register,
         formState: { errors },
@@ -11,7 +11,7 @@ export  function TextArea({ name, label, styleLabel, styleInput,
         {label}
       </label>
       <textarea className={styleInput} {...register(name)} {...passProps} rows="10"></textarea>
-      <span className={styleMessage}>{errors[name]?.message || userNameErr || passwordErr || mailErr}</span>
+      <span className={styleMessage}>{errors[name]?.message}</span>
     </div>
   )
 }

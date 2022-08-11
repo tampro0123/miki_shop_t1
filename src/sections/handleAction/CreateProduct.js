@@ -11,20 +11,41 @@ export default function createProduct() {
     const schema = yup.object().shape({
       nameProduct: yup
       .string()
-      .required('Nhập tên sản phẩm')
+      .required('Nhập tên sản phẩm'),
+      imageMain : yup
+      .mixed()
+      .required('Vui lòng chọn ảnh chính'),
+      desc : yup
+      .string()
+      .required('Vui lòng nhập mô tả sản phẩm'),
+      dynamicForm: yup .array()
+      .of(yup .object().shape({
+        size: yup .string().required("Vui lòng nhập cỡ"),
+        quantity:yup .string().required("Vui lòng số lượng"),
+        price:yup .string().required("Vui lòng giá")
+      })),
+
+        
 
       });
       const methods = useForm({
           resolver: yupResolver(schema),
+          defaultValues: {
+            imageMain: null,
+            dynamicForm : []
+          }
       });
       const { handleSubmit, reset,register ,control } = methods;
-      const {fields , append, remove, } = useFieldArray({
+      const {fields , append, remove } = useFieldArray({
         control,
         name: 'dynamicForm',
       });
+      
       // Handle Submit
       const [baseMainImg, setBaseImgMain] = useState('')
       const [baseImgs, setBaseImgs] =useState([])
+      const [click,setClick] = useState(false)
+      const [errAdd, setErrAdd] = useState('')
       let arr
       const onChange = (e)=>{
         let convertArr = Array.from(e.target.files)
@@ -41,9 +62,10 @@ export default function createProduct() {
         })   
       }
       const onSubmit =  (data) => {
-        if (data) {
-       
-          console.log(baseImgs)
+        if(!click){
+          return setErrAdd("Vui lòng thêm size")
+        }
+        if (data && click) {
 
           const dataAdd = axios({
             method: 'POST',
@@ -60,8 +82,12 @@ export default function createProduct() {
               'Content-Type': 'application/json',
             },
           })
-          .then(response => console.log(response))
+          .then(response =>{
+            console.log(response)
+            reset()
+          })
           .catch (err => console.log(err))
+          console.log(data)
         }
       };
       const style = {
@@ -92,39 +118,40 @@ export default function createProduct() {
                   className ='flex flex-col '
                   label={'Kích cỡ : '}
                   styleLabel= {style.label}
-                  name="size"
+                  // name="size"
                   styleInput={style.lgInput}
                   styleMessage={style.message}
                   placeholder="Size..."
                   type ='number'
-                  {...register(`dynamicForm.${index}.size`)}
+                  name = {`dynamicForm.${index}.size`}
+                  isArray
                   />
                   <TextField
                   className ='flex flex-col '
                   label={'Số lượng : '}
                   styleLabel= {style.label}
-                  name="quantity"
                   styleInput={style.lgInput}
                   styleMessage={style.message}
                   placeholder="Quantity..."
                   type ='number'
-                  {...register(`dynamicForm.${index}.quantity`)}
-
+                  name = {`dynamicForm.${index}.quantity`}
+                  isArray
                   />
                   <TextField
                   className ='flex flex-col '
                   label={'Giá sản phẩm: '}
                   styleLabel= {style.label}
-                  name="price"
                   styleInput={style.lgInput}
                   styleMessage={style.message}
                   placeholder="Price..."
                   type ='number'
-                  {...register(`dynamicForm.${index}.price`)}
+                  name = {`dynamicForm.${index}.price`}
+                  isArray
                   />
                   <Button  type="button"
                     className=" w-[200px] text-base absolute right-[-209px] top-[59px] "
                     primary
+                    
                     onClick={() => remove(index)}
                     classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
                     >
@@ -133,26 +160,34 @@ export default function createProduct() {
                 </div>
               )
             } )}
-            
+          
           <Button  type="button"
-            onClick={() => append()}
+            onClick={() => {
+              setClick(true)
+              setErrAdd('')
+              append()
+            }}
             className="mt-[32px] w-[200px] text-base"
             primary
+            name = 'buttonAddNew'
+            {...register('buttonAddNew')}
+            
             classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
             >
               Thêm mới
           </Button>
+          {errAdd && <span className = {style.message}>{errAdd}</span>}
         </div>
         
         <TextField
           className="border-none flex flex-col"
           label={'Ảnh sản phẩm: '}
           styleLabel= {style.label}
-          name="imageMain"
           styleInput={style.lgInput+'border-none'}
           styleMessage={style.message}
           type="file"
           onChange = {(e)=> baseImgMain(e)}
+          name="imageMain"
         />        
         <TextField
           className="mb-4 border-none flex flex-col"
@@ -171,12 +206,14 @@ export default function createProduct() {
           name ='desc'
           styleInput = {style.area}
           placeholder ='Thông tin của sản phẩm ... '
+          styleMessage={style.message}
         />     
         <SlectOption 
           className =''
           styleInput = {style.area}
           valueOption = {optionCategory}
           name ='category'
+          styleMessage={style.message}
         />
         <Button
           className="mt-[32px] w-full text-base"
