@@ -63,8 +63,14 @@ export function RegisterFormSection() {
         },
       });
       console.log(data);
+<<<<<<< HEAD
       res.then((data) => {
         setErrMail(undefined);
+=======
+
+      res.then(data => {
+        setErrMail(undefined)
+>>>>>>> c167c115e7b40bc1de70caaff97bcbd3f8899278
         setTimeout(() => router.push('/login'), 3000);
       });
       let mailErr;
@@ -79,6 +85,10 @@ export function RegisterFormSection() {
       });
       // setTimeout(() => router.push('/login'), 3000);
       reset();
+<<<<<<< HEAD
+=======
+
+>>>>>>> c167c115e7b40bc1de70caaff97bcbd3f8899278
     }
   };
 
