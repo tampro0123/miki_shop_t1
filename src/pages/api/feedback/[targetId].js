@@ -10,7 +10,7 @@ const feedbackHandler = async (req, res) => {
     case 'GET':
       try {
         await dbConnect();
-        const feedbacks = await Feedback.find({ targetId }).sort({createdAt: -1}).populate('user');
+        const feedbacks = await Feedback.find({ targetId }).sort({ createdAt: -1 }).populate('user');
         return res.status(200).json({
           sucess: true,
           feedbacks: feedbacks,
