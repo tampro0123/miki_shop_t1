@@ -65,7 +65,7 @@ const FeedbackHandler = async (req, res) => {
     default:
       return res.status(500).json({
         success: false,
-        message: 'Faild to connect to server',
+        message: 'Faild to connect to server!',
       });
   }
 };
