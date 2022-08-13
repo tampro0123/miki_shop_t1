@@ -1,12 +1,9 @@
-import dbConnect from 'src/utils/dbConnect.js';
-import User from 'src/models/User';
 import bcrypt from 'bcrypt';
-import RefreshToken from 'src/models/RefreshToken';
 import { serialize } from 'cookie';
-import {
-  generateAccessToken,
-  generateRefreshToken,
-} from "src/utils/generateToken";
+import RefreshToken from 'src/models/RefreshToken';
+import User from 'src/models/User';
+import dbConnect from 'src/utils/dbConnect.js';
+import { generateAccessToken, generateRefreshToken } from 'src/utils/generateToken';
 
 async function handler(req, res) {
   const { method } = req;
@@ -31,14 +28,13 @@ async function handler(req, res) {
         }
         if (user && validPassword) {
           const { password, ...userInfo } = user;
-
+          //Tạo refreshToken tương ứng
           const accessToken = generateAccessToken(user);
           const refreshToken = generateRefreshToken(user);
-          const newRefreshToken = new RefreshToken({
-            userId: user._id,
+          await RefreshToken.create({
+            _id: user._id,
             refreshToken,
           });
-          await newRefreshToken.save();
 
           res.setHeader(
             'Set-Cookie',
