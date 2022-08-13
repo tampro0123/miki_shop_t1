@@ -1,8 +1,8 @@
 import withAuth from 'src/middlewares/withAuth';
-import Comment from 'src/models/Comment';
+import Feedback from 'src/models/Feedback';
 import dbConnect from 'src/utils/dbConnect.js';
 
-const commentHandler = async (req, res) => {
+const feedbackHandler = async (req, res) => {
   const { method } = req;
   const { targetId } = req.query;
 
@@ -10,7 +10,7 @@ const commentHandler = async (req, res) => {
     case 'GET':
       try {
         await dbConnect();
-        const result = await Comment.find({ targetId }).sort({createdAt: -1}).populate('user');
+        const result = await Feedback.find({ targetId }).sort({createdAt: -1}).populate('user');
         return res.status(200).json({
           sucess: true,
           result: result,
@@ -27,4 +27,4 @@ const commentHandler = async (req, res) => {
   }
 };
 
-export default withAuth(commentHandler);
+export default withAuth(feedbackHandler);
