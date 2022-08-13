@@ -24,7 +24,7 @@ const FeedbackHandler = async (req, res) => {
     case 'POST':
       try {
         //Check user đã đánh giá hay chưa
-        const feedbacks = await Feedback.find({ targetId, userId });
+        const feedbacks = await Feedback.find({ targetId, user: userId });
         if (feedbacks.length > 0) {
           return res.status(409).json({
             success: false,
