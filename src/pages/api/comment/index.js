@@ -1,32 +1,73 @@
 import withAuth from 'src/middlewares/withAuth';
-import Comment from 'src/models/Comment';
+import Feedback from 'src/models/Feedback';
+import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
 
-const commentHandler = async (req, res) => {
+const FeedbackHandler = async (req, res) => {
   const { method } = req;
   const { userId, content, rate, targetId } = req.body;
   await dbConnect();
 
   switch (method) {
+    case 'GET':
+      try {
+        return res.status(200).json({
+          success: false,
+          message: 'Please insert query string!',
+        });
+      } catch (err) {
+        return res.status(500).json({
+          success: false,
+          error: err,
+        });
+      }
     case 'POST':
       try {
-        await Comment.findByIdAndUpdate(targetId, { isReplied: true });
-        const result = await Comment.create({ user: userId, content, targetId });
+        //Check user đã đánh giá hay chưa
+        const feedbacks = await Feedback.find({ targetId, userId });
+        if (feedbacks.length > 0) {
+          return res.status(409).json({
+            success: false,
+            message: 'Bạn đã đánh giá sản phẩm này rồi!',
+          });
+        }
+        //Tạo feedback mới
+        await Feedback.create({ user: userId, content, rate, targetId });
 
-        return res.status(201).json({
-          sucess: true,
-          message: 'Commented!',
+        //Tính toán và cập nhật lại rate/count
+        const rating = await Feedback.aggregate([
+          {
+            $group: { _id: '$targetId', avg: { $avg: '$rate' }, count: { $sum: 1 } },
+          },
+        ]);
+        await Products.findByIdAndUpdate(
+          targetId,
+          {
+            rating: {
+              rate: rating[0].avg.toFixed(1).toString(),
+              count: rating[0].count,
+            },
+          },
+          { new: true }
+        );
+        //Trả response
+        return res.status(200).json({
+          success: true,
+          message: 'Bạn đã đánh giá thành công!',
         });
       } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({
+          success: false,
+          error: error,
+        });
       }
       break;
     default:
       return res.status(500).json({
-        sucess: false,
-        message: 'Faild to post connect to server!',
+        success: false,
+        message: 'Faild to connect to server',
       });
   }
 };
 
-export default withAuth(commentHandler);
+export default withAuth(FeedbackHandler);
