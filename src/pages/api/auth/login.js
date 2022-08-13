@@ -56,9 +56,8 @@ async function handler(req, res) {
         return res.status(500).json(error);
       }
       break;
-
     default:
-      return method;
+      return res.status(500).json({ success: false, message: 'Faild to connect to server' });
   }
 }
 export default handler;
