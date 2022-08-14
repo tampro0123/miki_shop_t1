@@ -50,6 +50,7 @@ const FeedbackHandler = async (req, res) => {
         const mediaInstance = {
           id:'',
           src: '',
+          type:''
         }
         
         //Kiểm tra xem có file media không sau đó upload theo phân loại nếu có
@@ -63,11 +64,11 @@ const FeedbackHandler = async (req, res) => {
           }
           const result = await cloudinary.uploader.upload(path, options, (err, response) => {
             console.log(err, response);
-          })
-          mediaInstance = {
-            id: _id.toString(),
-            src: result.secure_url
-          }
+          });
+          
+          mediaInstance.id = _id.toString(),
+          mediaInstance.src = result.secure_url,
+          mediaInstance.type = media.type
         }
 
         //Tạo feedback mới
