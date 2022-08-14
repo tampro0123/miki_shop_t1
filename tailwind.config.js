@@ -16,6 +16,7 @@ module.exports = {
         'price-text': '#92715A',
         'btn': '#251C17',
         'Neutral/2': '#626262',
+        'Neutral/3': '#A9A9A9',
         'border-1': '#6E5544',
         'msgEr': '#d2311b',
 
