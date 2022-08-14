@@ -2,11 +2,24 @@ import withAuth from 'src/middlewares/withAuth';
 import Feedback from 'src/models/Feedback';
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
+import { cloudinary } from 'src/utils/cloudinary.js';
+
+const mongoose = require('mongoose');
+
+//Set file limit size
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '20mb', // Set desired value here
+    },
+  },
+};
+
 
 const FeedbackHandler = async (req, res) => {
-  const { method } = req;
-  const { userId, content, rate, targetId } = req.body;
   await dbConnect();
+  const { method } = req;
+  const { userId, content, rate, media, targetId } = req.body;
 
   switch (method) {
     case 'GET':
@@ -31,8 +44,35 @@ const FeedbackHandler = async (req, res) => {
             message: 'Bạn đã đánh giá sản phẩm này rồi!',
           });
         }
+
+        //Khởi tạo 1 media Object global
+        const _id = new mongoose.Types.ObjectId();
+        const mediaInstance = {
+          id:'',
+          src: '',
+          type:''
+        }
+        
+        //Kiểm tra xem có file media không sau đó upload theo phân loại nếu có
+        if (media.src) {
+          const path = media.src;
+          const options = {
+            upload_preset: 'feedbacks',
+            resource_type: media.type,
+            overwrite: true,
+            public_id: _id
+          }
+          const result = await cloudinary.uploader.upload(path, options, (err, response) => {
+            console.log(err, response);
+          });
+          
+          mediaInstance.id = _id.toString(),
+          mediaInstance.src = result.secure_url,
+          mediaInstance.type = media.type
+        }
+
         //Tạo feedback mới
-        await Feedback.create({ user: userId, content, rate, targetId });
+        await Feedback.create({ _id, user: userId, content, rate, media: mediaInstance, targetId });
 
         //Tính toán và cập nhật lại rate/count
         const rating = await Feedback.aggregate([
