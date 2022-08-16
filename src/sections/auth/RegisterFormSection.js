@@ -5,10 +5,10 @@ import * as yup from 'yup';
 import Button from 'src/components/Button';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import axios from 'axios';
-import { useState } from "react";
+import { useState } from 'react';
 export function RegisterFormSection() {
   const router = useRouter();
-  const [errMail , setErrMail] = useState(undefined)
+  const [errMail, setErrMail] = useState(undefined);
   // create schema validate form
   const schema = yup.object().shape({
     firstName: yup.string().required('Vui lòng nhập họ'),
@@ -63,27 +63,27 @@ export function RegisterFormSection() {
         },
       });
       console.log(data);
-<<<<<<< HEAD
+      // <<<<<<< HEAD
       setTimeout(() => router.push('/login'), 3000);
       // reset();
-=======
-      res.then(data => {
-        setErrMail(undefined)
+      // =======
+      res.then((data) => {
+        setErrMail(undefined);
         setTimeout(() => router.push('/login'), 3000);
-      })
+      });
       let mailErr;
-      let messageErrMail
-      res.catch(value =>{
-        mailErr = value?.response?.data?.errEmail
-        messageErrMail=value?.response?.data?.message
-        if(mailErr == false){
-          setErrMail(messageErrMail)
+      let messageErrMail;
+      res.catch((value) => {
+        mailErr = value?.response?.data?.errEmail;
+        messageErrMail = value?.response?.data?.message;
+        if (mailErr == false) {
+          setErrMail(messageErrMail);
         }
-        console.log(value)
-      })
+        console.log(value);
+      });
       // setTimeout(() => router.push('/login'), 3000);
       reset();
->>>>>>> aa237c0bb282e3850433525a9e386bbb3b09e894
+      // >>>>>>> aa237c0bb282e3850433525a9e386bbb3b09e894
     }
   };
 
@@ -119,7 +119,7 @@ export function RegisterFormSection() {
           styleInput={style.lgInput}
           styleMessage={style.message}
           placeholder="Nhập email hoặc số điện thoại"
-          mailErr = {errMail}
+          mailErr={errMail}
         />
 
         <TextField
