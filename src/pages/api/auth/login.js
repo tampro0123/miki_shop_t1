@@ -17,6 +17,7 @@ async function handler(req, res) {
           return res.status(400).json({
             success: false,
             message: 'Người dùng không tồn tại trên hệ thống',
+            userNameSucc: false,
           });
         // nếu email user đã tồn tại trả về lỗi 400 và message
         const validPassword = await bcrypt.compare(password, user.password);
@@ -24,6 +25,7 @@ async function handler(req, res) {
           return res.status(401).json({
             message: 'Mật khẩu không đúng',
             success: false,
+            passwordSucc: false,
           });
         }
         if (user && validPassword) {
@@ -43,7 +45,7 @@ async function handler(req, res) {
               maxAge: 3600 * 24 * 365 * 1000,
             })
           );
-
+          
           return res.status(200).json({
             accessToken: accessToken,
             user: userInfo,

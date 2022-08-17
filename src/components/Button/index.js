@@ -39,6 +39,7 @@ function Button({
       onClick: () => router.push(to),
       ...passProps,
     };
+    Component = 'div';
   } else if (href) {
     props.href = href;
     Component = 'a';
@@ -57,7 +58,8 @@ function Button({
   return (
     <Component
       {...props}
-      className={`rounded-lg leading-6 text-base flex items-center justify-center cursor-pointer font-bold ${classes} ${className} ${classHover}`}
+      className={`rounded-lg leading-6 text-base flex items-center 
+      justify-center cursor-pointer font-bold ${classes} ${className} ${classHover}`}
     >
       {leftIcon && <span className={styleLeftIcon}>{leftIcon}</span>}
       <span className={styleContent}>{children}</span>

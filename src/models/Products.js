@@ -24,5 +24,9 @@ const ProductSchema = new Schema(
     collection: 'products',
   }
 );
-
 module.exports = mongoose.models.Products || mongoose.model('Products', ProductSchema);
+<<<<<<< devbe
+=======
+
+
+>>>>>>> devfull

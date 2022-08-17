@@ -1,11 +1,9 @@
 import withAuth from 'src/middlewares/withAuth';
 import withRoles from 'src/middlewares/withRoles';
-
+const mongoose = require('mongoose');
 import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
 import dbConnect from 'src/utils/dbConnect.js';
-
-const mongoose = require('mongoose');
 
 //Set file limit size
 export const config = {
@@ -26,7 +24,6 @@ const ProductHandler = async (req, res) => {
         const { name, image, subImage, description, category, storage } = req.body;
         const _id = new mongoose.Types.ObjectId();
         const imageArray = [];
-
         //cloudinary options
         const options = {
           upload_preset: 'products',
@@ -49,7 +46,6 @@ const ProductHandler = async (req, res) => {
         }
         const result = await cloudinary.uploader.upload(image, options);
         imageArray.unshift({ id: _id, src: result.secure_url });
-
         //create new Product with image from cloudinary response
         await Products.create({
           _id,
@@ -67,7 +63,7 @@ const ProductHandler = async (req, res) => {
       } catch (error) {
         return res.status(500).json({
           success: false,
-          message: error,
+          message: "Error",
         });
       }
 
@@ -78,4 +74,4 @@ const ProductHandler = async (req, res) => {
 };
 
 //protect roles
-export default withAuth(withRoles(ProductHandler, 'admin'));
+export default ProductHandler;
