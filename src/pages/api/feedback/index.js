@@ -48,11 +48,11 @@ const FeedbackHandler = async (req, res) => {
         //Khởi tạo 1 media Object global
         const _id = new mongoose.Types.ObjectId();
         const mediaInstance = {
-          id:'',
+          id: '',
           src: '',
-          type:''
+          type: ''
         }
-        
+
         //Kiểm tra xem có file media không sau đó upload theo phân loại nếu có
         if (media.src) {
           const path = media.src;
@@ -65,10 +65,10 @@ const FeedbackHandler = async (req, res) => {
           const result = await cloudinary.uploader.upload(path, options, (err, response) => {
             console.log(err, response);
           });
-          
+
           mediaInstance.id = _id.toString(),
-          mediaInstance.src = result.secure_url,
-          mediaInstance.type = media.type
+            mediaInstance.src = result.secure_url,
+            mediaInstance.type = media.type
         }
 
         //Tạo feedback mới
@@ -110,4 +110,4 @@ const FeedbackHandler = async (req, res) => {
   }
 };
 
-export default withAuth(FeedbackHandler);
+export default FeedbackHandler;

@@ -1,10 +1,9 @@
-import React from 'react'
 import axios from 'axios';
-function  deleteProduct(idProduct) {
+function deleteProduct(idProduct) {
     const reqDelete = axios({
         method: 'DELETE',
-        url : `/api/products/${idProduct}`
+        url: `/api/products/${idProduct}`
     })
-    .then(res => console.log(res))
+        .then(res => console.log(res))
 }
 export default deleteProduct
