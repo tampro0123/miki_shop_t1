@@ -4,9 +4,9 @@ import { CaretDown, LogoIcon, SearchIcon, Favorite, CartIcon, UserIcon } from 's
 export default function Header() {
   return (
     <header className="flex justify-between py-[24px] px-[152px]">
-      <div className ='flex items-end'>
+      <div className="flex items-end">
         <ul className="flex justify-between gap-[42px]">
-          <li className ='py-[4px]'>
+          <li className="py-[4px]">
             <Link href="/">
               <a className="text-16 hover:text-3rd-text duration-500 font-bold">Trang chủ</a>
             </Link>
@@ -18,7 +18,7 @@ export default function Header() {
 
             <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300" />
           </li>
-          <li className ='py-[4px]'>
+          <li className="py-[4px]">
             <Link href="/">
               <a className="text-16 hover:text-3rd-text duration-500">Về chúng tôi</a>
             </Link>
@@ -26,12 +26,12 @@ export default function Header() {
         </ul>
       </div>
       <div className="flex flex-col items-center">
-        <Link href="/">
+        <Link href="/" passHref>
           <a>
-            <LogoIcon classNameIcon="cursor-pointer" />
+            <LogoIcon classNameIcon="cursor-pointer" />{' '}
           </a>
         </Link>
-        <Link href="/">
+        <Link href="/" passHref>
           <h1 className="cursor-pointer font-plf text-[40px] font-bold mt-[12px] text-primary-text leading-10 text-center">
             MIKI JEWELLRY
           </h1>
@@ -42,13 +42,13 @@ export default function Header() {
           <input placeholder="Tìm kiếm" type="text" className="h-[32px] text-[14px] px-[5px] border-0 outline-0 " />
           <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
         </div>
-        <Link href="/" >
-          <a className='py-[4px]'>
+        <Link href="/">
+          <a className="py-[4px]">
             <CartIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </a>
         </Link>
         <Link href="/">
-          <a className='py-[4px]'>
+          <a className="py-[4px]">
             <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </a>
         </Link>

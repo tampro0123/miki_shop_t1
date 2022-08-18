@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        pc: '375px',
+        'mobile': { 'max': '480px' },
       },
       fontFamily: {
         mon: ['Montserrat'],

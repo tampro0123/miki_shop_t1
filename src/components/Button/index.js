@@ -53,7 +53,7 @@ function Button({
   } else if (text) {
     var classes = 'px-0 py-0 inline-flex text-3rd-text border-[1px] border-transparent';
   } else if (outline) {
-    var classes = 'rounded-[40px] border-[1px] border-border-1 flex w-full px-[32px] py-[8px]';
+    var classes = 'border-[1px] rounded-[9999px] border-border-1 flex w-full px-[32px] py-[8px]';
   }
   return (
     <Component
