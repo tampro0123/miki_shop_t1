@@ -1,20 +1,18 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-export function TextField({ name, label, styleLabel, styleInput,
-   styleMessage, className, passwordErr, userNameErr , mailErr, isArray,...passProps }) {
+export function TextField({ name, label, styleLabel, styleInput, styleMessage, className, ...passProps }) {
   const {
     register,
     formState: { errors },
   } = useFormContext();
-  const [baseName,index,subName] = isArray ? name.split('.') : []
+
   return (
     <div className={className}>
       <label className={styleLabel} htmlFor={name}>
         {label}
       </label>
       <input className={styleInput} {...register(name)} {...passProps} />
-      <span className={styleMessage}>{isArray ? errors?.[baseName]?.[+index]?.[subName]?.message :
-       errors[name]?.message || userNameErr || passwordErr || mailErr}</span>
+      <span className={styleMessage}>{errors[name]?.message}</span>
     </div>
   );
 }
