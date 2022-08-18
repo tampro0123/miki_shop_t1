@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "src/hooks/generateToken";
+} from "src/utils/generateToken";
 import cookie from "cookie";
 
 dbConnect();
@@ -35,7 +35,7 @@ const refreshTokenHandler = async (req, res) => {
             const newAccessToken = generateAccessToken(user);
             const newRefreshToken = generateRefreshToken(user);
             
-            await RefreshToken.remove({});
+            await RefreshToken.findOneAndDelete({ refreshToken });
             await RefreshToken.create({ userId: user._id, refreshToken: newRefreshToken });
             res.setHeader(
               "Set-Cookie",
@@ -52,7 +52,7 @@ const refreshTokenHandler = async (req, res) => {
       } catch (err) {
         return res.status(500).json({
           err: err,
-          message: "co loi roi d c m!",
+          message: "Error at RefreshToken",
         });
       }
       break;

@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const RefreshTokenSchema = new mongoose.Schema(
+const RefreshTokenSchema = new Schema(
   {
-    userId: { type: String, required: true },
     refreshToken: { type: String, required: true },
   },
   {
@@ -10,4 +10,5 @@ const RefreshTokenSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.RefreshToken || mongoose.model('RefreshToken', RefreshTokenSchema);
+module.exports = mongoose.models.RefreshToken || mongoose.model('RefreshToken', RefreshTokenSchema);
+
