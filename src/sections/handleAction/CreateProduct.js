@@ -1,12 +1,14 @@
-import React from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, useFieldArray } from 'react-hook-form';
-import * as yup from 'yup';
 import axios from 'axios';
-import { FormProviderBox, TextField, TextArea, SlectOption } from 'src/components/hook-form';
-import Button from 'src/components/Button';
+import Image from 'next/image';
 import { useState } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
+import Button from 'src/components/Button';
+import { FormProviderBox, SlectOption, TextArea, TextField } from 'src/components/hook-form';
 import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg.js';
+import * as yup from 'yup';
+
 export default function createProduct() {
   const schema = yup.object().shape({
     nameProduct: yup.string().required('Nhập tên sản phẩm'),
@@ -34,16 +36,20 @@ export default function createProduct() {
     name: 'dynamicForm',
   });
 
-  // Handle Submit
+
   const [baseMainImg, setBaseImgMain] = useState('');
   const [baseImgs, setBaseImgs] = useState([]);
-  const [click, setClick] = useState(false);
   const [errAdd, setErrAdd] = useState('');
-  let arr;
+  const [viewImg, setViewImg] = useState('');
+  const [viewImgs, setViewImgs] = useState([]);
+
   const onChange = (e) => {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
+
+      setViewImgs((data) => [...data, URL.createObjectURL(item)])
+
       setBaseImgs((prevState) => [...prevState, base64]);
     });
   };
@@ -51,17 +57,23 @@ export default function createProduct() {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
+
+      setViewImg(URL.createObjectURL(item))
       setBaseImgMain(base64);
     });
   };
+  // Handle Submit
   const onSubmit = (data) => {
-    if (!click) {
-      return setErrAdd('Vui lòng thêm size');
+    if (data.dynamicForm.length == 0) {
+      return setErrAdd("Vui lòng thêm size");
+    } else {
+      setErrAdd('');
     }
-    if (data && click) {
+    if (data) {
       const dataAdd = axios({
         method: 'POST',
-        url: '/api/products/create',
+        url: '../api/products/create',
+
         data: {
           category: data.category,
           description: data.desc,
@@ -79,13 +91,14 @@ export default function createProduct() {
         })
         .catch((err) => console.log(err));
       reset({
-        category: '',
         desc: '',
         dynamicForm: [],
         imageMain: null,
         image: null,
         nameProduct: '',
       });
+      setBaseImgMain('')
+      setBaseImgs([])
     }
   };
   const style = {
@@ -95,7 +108,7 @@ export default function createProduct() {
     label: 'mt-6 pl-[8px] mb-[8px]',
     area: 'w-full rounded-lg border-solid border-border-1 border-[1px] p-[10px]',
   };
-  const optionCategory = ['Nhẫn', 'Vòng cổ', 'Bông tai'];
+  const optionCategory = ['Nhẫn', 'Vòng cổ', 'Bông tai', 'Lắc'];
   return (
     <div>
       <FormProviderBox className="px-10 max-w-[750px] " methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -162,9 +175,8 @@ export default function createProduct() {
           <Button
             type="button"
             onClick={() => {
-              setClick(true);
-              setErrAdd('');
               append();
+              setErrAdd('');
             }}
             className="mt-[32px] w-[200px] text-base"
             primary
@@ -186,6 +198,22 @@ export default function createProduct() {
           onChange={(e) => baseImgMain(e)}
           name="imageMain"
         />
+        {viewImg ?
+          <div>
+            <div className="border-[1px] border-dashed border-[#333] w-[200px]">
+              <Image
+                width="200px"
+                height="200px"
+                objectFit="cover"
+                src={viewImg}
+                alt="Ảnh sản phẩm"
+              />
+
+            </div>
+          </div>
+          : ''}
+
+
         <TextField
           className="mb-4 border-none flex flex-col"
           label={'Ảnh liên quan: '}
@@ -197,6 +225,27 @@ export default function createProduct() {
           multiple
           onChange={(e) => onChange(e)}
         />
+        {viewImgs.length != 0 ?
+          <div className="grid grid-cols-3 gap-[8px]">
+            {viewImgs.map(item =>
+              <div className="border-[1px] border-dashed border-[#333]">
+                <Image
+                  width="200px"
+                  height="200px"
+                  objectFit="cover"
+                  src={item}
+                  alt="Ảnh sản phẩm"
+                />
+              </div>
+
+            )
+            }
+          </div>
+
+          :
+          ''
+        }
+
         <TextArea
           className="mb-4 flex flex-col"
           label={'Thông tin sản phẩm: '}
