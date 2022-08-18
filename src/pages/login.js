@@ -14,7 +14,7 @@ const login = () => {
         <div className="flex justify-center">
           <div className="flex w-[1136px] mobile:w-[375px] mobile:justify-center">
             {/* Img */}
-            <Image width={646} src={imgLogin} alt="imgRegister" className="rounded-l-16 mobile:hidden" />
+            <Image height={"100%"} width={646} src={imgLogin} alt="imgRegister" className="rounded-l-16 mobile:hidden" />
             {/* Content */}
             <div className="w-[490px] bg-bgr-auth mobile:bg-transparent rounded-r-16">
               <div className="flex items-center flex-col mt-14 mobile:mt-10">
