@@ -1,12 +1,10 @@
 import React from 'react';
-import Component1 from 'src/components/Component1';
 import { toast } from 'react-toastify';
 //always import from src folder
 export default function shop() {
   const functionThatReturnPromise = () => new Promise((resolve) => setTimeout(resolve, 2000));
   return (
     <div>
-      <Component1 />
       <button
         onClick={() => {
           toast.success('🦄 Wow so easy');
