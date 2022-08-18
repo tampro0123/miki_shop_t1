@@ -4,7 +4,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
 import Image from 'next/image'
 import { FormProviderBox, SlectOption, TextArea, TextField } from 'src/components/hook-form';
-import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg.js';
+import convertToBase64 from 'src/sections/handleAction/functionHandle/convertImg.js';
 import * as yup from 'yup';
 import { inforProduct } from 'src/recoils/inforProduct.js'
 import { useRecoilValue } from 'recoil'
