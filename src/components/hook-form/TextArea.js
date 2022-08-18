@@ -1,6 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 export function TextArea({ name, label, styleLabel, styleInput,
   styleMessage, className, defaultValueArea, ...passProps }) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> a7e0630168139554792177d7759a74592ecaa7f0
   const {
     register,
     formState: { errors },
