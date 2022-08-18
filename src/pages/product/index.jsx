@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Page from 'src/components/Page';
 import Footer from 'src/layouts/footer';
 import Header from 'src/layouts/header';
-import Banner from 'src/assets/product/banner.jpg';
+import Banner from 'src/assets/Product/banner.jpg';
 import axios from 'axios';
 import Button from 'src/components/Button';
 import { useRouter } from 'next/router';
@@ -20,7 +20,7 @@ export default function Products({ products, pageCount }) {
   };
 
   const handlePageClick = (e) => {
-    filterSearch({ router, page: e.selected });
+    filterSearch({ router, page: e.selected + 1 });
   };
 
   useLayoutEffect(() => {
