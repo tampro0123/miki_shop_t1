@@ -12,17 +12,17 @@ import filterSearch from 'src/utils/filterSearch';
 
 export default function Products({ products, pageCount }) {
   const router = useRouter();
-  let sortChecked = useRef(' ')
-  const [sortValue, setSortValue] = useState(" ");
+  let sortChecked = useRef(' ');
+  const [sortValue, setSortValue] = useState(' ');
   const handleSort = (e) => {
     sortChecked.current = e.target.value;
     setSortValue(e.target.value);
   };
 
-  const handlePageClick =(e) => {
-    console.log(e.selected)
-    filterSearch({ router, page: e.selected});
-  }
+  const handlePageClick = (e) => {
+    console.log(e.selected);
+    filterSearch({ router, page: e.selected });
+  };
 
   useLayoutEffect(() => {
     filterSearch({ router, sort: sortValue });
@@ -38,7 +38,9 @@ export default function Products({ products, pageCount }) {
             <h1 className="font-bold text-32 leading-10">Danh mục sản phẩm</h1>
             <div className="relative group">
               <select className="p-2 border-none" value={sortChecked.current} onChange={handleSort}>
-                <option disabled defaultValue>Sắp xếp theo</option>
+                <option disabled defaultValue>
+                  Sắp xếp theo
+                </option>
                 <option value=" ">Mặc định</option>
                 <option value="price-up">Giá tăng dần</option>
                 <option value="price-down">Giá giảm dần</option>
@@ -85,22 +87,22 @@ export default function Products({ products, pageCount }) {
               );
             })}
           </div>
-        <ReactPaginate
-        className='flex items-center float-right mt-12'
-        pageLinkClassName='px-3 py-1 border border-1 solid hover:bg-[#ccc]'
-        pageClassName ='mx-2'
-        activeLinkClassName='bg-primary-text text-white select-none cursor-not-allowed hover:bg-primary-text'
-        activeClassName='select-none'
-        previousLinkClassName='px-3 py-1 border border-1 solid hover:bg-[#ccc]'
-        nextLinkClassName='px-3 py-1 border border-1 solid hover:bg-[#ccc]'
-          previousLabel="Previous"
-          nextLabel="Next"
-          breakLabel="..."
-          pageCount={pageCount}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          onPageChange={handlePageClick}
-        />
+          <ReactPaginate
+            className="flex items-center float-right mt-12"
+            pageLinkClassName="px-3 py-1 border border-1 solid hover:bg-[#ccc]"
+            pageClassName="mx-2"
+            activeLinkClassName="bg-primary-text text-white select-none cursor-not-allowed hover:bg-primary-text"
+            activeClassName="select-none"
+            previousLinkClassName="px-3 py-1 border border-1 solid hover:bg-[#ccc]"
+            nextLinkClassName="px-3 py-1 border border-1 solid hover:bg-[#ccc]"
+            previousLabel="Previous"
+            nextLabel="Next"
+            breakLabel="..."
+            pageCount={pageCount}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageClick}
+          />
         </div>
         <Footer />
       </div>
