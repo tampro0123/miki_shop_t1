@@ -3,13 +3,12 @@ import Page from 'src/components/Page';
 import Footer from 'src/layouts/footer';
 import Header from 'src/layouts/header';
 import Button from 'src/components/Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Add, ImgAndVideo, Separate, Sub } from 'src/components/Icons';
 import axios from 'axios';
 import { RatingReview, RatingStar, ratingValue } from 'src/components/Rating/Rating';
 import { useRecoilValue } from 'recoil';
 import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg';
-import Link from 'next/link';
 
 const DetailProduct = ({ product, productList, feedbacks }) => {
   const Images = product.images;
@@ -40,6 +39,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
   const [errSend, setErrSend] = useState('');
   const [ratingMessErr, setRatingMessErr] = useState(false);
   const [cmtMessErr, setCmtMessErr] = useState(false);
+  const [errFile, setErrFile] = useState(false);
   const handleSubAmount = () => {
     amount > 0 && setAmount((prev) => prev - 1);
   };
@@ -70,11 +70,17 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
   };
   const countStar = product.rating.rate;
   const handleImgCmt = async (e) => {
-    const type = e.target.files[0].type.includes('image') ? 'image' : 'video';
-    setTypeCmt(type);
-    const file = e.target.files[0];
-    const baseMedia = await convertToBase64(file);
-    setMediaCmt(baseMedia);
+    console.log(e.target.files[0].type.includes('image'))
+    if (e.target.files[0].type.includes('image')) {
+      const type = e.target.files[0].type.includes('image') ? 'image' : 'video';
+      setTypeCmt(type);
+      const file = e.target.files[0];
+      const baseMedia = await convertToBase64(file);
+      setMediaCmt(baseMedia);
+    } else {
+      setErrFile(true);
+      setTypeCmt("Sai file");
+    }
   };
 
   const handleSubmitCmt = async () => {
@@ -219,7 +225,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
                     <div className="inline-block ml-[18px] mr-4 w-[2px] h-[16px] bg-Neutral/2 "></div>
                     <span className="text-white bg-[#A18A68] rounded-[4px] py-[4px] px-[7px] ">{`${product.discount} %`}</span>
                     <p className="text-price-text text-5xl font-bold mt-4">
-                      {new Intl.NumberFormat('vi-VN').format((price -= (price * product.discount) / 100))} đ
+                      {new Intl.NumberFormat('vi-VN').format(Math.floor(price -= (price * product.discount) / 100))} đ
                     </p>
                   </div>
                 )}
@@ -656,7 +662,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
                   <label htmlFor="image" className="inline-block cursor-pointer">
                     <ImgAndVideo />
                   </label>
-                  <span className="font-bold text-xl">({typeCmt ? '1' : '0'})</span>
+                  <span className="font-bold text-xl">( {typeCmt })</span>
                 </div>
                 <Button onClick={handleSubmitCmt} primary className={'float-right hover-btn-primary shadow-md'}>
                   Gửi
@@ -667,27 +673,29 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
           <div className="flex justify-center mt-[60px]">
             <Separate />
           </div>
-          <div className="flex justify-between mt-[70px]">
+          <div className="grid grid-cols-4 gap-10  mt-[70px]">
             {productList.map((product, i) => {
               return (
-                <div key={product.name} className="w-[22%] text-center font-bold relative z-10 flex flex-col-reverse">
+                <div key={product.name} className="flex flex-col-reverse text-center font-bold relative z-10 ">
                   <Button primary className="w-full mt-6 hover-btn-primary peer">
                     Thêm vào giỏ hàng
                   </Button>
-                  <p className="text-[20px] mt-6 text-trumcate2">{product.name}</p>
                   <p className="text-price-text mt-[6px]">
                     {new Intl.NumberFormat('vi-VN').format(product.storage[0].price)} đ
                   </p>
+                  <p className="text-[20px] mt-6 text-trumcate2">{product.name}</p>
                   <div className="hover:shadow-product hover:scale-[1.01] shadow-md rounded-16 peer-hover:shadow-product">
-                    <Image
-                      src={product.images[0].src}
-                      alt="Best seller product"
-                      placeholder="empty"
-                      width="254"
-                      height="300"
-                      layout="fixed"
-                      className="rounded-16 flex-shrink-0"
-                    />
+                    <a href={`product/${product.category}/${product._id}`}>
+                      <Image
+                        src={product.images[0].src}
+                        alt="Best seller product"
+                        placeholder="empty"
+                        width="254"
+                        height="300"
+                        layout="fixed"
+                        className="rounded-16"
+                      />
+                    </a>
                   </div>
                 </div>
               );
