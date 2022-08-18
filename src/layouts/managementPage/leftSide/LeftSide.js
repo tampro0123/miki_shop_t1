@@ -26,7 +26,7 @@ export default function LeftSide() {
 
             </div>
             <div className ='mb-[40px] bg-[#B78D71] rounded-8'>
-                <Link href="/managementProducts">
+                <Link href="/management/managementProducts">
                     <a className ='text-[20px] text-white block p-[15px] ml-[40px]'>Quản lý sản phẩm</a>
                 </Link>
 
