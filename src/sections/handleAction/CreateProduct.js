@@ -92,6 +92,8 @@ export default function createProduct() {
             });
             setBaseImgMain('')
             setBaseImgs([])
+            setViewImg('')
+            setViewImgs([])
         }
     };
     const style = {
@@ -219,8 +221,8 @@ export default function createProduct() {
                 />
                 {viewImgs.length != 0 ?
                     <div className="grid grid-cols-3 gap-[8px]">
-                        {viewImgs.map(item =>
-                            <div className="border-[1px] border-dashed border-[#333]">
+                        {viewImgs.map((item, index) =>
+                            <div key={index} className="border-[1px] border-dashed border-[#333]">
                                 <Image
                                     width="200px"
                                     height="200px"
