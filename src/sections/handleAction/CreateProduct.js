@@ -1,3 +1,4 @@
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import Image from 'next/image';
@@ -7,6 +8,7 @@ import Button from 'src/components/Button';
 import { FormProviderBox, SlectOption, TextArea, TextField } from 'src/components/hook-form';
 import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg.js';
 import * as yup from 'yup';
+
 export default function createProduct() {
   const schema = yup.object().shape({
     nameProduct: yup.string().required('Nhập tên sản phẩm'),
@@ -34,16 +36,20 @@ export default function createProduct() {
     name: 'dynamicForm',
   });
 
+
   const [baseMainImg, setBaseImgMain] = useState('');
   const [baseImgs, setBaseImgs] = useState([]);
   const [errAdd, setErrAdd] = useState('');
   const [viewImg, setViewImg] = useState('');
   const [viewImgs, setViewImgs] = useState([]);
+
   const onChange = (e) => {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
-      setViewImgs((data) => [...data, URL.createObjectURL(item)]);
+
+      setViewImgs((data) => [...data, URL.createObjectURL(item)])
+
       setBaseImgs((prevState) => [...prevState, base64]);
     });
   };
@@ -51,7 +57,8 @@ export default function createProduct() {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
-      setViewImg(URL.createObjectURL(item));
+
+      setViewImg(URL.createObjectURL(item))
       setBaseImgMain(base64);
     });
   };
@@ -66,6 +73,7 @@ export default function createProduct() {
       const dataAdd = axios({
         method: 'POST',
         url: '../api/products/create',
+
         data: {
           category: data.category,
           description: data.desc,
@@ -196,9 +204,8 @@ export default function createProduct() {
               <Image width="200px" height="200px" objectFit="cover" src={viewImg} alt="Ảnh sản phẩm" />
             </div>
           </div>
-        ) : (
-          ''
-        )}
+          : ''}
+
 
         <TextField
           className="mb-4 border-none flex flex-col"
@@ -221,7 +228,8 @@ export default function createProduct() {
           </div>
         ) : (
           ''
-        )}
+        }
+
         <TextArea
           className="mb-4 flex flex-col"
           label={'Thông tin sản phẩm: '}

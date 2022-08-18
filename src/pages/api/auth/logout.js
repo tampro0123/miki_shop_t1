@@ -1,31 +1,32 @@
+import cookie from 'cookie';
 import RefreshToken from 'src/models/RefreshToken';
-import dbConnect from "src/utils/dbConnect";
-import cookie from "cookie";
+import dbConnect from 'src/utils/dbConnect';
 
 dbConnect();
 
 const logoutHandler = async (req, res) => {
   const { method } = req;
+  const { id } = req.body;
 
   switch (method) {
-    case "POST":
+    case 'POST':
       try {
+        //Xoá bỏ refreshToken tương ứng với user logout
+        await RefreshToken.findByIdAndDelete(id);
         res.setHeader(
-          "Set-Cookie",
-          cookie.serialize("refreshToken", "", {
+          'Set-Cookie',
+          cookie.serialize('refreshToken', '', {
             maxAge: -1,
-            path: "/",
+            path: '/',
           })
         );
-        await RefreshToken.remove({});
-        return res.status(200).json("Logged out!");
+        return res.status(200).json('Logged out!');
       } catch (err) {
         return res.status(400).json({ success: false, message: err });
       }
       break;
     default:
-      res.status(500).json({ success: false });
-      break;
+      return res.status(500).json({ success: false, message: 'Faild to connect to server' });
   }
 };
 
