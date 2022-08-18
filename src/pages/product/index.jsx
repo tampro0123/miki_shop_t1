@@ -20,7 +20,6 @@ export default function Products({ products, pageCount }) {
   };
 
   const handlePageClick = (e) => {
-    console.log(e.selected);
     filterSearch({ router, page: e.selected });
   };
 
