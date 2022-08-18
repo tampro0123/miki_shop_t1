@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Button from 'src/components/Button';
 import OverLay from 'src/layouts/managementPage/overlay/OverLay.js';
-import deleteProduct from 'src/sections/handleAction/functionHanle/deleteProduct.js'
+import deleteProduct from 'src/sections/handleAction/functionHandle/deleteProduct.js'
 import { useProducts } from 'src/hooks'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
