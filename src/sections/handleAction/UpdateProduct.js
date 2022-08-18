@@ -14,7 +14,7 @@ export default function createProduct() {
     const router = useRouter()
     const { id } = router.query
     const valueProduct = useRecoilValue(inforProduct)
-    console.log(valueProduct)
+    console.log(valueProduct.name)
     // let arrImgs = valueProduct?.images
     const [imgsSub, setImgsSub] = useState([])
     const [arrImgs, setArrImgs] = useState([])
@@ -29,8 +29,6 @@ export default function createProduct() {
     useEffect(() => {
         setIsSwr(false)
     }, [])
-
-    // let imgsSub = arrImgs.slice(1)
     const schema = yup.object().shape({
         nameProduct: yup.string().required('Nhập tên sản phẩm'),
         desc: yup.string().required('Vui lòng nhập mô tả sản phẩm'),
@@ -53,9 +51,9 @@ export default function createProduct() {
                     price: item.price
                 }
             }),
-            nameProduct: valueProduct.name,
-            desc: valueProduct.description,
-            discount: valueProduct.discount
+            nameProduct: valueProduct?.name,
+            desc: valueProduct?.description,
+            discount: valueProduct?.discount
 
         },
     });
@@ -269,8 +267,8 @@ export default function createProduct() {
                         />
                         {viewImgs.length != 0 ?
                             <div className="grid grid-cols-3 gap-[8px]">
-                                {viewImgs.map(item =>
-                                    <div className="border-[1px] border-dashed border-[#333]">
+                                {viewImgs.map((item, index) =>
+                                    <div key={index} className="border-[1px] border-dashed border-[#333]">
                                         <Image
                                             width="200px"
                                             height="200px"
@@ -285,8 +283,8 @@ export default function createProduct() {
                             </div>
                             :
                             <div className="grid grid-cols-3 gap-[8px]">
-                                {imgsSub.map(item =>
-                                    <div className="border-[1px] border-dashed border-[#333]">
+                                {imgsSub.map((item, index) =>
+                                    <div key={index} className="border-[1px] border-dashed border-[#333]">
                                         <Image
                                             width="200px"
                                             height="200px"
