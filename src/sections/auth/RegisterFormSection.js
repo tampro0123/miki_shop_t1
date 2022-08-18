@@ -217,7 +217,6 @@ export function RegisterFormSection() {
             placeholder="Nhập email hoặc số điện thoại"
             mailErr={errMail}
           />
-=======
           <TextField
             name="confirmPassword"
             styleInput="w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
