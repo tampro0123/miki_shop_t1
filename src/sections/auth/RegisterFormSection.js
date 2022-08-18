@@ -6,6 +6,7 @@ import Button from 'src/components/Button';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import axios from 'axios';
 import { useState } from 'react';
+
 export function RegisterFormSection() {
   const router = useRouter();
   const [errMail, setErrMail] = useState(undefined);
@@ -13,7 +14,7 @@ export function RegisterFormSection() {
   const schema = yup.object().shape({
     firstName: yup.string().required('Vui lòng nhập họ'),
     lastName: yup.string().required('Vui lòng nhập tên'),
-    dateOfBirth: yup.string().required('Vui lòng nhập ngày sinh'),
+    dateOfBirth: yup.string().required('Vui lòng nhập'),
     email: yup
       .string()
       .required('Vui lòng nhập email')
@@ -21,7 +22,7 @@ export function RegisterFormSection() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         'Email không tồn tại'
       ),
-    password: yup.string().trim().required('Vui lòng nhập mật khẩu').min(8, 'Nhập mật khẩu có ít nhất 8 kí tự'),
+    password: yup.string().trim().required('Vui lòng nhập mật khẩu').min(8, 'Nhập mật khẩu từ 6 đến 8 kí tự'),
     confirmPassword: yup
       .string()
       .trim()
@@ -63,7 +64,6 @@ export function RegisterFormSection() {
         },
       });
       console.log(data);
-      // <<<<<<< HEAD
       setTimeout(() => router.push('/login'), 3000);
       // reset();
       // =======
@@ -83,73 +83,74 @@ export function RegisterFormSection() {
       });
       // setTimeout(() => router.push('/login'), 3000);
       reset();
-      // >>>>>>> aa237c0bb282e3850433525a9e386bbb3b09e894
     }
-  };
-
-  // Style Input
-  const style = {
-    smInputGap: 'w-[129px] mr-3 h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid',
-    smInput: 'w-[128px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid text-xs',
-    lgInput: 'w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]',
-    checkbox: 'cursor-pointer w-6 h-6 rounded-[4px] ml-1 mr-[9px]',
-    message: 'text-msgEr text-sm',
   };
 
   // UI
   return (
     <div>
-      <FormProviderBox className={'px-10'} methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-[32px] flex">
-          <TextField name="firstName" styleInput={style.smInputGap} styleMessage={style.message} placeholder="Họ" />
-
-          <TextField name="lastName" styleInput={style.smInputGap} styleMessage={style.message} placeholder="Tên" />
-
+      <FormProviderBox className={'px-10 mobile:mx-[16px] mobile:px-0'} methods={methods} onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex mt-[32px] justify-between">
+          <TextField
+            name="firstName"
+            styleInput="w-[129px] mobile:w-[113px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid"
+            styleMessage="text-msgEr text-sm"
+            placeholder="Họ"
+          />
+          <TextField
+            name="lastName"
+            styleInput="w-[129px] mobile:w-[113px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid"
+            styleMessage="text-msgEr text-sm"
+            placeholder="Tên"
+          />
           <TextField
             name="dateOfBirth"
-            styleInput={style.smInput}
-            styleMessage={style.message}
+            styleInput="w-[128px] mobile:w-[113px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid text-xs"
+            styleMessage="text-msgEr text-sm"
             placeholder="DD/MM/YY"
             type="date"
           />
         </div>
-
         <TextField
           name="email"
-          styleInput={style.lgInput}
-          styleMessage={style.message}
+          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleMessage="text-msgEr text-sm"
           placeholder="Nhập email hoặc số điện thoại"
-          mailErr={errMail}
         />
-
         <TextField
           name="password"
-          styleInput={style.lgInput}
-          styleMessage={style.message}
+          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleMessage="text-msgEr text-sm"
           placeholder="Nhập mật khẩu ít nhất 8 kí tự"
           type="password"
         />
-
         <TextField
           name="confirmPassword"
-          styleInput={style.lgInput}
-          styleMessage={style.message}
+          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleMessage="text-msgEr text-sm"
           placeholder="Xác thực lại mật khẩu"
           type="password"
         />
-
         {/* CheckBox */}
         <div className="mt-4 flex items-center">
           <div className="w-[37px]">
-            <input className={style.checkbox} type="checkbox" {...register('check')} />
+            <input
+              className="cursor-pointer w-6 h-6 rounded-[4px] ml-1 mr-[9px]"
+              type="checkbox"
+              {...register('check')}
+            />
           </div>
-          <label htmlFor="getEmail">Nhận thông tin khuyến mãi qua email</label>
+          <label className="mobile:font-mon mobile:text-base mobile:leading-6 mobile:font-medium" htmlFor="getEmail">Nhận thông tin khuyến mãi qua email</label>
         </div>
         <div className="mt-6 flex items-center">
           <div className="w-[37px]">
-            <input className={style.checkbox} type="checkbox" {...register('check')} />
+            <input
+              className="cursor-pointer w-6 h-6 rounded-[4px] ml-1 mr-[9px]"
+              type="checkbox"
+              {...register('check')}
+            />
           </div>
-          <label>
+          <label className="mobile:font-mon mobile:text-base mobile:leading-6 mobile:font-medium">
             Tôi đã đọc và đồng ý với các{' '}
             <Button text to="/" className={'font-medium'}>
               điều khoản chính sách
@@ -157,10 +158,10 @@ export function RegisterFormSection() {
             của Miki Jewelry
           </label>
         </div>
-        <span className={style.message}>{errors['check']?.message}</span>
+        <span className="text-msgEr text-sm">{errors['check']?.message}</span>
 
         <Button
-          className="mt-[32px] w-full "
+          className="mt-[32px] w-full mobile:text-base mobile:leading-6 mobile:font-bold"
           primary
           classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
         >
@@ -173,7 +174,7 @@ export function RegisterFormSection() {
             Đăng nhập
           </Button>
         </div>
-      </FormProviderBox>
-    </div>
+      </FormProviderBox >
+    </div >
   );
 }

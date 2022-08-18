@@ -6,7 +6,7 @@
 
 @layer components {
     body {
-        @apply font-mon bg-bgr text-base font-medium z-10 relative;
+        @apply font-mon bg-bgr text-base font-medium z-10 relative text-primary-text;
     }
     .app {
         @apply max-w-[1440px] mx-auto overflow-hidden relative;
@@ -29,4 +29,13 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+.text-trumcate2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }

@@ -1,21 +1,19 @@
 import withAuth from 'src/middlewares/withAuth';
-import Comment from 'src/models/Comment';
+import Feedback from 'src/models/Feedback';
 import dbConnect from 'src/utils/dbConnect.js';
 
-const commentHandler = async (req, res) => {
+const feedbackHandler = async (req, res) => {
   const { method } = req;
-  const { userId, content, targetId } = req.body;
+  const { targetId } = req.query;
 
   switch (method) {
-    case 'POST':
+    case 'GET':
       try {
         await dbConnect();
-        await Comment.findByIdAndUpdate(targetId, { isReplied: true });
-        const result = await Comment.create({ user: userId, content, targetId });
-
-        return res.status(201).json({
+        const feedbacks = await Feedback.find({ targetId }).sort({ createdAt: -1 }).populate('user');
+        return res.status(200).json({
           sucess: true,
-          message: 'Commented!',
+          feedbacks: feedbacks,
         });
       } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
@@ -29,4 +27,4 @@ const commentHandler = async (req, res) => {
   }
 };
 
-export default withAuth(commentHandler);
+export default withAuth(feedbackHandler);

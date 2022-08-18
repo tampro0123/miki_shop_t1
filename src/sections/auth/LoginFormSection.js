@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import Button from 'src/components/Button';
 import { FacebookColor, GoogleColor } from 'src/components/icons';
 import axios from 'axios';
+
 export function LoginFormSection() {
   const router = useRouter();
   const [errUserName, setErrUserName] = useState(undefined);
@@ -75,33 +76,24 @@ export function LoginFormSection() {
     }
   };
 
-  // Style Input
-  const style = {
-    smInput: 'w-[128px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid',
-    lgInput: 'w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]',
-    message: 'text-msgEr text-sm',
-  };
-
   // UI
   return (
     <div>
-      <FormProviderBox className={'px-10'} methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <FormProviderBox className={'px-10 mobile:mx-[16px] mobile:px-0'} methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           name="email"
-          styleInput={style.lgInput}
-          styleMessage={style.message}
+          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleMessage="text-msgEr text-sm"
           placeholder="Nhập email hoặc số điện thoại"
-          userNameErr={errUserName}
         />
 
         <TextField
           className="mb-4"
           name="password"
-          styleInput={style.lgInput}
-          styleMessage={style.message}
+          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleMessage="text-msgEr text-sm"
           placeholder="Nhập mật khẩu ít nhất 8 kí tự"
           type="password"
-          passwordErr={errPassword}
         />
 
         <Button to="/forgot-password" text className="text-sm leading-[22px] font-medium text-black">
@@ -119,7 +111,7 @@ export function LoginFormSection() {
         <h1 className="text-sm mt-[32px]">Hoặc đăng nhập bằng</h1>
 
         <div className="mt-6 flex w-full">
-          <Button href="https://m.facebook.com/login" outline className="mr-4">
+          <Button href="https://m.facebook.com/login" outline className="mr-[7px] mobile:w-[168px] mobile:h-[56px] text-base leading-[24px] rounded-[40px]">
             <div className="flex items-center">
               <FacebookColor />
               <h1 className="ml-4">Facebook</h1>
@@ -129,6 +121,7 @@ export function LoginFormSection() {
           <Button
             href="https://accounts.google.com/ServiceLogin?passive=1209600&continue=https://contacts.google.com/?hl%3Dvi&followup=https://contacts.google.com/?hl%3Dvi&hl=vi"
             outline
+            className="mobile:w-[168px] mobile:h-[56px] text-base leading-[24px] rounded-[40px]"
           >
             <div className="flex items-center">
               <GoogleColor />
