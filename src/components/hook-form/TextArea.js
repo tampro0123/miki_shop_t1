@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form';
-export  function TextArea({ name, label, styleLabel, styleInput,
-    styleMessage, className, ...passProps }) {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+export function TextArea({ name, label, styleLabel, styleInput,
+  styleMessage, className, ...passProps }) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
     <div className={className}>
       <label className={styleLabel} htmlFor={name}>
