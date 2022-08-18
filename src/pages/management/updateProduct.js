@@ -1,5 +1,5 @@
 import { LogoIcon } from 'src/components/icons';
-import UpdateProduct from 'src/sections/handleAction/updateProduct.js';
+import UpdateProduct from 'src/sections/handleAction/UpdateProduct.js';
 export default function updateProduct() {
     return (
         <div>
