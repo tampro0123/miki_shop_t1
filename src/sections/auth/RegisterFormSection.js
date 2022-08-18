@@ -186,7 +186,6 @@ export function RegisterFormSection() {
           </Button>
         </div>
       </FormProviderBox>
-      )}
     </div>
 
   );
