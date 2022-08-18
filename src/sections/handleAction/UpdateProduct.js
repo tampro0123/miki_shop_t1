@@ -4,7 +4,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
 import Image from 'next/image'
 import { FormProviderBox, SlectOption, TextArea, TextField } from 'src/components/hook-form';
-import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg.js';
+import convertToBase64 from 'src/sections/handleAction/functionHandle/convertImg.js';
 import * as yup from 'yup';
 import { inforProduct } from 'src/recoils/inforProduct.js'
 import { useRecoilValue } from 'recoil'
@@ -14,7 +14,6 @@ export default function createProduct() {
     const router = useRouter()
     const { id } = router.query
     const valueProduct = useRecoilValue(inforProduct)
-    console.log(valueProduct)
     // let arrImgs = valueProduct?.images
     const [imgsSub, setImgsSub] = useState([])
     const [arrImgs, setArrImgs] = useState([])
@@ -29,8 +28,6 @@ export default function createProduct() {
     useEffect(() => {
         setIsSwr(false)
     }, [])
-
-    // let imgsSub = arrImgs.slice(1)
     const schema = yup.object().shape({
         nameProduct: yup.string().required('Nhập tên sản phẩm'),
         desc: yup.string().required('Vui lòng nhập mô tả sản phẩm'),
@@ -53,9 +50,9 @@ export default function createProduct() {
                     price: item.price
                 }
             }),
-            nameProduct: valueProduct.name,
-            desc: valueProduct.description,
-            discount: valueProduct.discount
+            nameProduct: valueProduct?.name,
+            desc: valueProduct?.description,
+            discount: valueProduct?.discount
 
         },
     });
@@ -269,38 +266,40 @@ export default function createProduct() {
                         />
                         {viewImgs.length != 0 ?
                             <div className="grid grid-cols-3 gap-[8px]">
-                                {viewImgs.map(item =>
-                                    <div className="border-[1px] border-dashed border-[#333]">
-                                        <Image
-                                            width="200px"
-                                            height="200px"
-                                            objectFit="cover"
-                                            src={item}
-                                            alt="Ảnh sản phẩm"
-                                        />
-                                    </div>
+                                {
+                                    viewImgs.map((item, index) =>
+                                        <div key={index} className="border-[1px] border-dashed border-[#333]">
+                                            <Image
+                                                width="200px"
+                                                height="200px"
+                                                objectFit="cover"
+                                                src={item}
+                                                alt="Ảnh sản phẩm"
+                                            />
+                                        </div>
 
-                                )
+                                    )
                                 }
                             </div>
                             :
                             <div className="grid grid-cols-3 gap-[8px]">
-                                {imgsSub.map(item =>
-                                    <div className="border-[1px] border-dashed border-[#333]">
-                                        <Image
-                                            width="200px"
-                                            height="200px"
-                                            objectFit="cover"
-                                            src={item.src}
-                                            alt="Ảnh sản phẩm"
-                                        />
-                                    </div>
+                                {
+                                    imgsSub.map((item, index) =>
+                                        <div key={index} className="border-[1px] border-dashed border-[#333]">
+                                            <Image
+                                                width="200px"
+                                                height="200px"
+                                                objectFit="cover"
+                                                src={item.src}
+                                                alt="Ảnh sản phẩm"
+                                            />
+                                        </div>
 
-                                )
+                                    )
                                 }
                             </div>
                         }
-                        <TextArea
+                        < TextArea
                             className="mb-4 flex flex-col"
                             label={'Thông tin sản phẩm: '}
                             name="desc"
@@ -324,8 +323,8 @@ export default function createProduct() {
                         >
                             Tạo mới
                         </Button>
-                    </FormProviderBox>
-                </div>
+                    </FormProviderBox >
+                </div >
 
             }
         </>)

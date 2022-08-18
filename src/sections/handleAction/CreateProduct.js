@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
 import { FormProviderBox, SlectOption, TextArea, TextField } from 'src/components/hook-form';
-import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg.js';
+import convertToBase64 from 'src/sections/handleAction/functionHandle/convertImg.js';
 import * as yup from 'yup';
 export default function createProduct() {
   const schema = yup.object().shape({
@@ -43,7 +43,7 @@ export default function createProduct() {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
-      setViewImgs((data) => [...data, URL.createObjectURL(item)]);
+      setViewImgs((data) => [...data, URL.createObjectURL(item)])
       setBaseImgs((prevState) => [...prevState, base64]);
     });
   };
@@ -51,14 +51,14 @@ export default function createProduct() {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
-      setViewImg(URL.createObjectURL(item));
+      setViewImg(URL.createObjectURL(item))
       setBaseImgMain(base64);
     });
   };
   // Handle Submit
   const onSubmit = (data) => {
     if (data.dynamicForm.length == 0) {
-      return setErrAdd('Vui lòng thêm size');
+      return setErrAdd("Vui lòng thêm size");
     } else {
       setErrAdd('');
     }
@@ -80,6 +80,7 @@ export default function createProduct() {
       })
         .then((response) => {
           console.log(response);
+
         })
         .catch((err) => console.log(err));
       reset({
@@ -89,8 +90,10 @@ export default function createProduct() {
         image: null,
         nameProduct: '',
       });
-      setBaseImgMain('');
-      setBaseImgs([]);
+      setBaseImgMain('')
+      setBaseImgs([])
+      setViewImg('')
+      setViewImgs([])
     }
   };
   const style = {
@@ -190,15 +193,20 @@ export default function createProduct() {
           onChange={(e) => baseImgMain(e)}
           name="imageMain"
         />
-        {viewImg ? (
+        {viewImg ?
           <div>
             <div className="border-[1px] border-dashed border-[#333] w-[200px]">
-              <Image width="200px" height="200px" objectFit="cover" src={viewImg} alt="Ảnh sản phẩm" />
+              <Image
+                width="200px"
+                height="200px"
+                objectFit="cover"
+                src={viewImg}
+                alt="Ảnh sản phẩm"
+              />
+
             </div>
           </div>
-        ) : (
-          ''
-        )}
+          : ''}
 
         <TextField
           className="mb-4 border-none flex flex-col"
@@ -211,17 +219,26 @@ export default function createProduct() {
           multiple
           onChange={(e) => onChange(e)}
         />
-        {viewImgs.length != 0 ? (
+        {viewImgs.length != 0 ?
           <div className="grid grid-cols-3 gap-[8px]">
-            {viewImgs.map((item) => (
-              <div className="border-[1px] border-dashed border-[#333]">
-                <Image width="200px" height="200px" objectFit="cover" src={item} alt="Ảnh sản phẩm" />
+            {viewImgs.map((item, index) =>
+              <div key={index} className="border-[1px] border-dashed border-[#333]">
+                <Image
+                  width="200px"
+                  height="200px"
+                  objectFit="cover"
+                  src={item}
+                  alt="Ảnh sản phẩm"
+                />
               </div>
-            ))}
+
+            )
+            }
           </div>
-        ) : (
+
+          :
           ''
-        )}
+        }
         <TextArea
           className="mb-4 flex flex-col"
           label={'Thông tin sản phẩm: '}
@@ -248,4 +265,5 @@ export default function createProduct() {
       </FormProviderBox>
     </div>
   );
+
 }

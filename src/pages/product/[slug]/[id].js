@@ -363,7 +363,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
               <div>
                 <h3 className="text-xl font-bold mb-2">Lưu ý: </h3>
                 <p className="text-red-500 text-lg">
-                  Sản pẩm không còn nguyên vẹn hoặc mất hóa đơn, Miki sẽ thâu mua lại với 80% giá trị sản phẩm.
+                  Sản phẩm không còn nguyên vẹn hoặc mất hóa đơn, Miki sẽ thâu mua lại với 80% giá trị sản phẩm.
                 </p>
                 <p className="mt-3 text-red-500 text-lg">
                   Các sản pẩm trang sức bạc, mạ vàng, vòng đá, dây da các loại, chuỗi ngọc trai: Miki không mua lại!
@@ -490,146 +490,146 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
                 <div className={rateIndex == 1 ? 'block' : 'hidden'}>
                   {Rate5Star.length != 0
                     ? Rate5Star.map((feedback, index) => {
-                        return (
-                          <div key={feedback.user.email} className="mb-9 w-full flex">
-                            <div className="rounded-full overflow-hidden mr-3">
-                              <Image
-                                src={feedback.user.image}
-                                width="54"
-                                height="54"
-                                placeholder="empty"
-                                objectFit="cover"
-                              />
-                            </div>
-                            <div>
-                              <p>{feedback.user.username}</p>
-                              <RatingReview value={feedback.rate} />
-                              <p>{feedback.updatedAt}</p>
-                            </div>
-                            <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                            <div>
-                              <p className="font-bold">Nội dung bình luận:</p>
-                              <p className="pl-3">{feedback.content}</p>
-                            </div>
+                      return (
+                        <div key={feedback.user.email} className="mb-9 w-full flex">
+                          <div className="rounded-full overflow-hidden mr-3">
+                            <Image
+                              src={feedback.user.image}
+                              width="54"
+                              height="54"
+                              placeholder="empty"
+                              objectFit="cover"
+                            />
                           </div>
-                        );
-                      })
+                          <div>
+                            <p>{feedback.user.username}</p>
+                            <RatingReview value={feedback.rate} />
+                            <p>{feedback.updatedAt}</p>
+                          </div>
+                          <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
+                          <div>
+                            <p className="font-bold">Nội dung bình luận:</p>
+                            <p className="pl-3">{feedback.content}</p>
+                          </div>
+                        </div>
+                      );
+                    })
                     : ''}
                 </div>
                 <div className={rateIndex == 2 ? 'block' : 'hidden'}>
                   {Rate4Star.length != 0
                     ? Rate4Star.map((feedback, index) => {
-                        return (
-                          <div key={feedback.user.birthday} className="mb-9 w-full flex">
-                            <div className="rounded-full overflow-hidden mr-3">
-                              <Image
-                                src={feedback.user.image}
-                                width="54"
-                                height="54"
-                                placeholder="empty"
-                                objectFit="cover"
-                              />
-                            </div>
-                            <div>
-                              <p>{feedback.user.username}</p>
-                              <RatingReview value={feedback.rate} />
-                              <p>{feedback.updatedAt}</p>
-                            </div>
-                            <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                            <div>
-                              <p className="font-bold">Nội dung bình luận:</p>
-                              <p className="pl-3">{feedback.content}</p>
-                            </div>
+                      return (
+                        <div key={feedback.user.birthday} className="mb-9 w-full flex">
+                          <div className="rounded-full overflow-hidden mr-3">
+                            <Image
+                              src={feedback.user.image}
+                              width="54"
+                              height="54"
+                              placeholder="empty"
+                              objectFit="cover"
+                            />
                           </div>
-                        );
-                      })
+                          <div>
+                            <p>{feedback.user.username}</p>
+                            <RatingReview value={feedback.rate} />
+                            <p>{feedback.updatedAt}</p>
+                          </div>
+                          <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
+                          <div>
+                            <p className="font-bold">Nội dung bình luận:</p>
+                            <p className="pl-3">{feedback.content}</p>
+                          </div>
+                        </div>
+                      );
+                    })
                     : ''}
                 </div>
                 <div className={rateIndex == 3 ? 'block' : 'hidden'}>
                   {Rate3Star.length != 0
                     ? Rate3Star.map((feedback, index) => {
-                        return (
-                          <div key={feedback.user.password} className="mb-9 w-full flex">
-                            <div className="rounded-full overflow-hidden mr-3">
-                              <Image
-                                src={feedback.user.image}
-                                width="54"
-                                height="54"
-                                placeholder="empty"
-                                objectFit="cover"
-                              />
-                            </div>
-                            <div>
-                              <p>{feedback.user.username}</p>
-                              <RatingReview value={feedback.rate} />
-                              <p>{feedback.updatedAt}</p>
-                            </div>
-                            <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                            <div>
-                              <p className="font-bold">Nội dung bình luận:</p>
-                              <p className="pl-3">{feedback.content}</p>
-                            </div>
+                      return (
+                        <div key={feedback.user.password} className="mb-9 w-full flex">
+                          <div className="rounded-full overflow-hidden mr-3">
+                            <Image
+                              src={feedback.user.image}
+                              width="54"
+                              height="54"
+                              placeholder="empty"
+                              objectFit="cover"
+                            />
                           </div>
-                        );
-                      })
+                          <div>
+                            <p>{feedback.user.username}</p>
+                            <RatingReview value={feedback.rate} />
+                            <p>{feedback.updatedAt}</p>
+                          </div>
+                          <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
+                          <div>
+                            <p className="font-bold">Nội dung bình luận:</p>
+                            <p className="pl-3">{feedback.content}</p>
+                          </div>
+                        </div>
+                      );
+                    })
                     : ''}
                 </div>
                 <div className={rateIndex == 4 ? 'block' : 'hidden'}>
                   {Rate2Star.length != 0
                     ? Rate2Star.map((feedback, index) => {
-                        return (
-                          <div key={feedback.user.username} className="mb-9 w-full flex">
-                            <div className="rounded-full overflow-hidden mr-3">
-                              <Image
-                                src={feedback.user.image}
-                                width="54"
-                                height="54"
-                                placeholder="empty"
-                                objectFit="cover"
-                              />
-                            </div>
-                            <div>
-                              <p>{feedback.user.username}</p>
-                              <RatingReview value={feedback.rate} />
-                              <p>{feedback.updatedAt}</p>
-                            </div>
-                            <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                            <div>
-                              <p className="font-bold">Nội dung bình luận:</p>
-                              <p className="pl-3">{feedback.content}</p>
-                            </div>
+                      return (
+                        <div key={feedback.user.username} className="mb-9 w-full flex">
+                          <div className="rounded-full overflow-hidden mr-3">
+                            <Image
+                              src={feedback.user.image}
+                              width="54"
+                              height="54"
+                              placeholder="empty"
+                              objectFit="cover"
+                            />
                           </div>
-                        );
-                      })
+                          <div>
+                            <p>{feedback.user.username}</p>
+                            <RatingReview value={feedback.rate} />
+                            <p>{feedback.updatedAt}</p>
+                          </div>
+                          <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
+                          <div>
+                            <p className="font-bold">Nội dung bình luận:</p>
+                            <p className="pl-3">{feedback.content}</p>
+                          </div>
+                        </div>
+                      );
+                    })
                     : ''}
                 </div>
                 <div className={rateIndex == 5 ? 'block' : 'hidden'}>
                   {Rate1Star.length != 0
                     ? Rate1Star.map((feedback, index) => {
-                        return (
-                          <div key={feedback.user.username.image} className="mb-9 w-full flex">
-                            <div className="rounded-full overflow-hidden mr-3">
-                              <Image
-                                src={feedback.user.image}
-                                width="54"
-                                height="54"
-                                placeholder="empty"
-                                objectFit="cover"
-                              />
-                            </div>
-                            <div>
-                              <p>{feedback.user.username}</p>
-                              <RatingReview value={feedback.rate} />
-                              <p>{feedback.updatedAt}</p>
-                            </div>
-                            <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                            <div>
-                              <p className="font-bold">Nội dung bình luận:</p>
-                              <p className="pl-3">{feedback.content}</p>
-                            </div>
+                      return (
+                        <div key={feedback.user.username.image} className="mb-9 w-full flex">
+                          <div className="rounded-full overflow-hidden mr-3">
+                            <Image
+                              src={feedback.user.image}
+                              width="54"
+                              height="54"
+                              placeholder="empty"
+                              objectFit="cover"
+                            />
                           </div>
-                        );
-                      })
+                          <div>
+                            <p>{feedback.user.username}</p>
+                            <RatingReview value={feedback.rate} />
+                            <p>{feedback.updatedAt}</p>
+                          </div>
+                          <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
+                          <div>
+                            <p className="font-bold">Nội dung bình luận:</p>
+                            <p className="pl-3">{feedback.content}</p>
+                          </div>
+                        </div>
+                      );
+                    })
                     : ''}
                 </div>
               </div>

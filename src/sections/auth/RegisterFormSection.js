@@ -89,23 +89,23 @@ export function RegisterFormSection() {
   // UI
   return (
     <div>
-      <FormProviderBox className={'px-10 mobile:mx-[16px] mobile:px-0'} methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex mt-[32px] justify-between">
+      <FormProviderBox className={'px-10'} methods={methods} onSubmit={handleSubmit(onSubmit)}>
+        <div className="mt-[32px] flex">
           <TextField
             name="firstName"
-            styleInput="w-[129px] mobile:w-[113px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid"
+            styleInput="w-[129px] mr-3 h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid"
             styleMessage="text-msgEr text-sm"
             placeholder="Họ"
           />
           <TextField
             name="lastName"
-            styleInput="w-[129px] mobile:w-[113px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid"
+            styleInput="w-[129px] mr-3 h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid"
             styleMessage="text-msgEr text-sm"
             placeholder="Tên"
           />
           <TextField
             name="dateOfBirth"
-            styleInput="w-[128px] mobile:w-[113px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid text-xs"
+            styleInput="w-[128px] h-12 p-3 rounded-lg border-border-1 border-[1px] border-solid text-xs"
             styleMessage="text-msgEr text-sm"
             placeholder="DD/MM/YY"
             type="date"
@@ -113,24 +113,35 @@ export function RegisterFormSection() {
         </div>
         <TextField
           name="email"
-          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleInput="w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
           styleMessage="text-msgEr text-sm"
           placeholder="Nhập email hoặc số điện thoại"
         />
+
         <TextField
           name="password"
-          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleInput="w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
           styleMessage="text-msgEr text-sm"
           placeholder="Nhập mật khẩu ít nhất 8 kí tự"
           type="password"
         />
+
+        <TextField
+          name="email"
+          styleInput={style.lgInput}
+          styleMessage={style.message}
+          placeholder="Nhập email hoặc số điện thoại"
+          mailErr={errMail}
+        />
+
         <TextField
           name="confirmPassword"
-          styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
+          styleInput="w-[410px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
           styleMessage="text-msgEr text-sm"
           placeholder="Xác thực lại mật khẩu"
           type="password"
         />
+
         {/* CheckBox */}
         <div className="mt-4 flex items-center">
           <div className="w-[37px]">
@@ -140,7 +151,7 @@ export function RegisterFormSection() {
               {...register('check')}
             />
           </div>
-          <label className="mobile:font-mon mobile:text-base mobile:leading-6 mobile:font-medium" htmlFor="getEmail">Nhận thông tin khuyến mãi qua email</label>
+          <label htmlFor="getEmail">Nhận thông tin khuyến mãi qua email</label>
         </div>
         <div className="mt-6 flex items-center">
           <div className="w-[37px]">
@@ -150,7 +161,7 @@ export function RegisterFormSection() {
               {...register('check')}
             />
           </div>
-          <label className="mobile:font-mon mobile:text-base mobile:leading-6 mobile:font-medium">
+          <label>
             Tôi đã đọc và đồng ý với các{' '}
             <Button text to="/" className={'font-medium'}>
               điều khoản chính sách
@@ -161,7 +172,7 @@ export function RegisterFormSection() {
         <span className="text-msgEr text-sm">{errors['check']?.message}</span>
 
         <Button
-          className="mt-[32px] w-full mobile:text-base mobile:leading-6 mobile:font-bold"
+          className="mt-[32px] w-full "
           primary
           classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
         >
@@ -174,7 +185,8 @@ export function RegisterFormSection() {
             Đăng nhập
           </Button>
         </div>
-      </FormProviderBox >
-    </div >
+      </FormProviderBox>
+    </div>
+
   );
 }
