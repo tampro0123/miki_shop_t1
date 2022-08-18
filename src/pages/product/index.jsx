@@ -18,9 +18,9 @@ export default function Products({ products, pageCount }) {
     sortChecked.current = e.target.value;
     setSortValue(e.target.value);
   };
-
+  
   const handlePageClick =(e) => {
-    filterSearch({ router, page: e.selected});
+    filterSearch({ router, page: e.selected + 1});
   }
 
   useLayoutEffect(() => {
