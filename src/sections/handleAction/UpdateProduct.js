@@ -14,7 +14,6 @@ export default function createProduct() {
     const router = useRouter()
     const { id } = router.query
     const valueProduct = useRecoilValue(inforProduct)
-    console.log(valueProduct.name)
     // let arrImgs = valueProduct?.images
     const [imgsSub, setImgsSub] = useState([])
     const [arrImgs, setArrImgs] = useState([])
@@ -267,38 +266,40 @@ export default function createProduct() {
                         />
                         {viewImgs.length != 0 ?
                             <div className="grid grid-cols-3 gap-[8px]">
-                                {viewImgs.map((item, index) =>
-                                    <div key={index} className="border-[1px] border-dashed border-[#333]">
-                                        <Image
-                                            width="200px"
-                                            height="200px"
-                                            objectFit="cover"
-                                            src={item}
-                                            alt="Ảnh sản phẩm"
-                                        />
-                                    </div>
+                                {
+                                    viewImgs.map((item, index) =>
+                                        <div key={index} className="border-[1px] border-dashed border-[#333]">
+                                            <Image
+                                                width="200px"
+                                                height="200px"
+                                                objectFit="cover"
+                                                src={item}
+                                                alt="Ảnh sản phẩm"
+                                            />
+                                        </div>
 
-                                )
+                                    )
                                 }
                             </div>
                             :
                             <div className="grid grid-cols-3 gap-[8px]">
-                                {imgsSub.map((item, index) =>
-                                    <div key={index} className="border-[1px] border-dashed border-[#333]">
-                                        <Image
-                                            width="200px"
-                                            height="200px"
-                                            objectFit="cover"
-                                            src={item.src}
-                                            alt="Ảnh sản phẩm"
-                                        />
-                                    </div>
+                                {
+                                    imgsSub.map((item, index) =>
+                                        <div key={index} className="border-[1px] border-dashed border-[#333]">
+                                            <Image
+                                                width="200px"
+                                                height="200px"
+                                                objectFit="cover"
+                                                src={item.src}
+                                                alt="Ảnh sản phẩm"
+                                            />
+                                        </div>
 
-                                )
+                                    )
                                 }
                             </div>
                         }
-                        <TextArea
+                        < TextArea
                             className="mb-4 flex flex-col"
                             label={'Thông tin sản phẩm: '}
                             name="desc"
@@ -322,8 +323,8 @@ export default function createProduct() {
                         >
                             Tạo mới
                         </Button>
-                    </FormProviderBox>
-                </div>
+                    </FormProviderBox >
+                </div >
 
             }
         </>)

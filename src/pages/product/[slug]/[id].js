@@ -39,7 +39,6 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
   const [errSend, setErrSend] = useState('');
   const [ratingMessErr, setRatingMessErr] = useState(false);
   const [cmtMessErr, setCmtMessErr] = useState(false);
-  const [errFile, setErrFile] = useState(false);
   const handleSubAmount = () => {
     amount > 0 && setAmount((prev) => prev - 1);
   };
@@ -70,15 +69,13 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
   };
   const countStar = product.rating.rate;
   const handleImgCmt = async (e) => {
-    console.log(e.target.files[0].type.includes('image'))
-    if (e.target.files[0].type.includes('image')) {
+    if (e.target.files[0].type.includes('image')  ||  e.target.files[0].type.includes('video')) {
       const type = e.target.files[0].type.includes('image') ? 'image' : 'video';
       setTypeCmt(type);
       const file = e.target.files[0];
       const baseMedia = await convertToBase64(file);
       setMediaCmt(baseMedia);
     } else {
-      setErrFile(true);
       setTypeCmt("Sai file");
     }
   };
@@ -674,17 +671,20 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
             <Separate />
           </div>
           <div className="grid grid-cols-4 gap-10  mt-[70px]">
-            {productList.map((product, i) => {
+          {productList.map((product, i) => {
               return (
-                <div key={product.name} className="flex flex-col-reverse text-center font-bold relative z-10 ">
+                <div key={product?.name} className="flex flex-col-reverse text-center font-bold relative z-10 ">
                   <Button primary className="w-full mt-6 hover-btn-primary peer">
                     Thêm vào giỏ hàng
                   </Button>
                   <p className="text-price-text mt-[6px]">
-                    {new Intl.NumberFormat('vi-VN').format(product.storage[0].price)} đ
+                    {new Intl.NumberFormat('vi-VN').format(
+                      Math.floor(product?.storage[0].price - (product?.storage[0].price * product.discount) / 100)
+                    )}{' '}
+                    đ
                   </p>
                   <p className="text-[20px] mt-6 text-trumcate2">{product.name}</p>
-                  <div className="hover:shadow-product hover:scale-[1.01] shadow-md rounded-16 peer-hover:shadow-product">
+                  <div className="hover:shadow-product hover:scale-[1.01] shadow-md rounded-16 peer-hover:shadow-product relative">
                     <a href={`product/${product.category}/${product._id}`}>
                       <Image
                         src={product.images[0].src}
@@ -696,6 +696,13 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
                         className="rounded-16"
                       />
                     </a>
+                    {product.discount ? (
+                      <p className="absolute top-0 left-0 px-3 inline-block before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 ">
+                        <span className="relative text-white">Sale</span>
+                      </p>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </div>
               );
