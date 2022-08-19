@@ -1,6 +1,3 @@
-import withAuth from 'src/middlewares/withAuth';
-import withRoles from 'src/middlewares/withRoles';
-
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
 
@@ -19,21 +16,6 @@ const ProductHandler = async (req, res) => {
         return res.status(201).json({
           success: true,
           product: product,
-        });
-      } catch (error) {
-        return res.status(500).json({
-          success: false,
-          message: error,
-        });
-      }
-      break;
-    case 'DELETE':
-      try {
-        const res = await Products.findByIdAndDelete(id);
-        console.log(res);
-        return res.status(201).json({
-          success: true,
-          message: 'Product deleted!',
         });
       } catch (error) {
         return res.status(500).json({
