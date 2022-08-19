@@ -22,18 +22,6 @@ const FeedbackHandler = async (req, res) => {
   const { userId, content, rate, media, targetId } = req.body;
 
   switch (method) {
-    case 'GET':
-      try {
-        return res.status(200).json({
-          success: false,
-          message: 'Please insert query string!',
-        });
-      } catch (err) {
-        return res.status(500).json({
-          success: false,
-          error: err,
-        });
-      }
     case 'POST':
       try {
         //Check user đã đánh giá hay chưa
@@ -110,4 +98,4 @@ const FeedbackHandler = async (req, res) => {
   }
 };
 
-export default FeedbackHandler;
+export default withAuth(FeedbackHandler);
