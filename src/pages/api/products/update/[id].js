@@ -113,4 +113,4 @@ const uploadHandler = async (req, res) => {
   }
 };
 
-export default uploadHandler;
+export default withAuth(withRoles(uploadHandler, 'admin'));
