@@ -15,10 +15,11 @@ export default function Footer() {
       return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     }
   }, []);
+
   return (
-    <div>
-      <footer className="px-[154px] mt-[120px] mobile:mx-[16px] mobile:mt-[64px] mobile:flex mobile:flex-col mobile:items-center">
-        <div className="grid grid-cols-2 pb-[40px] mobile:flex mobile:flex-col mobile:items-center mobile:pb-0 mobile:w-[375px]">
+    <footer className="flex justify-center">
+      <div className="mt-[120px] mobile:mx-[16px] mobile:mt-[64px] mobile:flex mobile:flex-col mobile:items-center">
+        <div className="grid grid-cols-2 w-[1136px] pb-[40px] mobile:flex mobile:flex-col mobile:items-center mobile:pb-0 mobile:w-[375px]">
           <div>
             <h3 className="text-[32px] line-[40px] font-bold text-primary-text mb-[40px] mobile:text-[23.5px] mobile:leading-[32px] mobile:font-mon mobile:font-semibold mobile:text-primary-text mobile:mb-[16px]">
               Đăng kí để nhận khuyến mãi
@@ -46,7 +47,7 @@ export default function Footer() {
           <div className="max-w-[400px] mobile:flex mobile:flex-col mobile:mb-[40px]">
             <Link href="/">
               <h1 className="font-plf text-[48px] cursor-pointer font-bold text-primary-text mb-[28px] mobile:text-[24px] mobile:leading-[32px] mobile:mb-[16px]">
-                MIKI JEWLLERY
+                MIKI JEWLERY
               </h1>
             </Link>
             <ul className="grid gap-[10px] mobile:flex mobile:flex-col">
@@ -97,7 +98,7 @@ export default function Footer() {
         <div className="flex justify-center items-center mobile:mt-[40px] py-[16px]">
           <p>MikiShop © 2022</p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 }

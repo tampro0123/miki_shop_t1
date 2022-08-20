@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, {useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import Page from 'src/components/Page';
 import Footer from 'src/layouts/footer';
 import Header from 'src/layouts/header';
@@ -12,8 +12,8 @@ import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Products({ products, pageCount }) {
   const router = useRouter();
-  let sortChecked = useRef(' ')
-  const [sortValue, setSortValue] = useState(" ");
+  let sortChecked = useRef(' ');
+  const [sortValue, setSortValue] = useState(' ');
   const handleSort = (e) => {
     sortChecked.current = e.target.value;
     setSortValue(e.target.value);
@@ -33,7 +33,9 @@ export default function Products({ products, pageCount }) {
             <h1 className="font-bold text-32 leading-10">Danh mục sản phẩm</h1>
             <div className="relative group">
               <select className="p-2 border-none" value={sortChecked.current} onChange={handleSort}>
-                <option disabled defaultValue>Sắp xếp theo</option>
+                <option disabled defaultValue>
+                  Sắp xếp theo
+                </option>
                 <option value=" ">Mặc định</option>
                 <option value="price-up">Giá tăng dần</option>
                 <option value="price-down">Giá giảm dần</option>
@@ -42,8 +44,8 @@ export default function Products({ products, pageCount }) {
               </select>
             </div>
           </div>
-          <ProductItem products= {products}/>
-        <Pagination pageCount={pageCount} />
+          <ProductItem products={products} />
+          <Pagination pageCount={pageCount} />
         </div>
         <Footer />
       </div>

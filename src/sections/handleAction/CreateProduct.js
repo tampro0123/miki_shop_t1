@@ -65,7 +65,7 @@ export default function createProduct() {
   // Handle Submit
   const onSubmit = (data) => {
     if (data.dynamicForm.length == 0) {
-      return setErrAdd("Vui lòng thêm size");
+      return setErrAdd('Vui lòng thêm size');
     } else {
       setErrAdd('');
     }
@@ -97,8 +97,8 @@ export default function createProduct() {
         image: null,
         nameProduct: '',
       });
-      setBaseImgMain('')
-      setBaseImgs([])
+      setBaseImgMain('');
+      setBaseImgs([]);
     }
   };
   const style = {
@@ -198,17 +198,10 @@ export default function createProduct() {
           onChange={(e) => baseImgMain(e)}
           name="imageMain"
         />
-        {viewImg ?
+        {viewImg ? (
           <div>
             <div className="border-[1px] border-dashed border-[#333] w-[200px]">
-              <Image
-                width="200px"
-                height="200px"
-                objectFit="cover"
-                src={viewImg}
-                alt="Ảnh sản phẩm"
-              />
-
+              <Image width="200px" height="200px" objectFit="cover" src={viewImg} alt="Ảnh sản phẩm" />
             </div>
           </div>
           : ''}
@@ -225,24 +218,15 @@ export default function createProduct() {
           multiple
           onChange={(e) => onChange(e)}
         />
-        {viewImgs.length != 0 ?
+        {viewImgs.length != 0 ? (
           <div className="grid grid-cols-3 gap-[8px]">
-            {viewImgs.map(item =>
+            {viewImgs.map((item) => (
               <div className="border-[1px] border-dashed border-[#333]">
-                <Image
-                  width="200px"
-                  height="200px"
-                  objectFit="cover"
-                  src={item}
-                  alt="Ảnh sản phẩm"
-                />
+                <Image width="200px" height="200px" objectFit="cover" src={item} alt="Ảnh sản phẩm" />
               </div>
-
-            )
-            }
+            ))}
           </div>
-
-          :
+        ) : (
           ''
         }
 
