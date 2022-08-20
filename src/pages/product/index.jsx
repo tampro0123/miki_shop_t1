@@ -54,9 +54,10 @@ export default function Products({ products, pageCount }) {
 export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
   const sort = query.sort || '';
+  const category = query.category || '';
   const [{data}, {data: res}] = await Promise.all([
-    request.get('products/all'),
-    request.get(`products/all?page=${page}&limit=16&sort=${sort}`)
+    request.get(`products/all?category=${category}`),
+    request.get(`products/all?page=${page}&category=${category}&limit=16&sort=${sort}`)
   ])
   return {
     props: {

@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Page from 'src/components/Page';
 import Footer from 'src/layouts/footer';
 import Header from 'src/layouts/header';
-import Button from 'src/components/Button';
 import axios from 'axios';
 import request from 'src/utils/request';
 import CardDetail from 'src/sections/productDetail/CardDetail';
@@ -23,7 +22,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
           <div className="flex justify-center mt-[60px]">
             <Separate />
           </div>
-          <ProductItem products={productList}/>
+          <ProductItem products={productList} />
         </div>
         <Footer />
       </div>
