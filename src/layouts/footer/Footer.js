@@ -1,4 +1,4 @@
-import AboutUs from 'src/components/aboutUs/index.js';
+import AboutUs from 'src/components/Aboutus/index.js';
 import Link from 'next/link';
 import { ArrowRightIcon, Twitter, FaceBook, Instagram, TikTok, Pinterest } from 'src/components/Icons/index.js';
 import { useEffect, useState } from 'react';
