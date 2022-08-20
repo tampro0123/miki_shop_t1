@@ -4,6 +4,7 @@ import { ArrowRightIcon, Twitter, FaceBook, Instagram, TikTok, Pinterest } from 
 import { useEffect, useState } from 'react';
 
 export default function Footer() {
+  // Set width window when resize
   const [windowWidth, setWindowWidth] = useState(undefined);
   // Get size window to respondsive
   useEffect(() => {
@@ -16,73 +17,6 @@ export default function Footer() {
   }, []);
   return (
     <div>
-      {/* <footer className="px-[10px] w-[375px] mt-[64px]">
-          <div className="flex flex-col">
-            <div>
-              <h3 className="text-[23.5px] leading-[32px] font-mon font-semibold text-primary-text mb-[16px]">
-                Đăng kí để nhận khuyến mãi
-              </h3>
-              <div className="flex items-center px-4 justify-between max-w-[412px] w-full bg-white h-[48px] border-[1px] border-primary-text rounded-8">
-                <input type="text" placeholder="Email" className="h-[40px] w-full outline-0" />
-                <ArrowRightIcon classNameIcon="cursor-pointer hover:scale-90 duration-300" />
-              </div>
-            </div>
-            <div className="mt-6">
-              <h3 className="text-[24px] leading-[32px] font-mon font-semibold text-primary-text mb-4">
-                Kết nối với chúng tôi tại
-              </h3>
-              <div className="flex w-full">
-                <FaceBook classNameIcon="cursor-pointer hover:scale-90 duration-300 w-6 h-6 mr-6" />
-                <Twitter classNameIcon="cursor-pointer hover:scale-90 duration-300 w-6 h-6 mr-6" />
-                <Instagram classNameIcon="cursor-pointer hover:scale-90 duration-300 w-6 h-6 mr-6" />
-                <TikTok classNameIcon="cursor-pointer hover:scale-90 duration-300 w-6 h-6 mr-6" />
-                <Pinterest classNameIcon="cursor-pointer hover:scale-90 duration-300 w-6 h-6 mr-6" />
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-[40px]">
-            <div className="max-w-[400px]">
-              <Link href="/">
-                <h1 className="font-plf text-[24px] cursor-pointer leading-[32px] font-bold text-primary-text mb-[16px]">
-                  MIKI JEWLLERY
-                </h1>
-              </Link>
-              <ul className="">
-                <li>Số GCNĐKDN: 2500150335</li>
-                <li>Cấp lần đầu: Ngày 26/03/2007</li>
-                <li>Đăng ký thay đổi lần thứ 16: Ngày 07/05/2018</li>
-                <li>Cơ quan cấp: Sở kế hoạch và đầu tư tỉnh Vĩnh Phúc</li>
-                <li>Địa chỉ: Phường Phúc Thắng, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc, Việt Nam</li>
-              </ul>
-            </div>
-
-            <div className="mt-[40px]">
-              <div className="flex justify-between">
-                <div>
-                  <AboutUs
-                    className="text-base leading-[24px] font-bold mb-4"
-                    title="Về chúng tôi"
-                    arr={['Thương hiệu', 'Lịch sử', 'Tuyển dụng']}
-                  />
-                  <AboutUs
-                    className="text-base leading-[24px] font-bold mb-4 mt-10"
-                    title="Dịch vụ khách hàng"
-                    arr={['Thanh toán', 'Cẩm nang sử dụng', 'Câu hỏi thường gặp']}
-                  />
-                </div>
-                <AboutUs
-                  className="text-base leading-[24px] font-bold mb-4"
-                  title="Tài khoản"
-                  arr={['Lịch sử mua hàng', 'Giỏ hàng', 'Thông tin']}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex mt-[40px] justify-center items-center py-[16px]">
-            <p>MikiShop © 2022</p>
-          </div>
-        </footer> */}
       <footer className="px-[154px] mt-[120px] mobile:mx-[16px] mobile:mt-[64px] mobile:flex mobile:flex-col mobile:items-center">
         <div className="grid grid-cols-2 pb-[40px] mobile:flex mobile:flex-col mobile:items-center mobile:pb-0 mobile:w-[375px]">
           <div>
@@ -123,25 +57,8 @@ export default function Footer() {
               <li>Địa chỉ: Phường Phúc Thắng, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc, Việt Nam</li>
             </ul>
           </div>
-
-          <div className="grid grid-cols-3 mobile:hidden">
-            <AboutUs
-              className="font-bold text-[20px] mb-[20px]"
-              title="Về chúng tôi"
-              arr={['Thương hiệu', 'Lịch sử', 'Tuyển dụng']}
-            />
-            <AboutUs
-              className="font-bold text-[20px] mb-[20px]"
-              title="Tài khoản"
-              arr={['Lịch sử mua hàng', 'Giỏ hàng', 'Thông tin']}
-            />
-            <AboutUs
-              className="font-bold text-[20px] mb-[20px]"
-              title="Dịch vụ khách hàng"
-              arr={['Thanh toán', 'Cẩm nang sử dụng', 'Câu hỏi thường gặp']}
-            />
-          </div>
-          <div className="mobile:flex mobile:flex-col hidden">
+          {/* Responsive Info */}
+          {windowWidth <= 480 ? <div className="mobile:flex mobile:flex-col hidden">
             <div className="flex justify-between">
               <AboutUs
                 className="font-bold text-[20px] mb-[20px] mobile:font-bold mobile:mb-4"
@@ -159,7 +76,23 @@ export default function Footer() {
               title="Dịch vụ khách hàng"
               arr={['Thanh toán', 'Cẩm nang sử dụng', 'Câu hỏi thường gặp']}
             />
-          </div>
+          </div> : <div className="grid grid-cols-3 mobile:hidden">
+            <AboutUs
+              className="font-bold text-[20px] mb-[20px]"
+              title="Về chúng tôi"
+              arr={['Thương hiệu', 'Lịch sử', 'Tuyển dụng']}
+            />
+            <AboutUs
+              className="font-bold text-[20px] mb-[20px]"
+              title="Tài khoản"
+              arr={['Lịch sử mua hàng', 'Giỏ hàng', 'Thông tin']}
+            />
+            <AboutUs
+              className="font-bold text-[20px] mb-[20px]"
+              title="Dịch vụ khách hàng"
+              arr={['Thanh toán', 'Cẩm nang sử dụng', 'Câu hỏi thường gặp']}
+            />
+          </div>}
         </div>
         <div className="flex justify-center items-center mobile:mt-[40px] py-[16px]">
           <p>MikiShop © 2022</p>
