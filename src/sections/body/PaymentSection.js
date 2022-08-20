@@ -9,7 +9,7 @@ import Button from 'src/components/Button';
 import { DeliveryAddressSection, PaymentMethodsSection, ProductsSection } from "src/sections/form"
 import { FormProviderBox } from 'src/components/hook-form';
 
-const DeliverySection = () => {
+const PaymentSection = () => {
     // Create the option status in Payment methods section
     const [option, setOption] = useState(undefined)
     // Create schema validate form
@@ -59,7 +59,7 @@ const DeliverySection = () => {
     // UI
     return (
         <div className="w-[1136px] mobile:w-[375px] text-align">
-            <h1 className="text-[32px] mobile:text-[24px] leading-10 mobile:leading-8 font-bold mobile:font-semibold mobile:ml-[16px]">Trang giao hàng</h1>
+            <h1 className="text-[32px] mobile:text-[24px] leading-10 mobile:leading-8 font-bold mobile:font-semibold mobile:ml-[16px]">Trang thanh toán</h1>
             {/* Form */}
             <FormProviderBox methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex mobile:items-center mt-12 mobile:mt-9 mb-10 mobile:flex-col-reverse">
@@ -83,4 +83,4 @@ const DeliverySection = () => {
     )
 }
 
-export default DeliverySection
+export default PaymentSection
