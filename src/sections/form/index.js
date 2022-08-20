@@ -1,3 +1,4 @@
 export * from './PaymentMethodsSection';
-export * from './ProductListSection';
+export * from './ProductsSection';
 export * from './DeliveryAddressSection';
+export * from './ProductsTitle';
