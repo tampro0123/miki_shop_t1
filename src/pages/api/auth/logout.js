@@ -1,10 +1,11 @@
 import cookie from 'cookie';
+import withAuth from 'src/middlewares/withAuth';
 import RefreshToken from 'src/models/RefreshToken';
 import dbConnect from 'src/utils/dbConnect';
 
-dbConnect();
 
 const logoutHandler = async (req, res) => {
+  await dbConnect();
   const { method } = req;
   const { id } = req.body;
 
@@ -30,4 +31,4 @@ const logoutHandler = async (req, res) => {
   }
 };
 
-export default logoutHandler;
+export default withAuth(logoutHandler);
