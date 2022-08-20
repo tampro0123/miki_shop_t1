@@ -43,7 +43,9 @@ export default function createProduct() {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
+
       setViewImgs((data) => [...data, URL.createObjectURL(item)])
+
       setBaseImgs((prevState) => [...prevState, base64]);
     });
   };
@@ -51,6 +53,7 @@ export default function createProduct() {
     let convertArr = Array.from(e.target.files);
     convertArr.forEach(async (item) => {
       let base64 = await convertToBase64(item);
+
       setViewImg(URL.createObjectURL(item))
       setBaseImgMain(base64);
     });

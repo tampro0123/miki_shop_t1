@@ -1,15 +1,14 @@
 import Image from 'next/image';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import Page from 'src/components/Page';
 import Footer from 'src/layouts/footer';
 import Header from 'src/layouts/header';
-import Banner from 'src/assets/Product/banner.jpg';
-import axios from 'axios';
-import Button from 'src/components/Button';
+import Banner from 'src/assets/product/banner.jpg';
 import { useRouter } from 'next/router';
-import ReactPaginate from 'react-paginate';
 import filterSearch from 'src/utils/filterSearch';
-import Link from 'next/link';
+import request from 'src/utils/request';
+import ProductItem from 'src/components/ProductItem/ProductItem';
+import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Products({ products, pageCount }) {
   const router = useRouter();
@@ -18,10 +17,6 @@ export default function Products({ products, pageCount }) {
   const handleSort = (e) => {
     sortChecked.current = e.target.value;
     setSortValue(e.target.value);
-  };
-
-  const handlePageClick = (e) => {
-    filterSearch({ router, page: e.selected + 1 });
   };
 
   useLayoutEffect(() => {
@@ -115,12 +110,15 @@ export default function Products({ products, pageCount }) {
 export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
   const sort = query.sort || '';
-  const data = await axios.get('http://localhost:3000/api/products/all');
-  const res = await axios.get(`http://localhost:3000/api/products/all?page=${page}&limit=16&sort=${sort}`);
+  const category = query.category || '';
+  const [{ data }, { data: res }] = await Promise.all([
+    request.get(`products/all?category=${category}`),
+    request.get(`products/all?page=${page}&category=${category}&limit=16&sort=${sort}`),
+  ]);
   return {
     props: {
-      products: res.data.product,
-      pageCount: Math.ceil(data.data.product.length / 16),
+      products: res.product,
+      pageCount: Math.ceil(data.product.length / 16),
     },
   };
 };
