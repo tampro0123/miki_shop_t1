@@ -40,7 +40,7 @@ async function handler(req, res) {
 
           res.setHeader(
             'Set-Cookie',
-            serialize('refreshtoken', refreshToken, {
+            serialize('refreshToken', refreshToken, {
               httpOnly: true,
               secure: false,
               path: "/",
