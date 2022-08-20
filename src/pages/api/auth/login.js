@@ -45,8 +45,6 @@ async function handler(req, res) {
               secure: false,
               path: "/",
               sameSite: "strict",
-
-
             })
           );
 
