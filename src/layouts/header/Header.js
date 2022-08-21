@@ -26,6 +26,7 @@ export default function Header() {
   }, []);
   useEffect(() => {
     setIdUser(valueUser.id)
+    console.log(valueUser.id)
   }, [valueUser])
   function handleClick() {
     if (valueUser.id) {
@@ -39,7 +40,7 @@ export default function Header() {
         .then(value => {
           console.log(value)
           setValueUser({})
-          return setTimeout(() => router.replace('/login'), 2000)
+          return setTimeout(() => router.replace('/login'))
         })
         .catch(err => console.error(err))
 
@@ -47,7 +48,7 @@ export default function Header() {
   }
   return (
     <header className="flex justify-center">
-      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px]">
+      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] mobile py-[24px]">
         <div className="flex items-end">
           <ul className="flex justify-between gap-[42px]">
             <li className="py-[4px]">
