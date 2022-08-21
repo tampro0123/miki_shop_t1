@@ -96,7 +96,7 @@ export default function Header() {
               {idUser ?
                 <div className="absolute z-20 
              max-w-[900px] w-[200px]
-              bg-bgr left-[-20px] top-full hidden transition-500 group-hover:block">
+              bg-bgr left-[-20px] top-full  transition-500 group-hover:block">
                   <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
                     <li className="text-16 hover:text-3rd-text duration-500">Thông tin</li>
                     <li className="text-16 hover:text-3rd-text duration-500">Giỏ hàng của bạn</li>
