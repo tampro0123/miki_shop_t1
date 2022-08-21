@@ -36,7 +36,7 @@ export const getStaticPaths = async () => {
   const paths = products.map((product) => {
     return {
       params: {
-        slug: product._id,
+        slug: product.slug,
       },
     };
   });
@@ -48,15 +48,17 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const slug = context.params.slug;
-  const [{ data: res }, { data: feedbacks }, { data }] = await axios.all([
-    request.get(`products/${slug}`),
-    request.get(`feedback/${slug}`),
-    request.get('products/all?page=1&limit=4'),
+  const res = await request.get(`products/${slug}`)
+  const {_id : targetId, category} = res.data.product;
+  console.log(targetId);
+  const [{ data: feedbacks }, { data }] = await axios.all([
+    request.get(`feedback/${targetId}`),
+    request.get(`products/all?page=1&limit=4&category=${category}`),
   ]);
   return {
     props: {
       productList: data.product,
-      product: res.product,
+      product: res.data.product,
       feedbacks: feedbacks.feedbacks,
     },
     revalidate: 10,

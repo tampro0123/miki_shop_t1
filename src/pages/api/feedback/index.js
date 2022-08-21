@@ -1,4 +1,4 @@
-import withAuth from 'src/middlewares/withAuth';
+// import withAuth from 'src/middlewares/withAuth';
 import Feedback from 'src/models/Feedback';
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
@@ -98,4 +98,4 @@ const FeedbackHandler = async (req, res) => {
   }
 };
 
-export default withAuth(FeedbackHandler);
+export default FeedbackHandler;
