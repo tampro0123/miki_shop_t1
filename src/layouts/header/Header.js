@@ -88,11 +88,21 @@ export default function Header() {
               <CartIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
             </a>
           </Link>
-          <Link href="/">
+          <Link href={idUser ? '/' : '/login'}>
             <a className="py-[4px] relative group">
               <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
               {idUser ?
-                ''
+                <div className="absolute z-20 
+             max-w-[900px] w-[200px]
+              bg-bgr left-[-20px] top-full hidden transition-500 group-hover:block">
+                  <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
+                    <li className="text-16 hover:text-3rd-text duration-500">Thông tin</li>
+                    <li className="text-16 hover:text-3rd-text duration-500">Giỏ hàng của bạn</li>
+                    <li className="text-16 hover:text-3rd-text duration-500"
+                      onClick={() => handleClick()}
+                    >Đăng xuất</li>
+                  </ul>
+                </div>
                 :
                 ''
               }
