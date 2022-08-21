@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import Page from 'src/components/Page'
-import Footer from 'src/layouts/footer'
-import Header from 'src/layouts/header'
 import banner from 'src/assets/Brand/banner.png'
 import Img1 from 'src/assets/Brand/Rectangle 4169.jpg'
 import Img2 from 'src/assets/Brand/Rectangle 4170.png'
@@ -11,7 +9,6 @@ import Img3 from 'src/assets/Brand/Rectangle 4171.jpg'
 export default function BrandAndHistory() {
   return (
     <Page title={'Brand And History'}>
-        <Header/>
         <div className='app'>
             <div className='relative'>
                 <Image
@@ -81,7 +78,6 @@ export default function BrandAndHistory() {
                 
             </div>
         </div>
-        <Footer/>
     </Page>
   )
 }
