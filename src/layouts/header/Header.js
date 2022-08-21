@@ -8,6 +8,7 @@ import HeaderMobile from 'src/layouts/header/HeaderMobile';
 import { useRecoilState } from 'recoil'
 import { useRouter } from 'next/router';
 import { dataUser } from 'src/recoils/dataUser.js'
+import axios from 'axios';
 export default function Header() {
   const router = useRouter()
   const [idUser, setIdUser] = useState('')
