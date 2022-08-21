@@ -55,25 +55,21 @@ export function LoginFormSection() {
         setErrPassword(undefined);
         return setTimeout(() => router.push('/'), 2000);
       });
-      let userNameErr;
-      let passwordErr;
       // Get error
       res.catch((value) => {
         let checkUserName = value?.response?.data?.userNameSucc;
         let checkPassword = value?.response?.data?.passwordSucc;
         if (checkUserName == false) {
-          userNameErr = setErrUserName(value?.response?.data?.message);
+          setErrUserName(value?.response?.data?.message);
         } else {
-          userNameErr = setErrUserName(undefined);
+          setErrUserName(undefined);
         }
         if (checkPassword == false) {
-          passwordErr = setErrPassword(value?.response?.data?.message);
+          setErrPassword(value?.response?.data?.message);
         } else {
-          passwordErr = setErrPassword(undefined);
+          setErrPassword(undefined);
         }
-        return userNameErr, passwordErr;
       });
-
       reset();
     }
   };
@@ -89,6 +85,7 @@ export function LoginFormSection() {
           styleInput="w-[410px] mobile:w-[355px] h-12 p-3 mt-6 rounded-lg border-solid border-border-1 border-[1px]"
           styleMessage="text-msgEr text-sm"
           placeholder="Nhập email hoặc số điện thoại"
+          userNameErr={errUserName}
         />
         {/* Password */}
         <TextField
@@ -98,6 +95,7 @@ export function LoginFormSection() {
           styleMessage="text-msgEr text-sm"
           placeholder="Nhập mật khẩu ít nhất 8 kí tự"
           type="password"
+          passwordErr={errPassword}
         />
         {/* Button forgot password */}
         <Button to="/forgot-password" text className="text-sm leading-[22px] font-medium text-black">
