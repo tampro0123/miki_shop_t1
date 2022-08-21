@@ -18,7 +18,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
         <Header />
         <div className="container m-0">
           <CardDetail product={product} />
-          <MoreDetail product={product} feedbacks={feedbacks}/>
+          <MoreDetail product={product} feedbacks={feedbacks} />
           <div className="flex justify-center mt-[60px]">
             <Separate />
           </div>
@@ -36,7 +36,7 @@ export const getStaticPaths = async () => {
   const paths = products.map((product) => {
     return {
       params: {
-        slug: product._id,
+        slug: product.slug,
       },
     };
   });
@@ -48,15 +48,18 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const slug = context.params.slug;
-  const [{ data: res }, { data: feedbacks }, { data }] = await axios.all([
-    request.get(`products/${slug}`),
-    request.get(`feedback/${slug}`),
-    request.get('products/all?page=1&limit=4'),
+  const product = await axios.get(`http://localhost:3000/api/products/${slug}`)
+  const category = await product.data.product.category;
+  const targetId = await product.data.product._id;
+
+  const [{ data: feedbacks }, { data }] = await axios.all([
+    request.get(`feedback/${targetId}`),
+    request.get(`products/all?page=1&limit=4&category=${category}`),
   ]);
   return {
     props: {
       productList: data.product,
-      product: res.product,
+      product: product.data.product,
       feedbacks: feedbacks.feedbacks,
     },
     revalidate: 10,
