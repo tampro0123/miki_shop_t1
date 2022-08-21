@@ -3,14 +3,11 @@ import React from 'react'
 import Img from 'src/assets/Career/career.jpg'
 import { Chat, DoneRing, Lamp, Separate, StarLight } from 'src/components/Icons'
 import Page from 'src/components/Page'
-import Footer from 'src/layouts/footer'
-import Header from 'src/layouts/header'
 
 export default function Career() {
   return (
     <Page title='Career'>
     <div className='app'>
-      <Header/>
         <div className='container m-0'>
         <h1 className='text-[32px] font-bold leading-10 mb-[32px]'>Cơ hội việc làm tại Miki</h1>
         <Image
@@ -43,7 +40,6 @@ export default function Career() {
         <Separate/>
         </div>
         </div>
-        <Footer/>
     </div>
     </Page>
   )

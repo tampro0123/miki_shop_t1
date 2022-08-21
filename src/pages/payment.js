@@ -1,17 +1,14 @@
 // Import library
 import React from 'react';
 // Import component, function, asset
-import Header from "src/layouts/header";
-import Footer from "src/layouts/footer";
 import PaymentSection from "src/sections/body/PaymentSection";
+import Page from 'src/components/Page';
 
 const payment = () => {
     // UI
-    return <div className="overflow-hidden">
-        <Header />
+    return <Page title="Payment">
         <div className="flex justify-center"><PaymentSection /></div>
-        <Footer />
-    </div>
+    </Page>
 };
 
 export default payment;

@@ -1,7 +1,4 @@
-import Image from 'next/image';
 import Page from 'src/components/Page';
-import Footer from 'src/layouts/footer';
-import Header from 'src/layouts/header';
 import axios from 'axios';
 import request from 'src/utils/request';
 import CardDetail from 'src/sections/productDetail/CardDetail';
@@ -15,7 +12,6 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
   return (
     <Page title={product.name}>
       <div className="app ">
-        <Header />
         <div className="container m-0">
           <CardDetail product={product} />
           <MoreDetail product={product} feedbacks={feedbacks} />
@@ -24,7 +20,6 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
           </div>
           <ProductItem products={productList} />
         </div>
-        <Footer />
       </div>
     </Page>
   );
@@ -48,10 +43,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const slug = context.params.slug;
-  const product = await axios.get(`http://localhost:3000/api/products/${slug}`)
-  const category = await product.data.product.category;
-  const targetId = await product.data.product._id;
-
+  const res = await request.get(`products/${slug}`)
+  const { _id: targetId, category } = await res.data.product;
   const [{ data: feedbacks }, { data }] = await axios.all([
     request.get(`feedback/${targetId}`),
     request.get(`products/all?page=1&limit=4&category=${category}`),
@@ -59,7 +52,7 @@ export const getStaticProps = async (context) => {
   return {
     props: {
       productList: data.product,
-      product: product.data.product,
+      product: res.data.product,
       feedbacks: feedbacks.feedbacks,
     },
     revalidate: 10,

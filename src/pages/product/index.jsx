@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import Page from 'src/components/Page';
-import Footer from 'src/layouts/footer';
-import Header from 'src/layouts/header';
 import Banner from 'src/assets/product/banner.jpg';
 import { useRouter } from 'next/router';
 import filterSearch from 'src/utils/filterSearch';
@@ -26,7 +24,6 @@ export default function Products({ products, pageCount }) {
   return (
     <Page title={'Products'}>
       <div className="app">
-        <Header />
         <Image src={Banner} layouts="fill" />
         <div className="container mt-0">
           <div className="flex items-center justify-between">
@@ -47,7 +44,6 @@ export default function Products({ products, pageCount }) {
           <ProductItem products={products} />
           <Pagination pageCount={pageCount} />
         </div>
-        <Footer />
       </div>
     </Page>
   );

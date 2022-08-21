@@ -43,8 +43,8 @@ async function handler(req, res) {
             serialize('refreshToken', refreshToken, {
               httpOnly: true,
               secure: false,
-              path: "/",
-              sameSite: "strict",
+              path: '/',
+              sameSite: 'strict',
             })
           );
 
