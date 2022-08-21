@@ -1,5 +1,5 @@
-import withAuth from 'src/middlewares/withAuth';
-import withRoles from 'src/middlewares/withRoles';
+import withAuth from 'src/middleware/withAuth';
+import withRoles from 'src/middleware/withRoles';
 const mongoose = require('mongoose');
 import Products from 'src/models/Products';
 import { cloudinary } from 'src/utils/cloudinary.js';
