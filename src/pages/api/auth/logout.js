@@ -1,5 +1,5 @@
 import cookie from 'cookie';
-import withAuth from 'src/middlewares/withAuth';
+import withAuth from 'src/middleware/withAuth';
 import RefreshToken from 'src/models/RefreshToken';
 import dbConnect from 'src/utils/dbConnect';
 

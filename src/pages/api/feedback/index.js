@@ -1,4 +1,4 @@
-import withAuth from 'src/middlewares/withAuth';
+import withAuth from 'src/middleware/withAuth';
 import Feedback from 'src/models/Feedback';
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';
