@@ -47,7 +47,7 @@ export default function Header() {
   }
   return (
     <header className="flex justify-center">
-      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between overflow-hidden w-[1136px] mobile:w-[375px] py-[24px]">
+      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px]">
         <div className="flex items-end">
           <ul className="flex justify-between gap-[42px]">
             <li className="py-[4px]">
@@ -96,7 +96,7 @@ export default function Header() {
               {idUser ?
                 <div className="absolute z-20 
              max-w-[900px] w-[200px]
-              bg-bgr left-[-20px] top-full  transition-500 group-hover:block">
+              bg-bgr left-[-20px] top-full hidden transition-500 group-hover:block">
                   <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
                     <li className="text-16 hover:text-3rd-text duration-500">Thông tin</li>
                     <li className="text-16 hover:text-3rd-text duration-500">Giỏ hàng của bạn</li>
@@ -108,6 +108,7 @@ export default function Header() {
                 :
                 ''
               }
+
             </a>
           </Link>
         </div>
