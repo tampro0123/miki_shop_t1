@@ -11,6 +11,7 @@ import CircleBgr from 'src/components/circles';
 import { useRecoilValue } from 'recoil'
 import { dataUser } from 'src/recoils/dataUser'
 import { useRouter } from 'next/router'
+import Page from 'src/components/Page';
 const login = () => {
   // Set width window when resize
   const [windowWidth, setWindowWidth] = useState(undefined);
@@ -39,7 +40,7 @@ const login = () => {
     return <>Loading...</>;
   }
   return (
-    <div>
+    <Page title="Login" isHeader={false}>
       <div className="app pt-[120px] mobile:pt-0">
         <div className="flex justify-center">
           <div className="flex w-[1136px] mobile:w-[375px] mobile:justify-center">
@@ -58,7 +59,7 @@ const login = () => {
               <LoginFormSection />
             </div>
           </div>
-        </div >
+        </div>
         {/* Footer */}
         <Footer />
         {/* Decoration background */}
@@ -70,8 +71,8 @@ const login = () => {
           CFull3={'scale-[0.4] left-[-200px] bottom-[-622px] '}
           CDash3={'left-[-287px] bottom-[296px]'}
         />)}
-      </div >
-    </div >
+      </div>
+    </Page>
   );
 };
 
