@@ -9,8 +9,10 @@ import axios from 'axios';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 import Button from 'src/components/Button';
 import { FacebookColor, GoogleColor } from 'src/components/icons';
-
+import { useSetRecoilState } from "recoil"
+import { dataUser } from 'src/recoils/dataUser.js'
 export function LoginFormSection() {
+  const setUser = useSetRecoilState(dataUser)
   const router = useRouter();
   // Set data to request
   const [errUserName, setErrUserName] = useState(undefined);
@@ -53,6 +55,14 @@ export function LoginFormSection() {
       res.then((value) => {
         setErrUserName(undefined);
         setErrPassword(undefined);
+        setUser({
+          accessToken: value.data.accessToken,
+          id: value.data.user._id,
+          userName: value.data.user.username,
+          email: value.data.user.email,
+          avatar: value.data.user.image,
+          role: value.data.user.role
+        })
         return setTimeout(() => router.push('/'), 2000);
       });
       // Get error
