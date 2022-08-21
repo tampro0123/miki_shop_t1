@@ -4,6 +4,7 @@ import HeaderAdmin from 'src/layouts/managementPage/headerAdmin/HeaderAdmin.js'
 import { useEffect, useState } from 'react'
 import { dataUser } from 'src/recoils/dataUser'
 import { useRouter } from 'next/router'
+import { useRecoilValue } from 'recoil'
 export default function OverLay({ children }) {
   const user = useRecoilValue(dataUser)
   const router = useRouter()
