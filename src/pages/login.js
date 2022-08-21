@@ -8,8 +8,10 @@ import { LoginFormSection } from 'src/sections/auth';
 import imgLogin from 'src/assets/Login/Login.jpg';
 import Footer from 'src/layouts/footer';
 import CircleBgr from 'src/components/circles';
+import { useRecoilValue } from 'recoil'
+import { dataUser } from 'src/recoils/dataUser'
+import { useRouter } from 'next/router'
 import Page from 'src/components/Page';
-
 const login = () => {
   // Set width window when resize
   const [windowWidth, setWindowWidth] = useState(undefined);
@@ -22,7 +24,21 @@ const login = () => {
       return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     }
   }, []);
-
+  const user = useRecoilValue(dataUser)
+  const router = useRouter()
+  const [loading, SetLoading] = useState(true)
+  useEffect(() => {
+    SetLoading(true)
+    router.prefetch('/')
+    if (user.role) {
+      router.replace('/')
+    } else {
+      SetLoading(false)
+    }
+  }, [])
+  if (loading) {
+    return <>Loading...</>;
+  }
   return (
     <Page title="Login" isHeader={false}>
       <div className="app pt-[120px] mobile:pt-0">
