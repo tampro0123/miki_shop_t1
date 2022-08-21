@@ -18,7 +18,7 @@ export default function ProductItem({products}) {
                   </p>
                   <p className="text-[20px] mt-6 text-trumcate2">{product.name}</p>
                   <div className="hover:shadow-product hover:scale-[1.01] shadow-md rounded-16 peer-hover:shadow-product relative">
-                    <Link href={`/product/${product._id}`}>
+                    <Link href={`/product/${product.slug}`}>
                     <a >
                       <Image
                         src={product.images[0].src}
