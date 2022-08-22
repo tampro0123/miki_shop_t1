@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import HeroImg from 'public/static/Home/HeroSection/hero-img.png'
+import HeroImg from 'public/static/Home/HeroSection/hero-img.jpg'
 import Button from 'src/components/Button'
 
 export default function HeroSection() {

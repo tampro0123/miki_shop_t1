@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import { LogoIcon } from 'src/components/icons';
 import { LoginFormSection } from 'src/sections/auth';
 import imgLogin from 'src/assets/Login/Login.jpg';
-import Footer from 'src/layouts/footer';
 import CircleBgr from 'src/components/circles';
 import { useRecoilValue } from 'recoil'
 import { dataUser } from 'src/recoils/dataUser'
@@ -41,7 +40,7 @@ const login = () => {
   }
   return (
     <Page title="Login" isHeader={false}>
-      <div className="app pt-[120px] mobile:pt-0">
+      <div className="app pt-[120px] mobile:pt-0 z-10">
         <div className="flex justify-center">
           <div className="flex w-[1136px] mobile:w-[375px] mobile:justify-center">
             {/* Image */}
@@ -60,8 +59,6 @@ const login = () => {
             </div>
           </div>
         </div>
-        {/* Footer */}
-        <Footer />
         {/* Decoration background */}
         {windowWidth <= 480 ? (<CircleBgr
           CFull2={'scale-[0.25] left-[-85px] top-[-515px] '}
