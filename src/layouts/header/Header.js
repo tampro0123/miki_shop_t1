@@ -34,6 +34,10 @@ export default function Header() {
         url: '/api/auth/logout',
         data: {
           id: valueUser.id,
+        },
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + valueUser.accessToken
         }
       })
         .then(value => {
