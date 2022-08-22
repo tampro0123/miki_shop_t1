@@ -28,14 +28,36 @@ export default function Header() {
                 <a className="text-16 hover:text-3rd-text duration-500 font-bold">Trang chủ</a>
               </Link>
             </li>
-            <li className="flex items-center py-[4px]">
+            <li className="flex items-center py-[4px] group static">
               <Link href="/">
-                <a className="mr-2 text-16 hover:text-3rd-text duration-500">Sản phẩm</a>
+                <a className="mr-2 text-16 hover:text-3rd-text duration-500 before:block before:absolute before:w-[90px] before:top-[110px] before:h-3">Sản phẩm</a>
               </Link>
-              <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300" />
+              <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 peer" />
+              <div className='hidden absolute group-hover:flex flex-col top-[114px] bg-white p-2 shadow-lg rounded-b-8 pr-3 z-50'>
+                  <Link href='/product?category=nhan&sort=+'>
+                  <a className="hover:bg-Neutral/3 px-2 py-1">
+                    Nhẫn
+                  </a>
+                  </Link>
+                  <Link href='/product?category=lac-tay&sort=+'>
+                  <a className="hover:bg-Neutral/3 px-2 py-1">
+                    Lắc tay
+                  </a>
+                  </Link>
+                  <Link href='/product?category=day-chuyen&sort=+'>
+                  <a className="hover:bg-Neutral/3 px-2 py-1">
+                    Dây chuyền
+                  </a>
+                  </Link>
+                  <Link href='/product?category=bong-tai&sort=+'>
+                  <a className="hover:bg-Neutral/3 px-2 py-1">
+                    Bông tai
+                  </a>
+                  </Link>
+              </div>
             </li>
             <li className="py-[4px]">
-              <Link href="/">
+              <Link href="/aboutus/brandandhistory">
                 <a className="text-16 hover:text-3rd-text duration-500">Về chúng tôi</a>
               </Link>
             </li>

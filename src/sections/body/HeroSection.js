@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import React from 'react'
-import HeroImg from 'public/static/Home/HeroSection/hero-img.png'
+import HeroImg from 'public/static/Home/HeroSection/hero-img.jpg'
 import Button from 'src/components/Button'
 
 export default function HeroSection() {
   return (
-    <div className='z-10 relative h-[629px] text-white'>
+    <div className='relative h-[629px] text-white'>
         <Image src={HeroImg}  layout='responsive' placeholder='blur' alt='beautiful girl'
-        className='-z-10'
+        className='relative -z-10'
         />
         <h2 className='absolute text-[96px] top-[137px] right-[325px]'>
           Thế Giới Nữ Trang 

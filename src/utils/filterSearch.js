@@ -1,4 +1,4 @@
-const filterSearch = ({router, page, category, sort, search, scroll = false}) => {
+const filterSearch = ({router, page, category, sort, search, desc, scroll = false}) => {
     const path = router.pathname;
     const query = router.query;
 

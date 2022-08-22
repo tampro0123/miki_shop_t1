@@ -3,11 +3,12 @@ import React from 'react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 // Import component, function, asset
-import { LogoMobileIcon, LogoIcon } from 'src/components/Icons';
+import { LogoIcon } from 'src/components/Icons';
 import { RegisterFormSection } from 'src/sections/auth';
 import imgRegister from 'src/assets/Register/Register.jpg';
 import Footer from 'src/layouts/Footer';
 import CircleBgr from 'src/components/circles';
+import Page from 'src/components/Page';
 
 const Register = () => {
   // Set width window when resize
@@ -24,7 +25,7 @@ const Register = () => {
 
   // UI
   return (
-    <div>
+    <Page title="Register" isHeader={false}>
       <div className="app pt-[120px] mobile:pt-0">
         <div className="flex justify-center">
           <div className="flex w-[1136px] mobile:w-[375px] mobile:justify-center">
@@ -43,7 +44,7 @@ const Register = () => {
               <RegisterFormSection />
             </div>
           </div>
-        </div >
+        </div>
         {/* Footer */}
         <Footer />
         {/* Decoration background */}
@@ -55,8 +56,8 @@ const Register = () => {
           CFull3={'scale-[0.4] left-[-200px] bottom-[-622px] '}
           CDash3={'left-[-287px] bottom-[296px]'}
         />)}
-      </div >
-    </div >
+      </div>
+    </Page>
   );
 };
 
