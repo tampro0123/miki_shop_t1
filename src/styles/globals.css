@@ -6,10 +6,10 @@
 
 @layer components {
     body {
-        @apply font-mon bg-bgr text-base font-medium z-10 relative text-primary-text;
+        @apply font-mon bg-bgr text-base font-medium  relative text-primary-text;
     }
     .app {
-        @apply max-w-[1440px] mx-auto overflow-hidden relative;
+        @apply max-w-[1440px] mx-auto overflow-hidden relative ;
     }
     h2 {
         @apply font-plf;
