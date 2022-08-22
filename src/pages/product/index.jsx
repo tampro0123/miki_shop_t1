@@ -10,7 +10,7 @@ import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Products({ products, pageCount }) {
   const router = useRouter();
-  const [sortValue, setSortValue] = useState(' ');
+  const [sortValue, setSortValue] = useState('price');
   const [orderValue, setOrderValue] = useState('');
   const handleSort = (e) => {
     if(e.target.id == 'sale') {
