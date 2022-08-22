@@ -39,7 +39,6 @@ const login = () => {
   if (loading) {
     return <>Loading...</>;
   } else {
-
     return (
       <Page title="Login" isHeader={false}>
         <div className="app pt-[120px] mobile:pt-0">
