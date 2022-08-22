@@ -10,7 +10,7 @@ import CircleBgr from 'src/components/circles';
 export default function Home() {
   return (
     <Page title="Home">
-      <div className="app -z-10">
+      <div className="app">
         <HeroSection />
         <AboutSection />
         <BestSeller />
