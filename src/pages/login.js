@@ -59,8 +59,6 @@ const login = () => {
               </div>
             </div>
           </div>
-          {/* Footer */}
-          <Footer />
           {/* Decoration background */}
           {windowWidth <= 480 ? (<CircleBgr
             CFull2={'scale-[0.25] left-[-85px] top-[-515px] '}
