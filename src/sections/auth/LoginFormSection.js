@@ -12,6 +12,9 @@ import { FacebookColor, GoogleColor } from 'src/components/icons';
 import { useSetRecoilState } from "recoil"
 import { dataUser } from 'src/recoils/dataUser.js'
 export function LoginFormSection() {
+  // click button then disable
+  const [disabled, setDisabled] = useState(false);
+  // Data user
   const setUser = useSetRecoilState(dataUser)
   const router = useRouter();
   // Set data to request
@@ -38,6 +41,8 @@ export function LoginFormSection() {
   // Handle Submit
   const onSubmit = (data) => {
     if (data) {
+      // Disable button
+      setDisabled(!disabled)
       // Logic request
       const res = axios({
         method: 'POST',
@@ -63,7 +68,7 @@ export function LoginFormSection() {
           avatar: value.data.user.image,
           role: value.data.user.role
         })
-        return setTimeout(() => router.push('/'), 2000);
+        router.push('/')
       });
       // Get error
       res.catch((value) => {
@@ -114,7 +119,7 @@ export function LoginFormSection() {
         {/* Button Sign in */}
         <Button
           className="mt-[32px] w-full text-base"
-          primary
+          disabled={disabled} primary={!disabled}
           classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
         >
           Đăng nhập
@@ -142,7 +147,7 @@ export function LoginFormSection() {
         {/* Go to regiter page */}
         <div className="flex mt-4 items-center mb-[84px]">
           <h1 className="text-sm leading-[22px] mr-1">Bạn chưa có tài khoản</h1>
-          <Button to="/register" text className="text-base leading-6 font-bold">
+          <Button to="/register" className="text-base leading-6 font-bold">
             Đăng ký
           </Button>
         </div>

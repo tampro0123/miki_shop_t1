@@ -9,6 +9,7 @@ function Button({
   secondary = false,
   text = false,
   outline = false,
+  disabled = false,
   //Other Style
   className,
   //classHover
@@ -32,6 +33,16 @@ function Button({
     ...passProps,
   };
 
+  // disabled logic
+  if (disabled) {
+    Object.keys(props).forEach((key) => {
+      if (key.startsWith('on') && typeof props[key] === 'function') {
+        delete props[key];
+      }
+    });
+    delete props.onClick;
+  }
+
   //Logic Btn
   let Component = 'button';
   if (to) {
@@ -54,6 +65,8 @@ function Button({
     var classes = 'px-0 py-0 inline-flex text-3rd-text border-[1px] border-transparent';
   } else if (outline) {
     var classes = 'border-[1px] rounded-[9999px] border-border-1 flex w-full px-[32px] py-[8px]';
+  } else if (disabled) {
+    var classes = 'text-white py-2 px-[46px] bg-[#aaa] border-[1px] border-transparent';
   }
   return (
     <Component

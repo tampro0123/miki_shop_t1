@@ -9,7 +9,7 @@
         @apply font-mon bg-bgr text-base font-medium  relative text-primary-text;
     }
     .app {
-        @apply max-w-[1440px] mx-auto overflow-hidden relative -z-10;
+        @apply max-w-[1440px] mx-auto overflow-hidden relative ;
     }
     h2 {
         @apply font-plf;

@@ -10,6 +10,8 @@ import Button from 'src/components/Button';
 import { FormProviderBox, TextField } from 'src/components/hook-form';
 
 export function RegisterFormSection() {
+  // click button then disable
+  const [disabled, setDisabled] = useState(false);
   // Set data to request
   const router = useRouter();
   const [errMail, setErrMail] = useState(undefined);
@@ -54,6 +56,9 @@ export function RegisterFormSection() {
   const onSubmit = (data) => {
     // Logic request
     if (data) {
+      // Disable button
+      setDisabled(!disabled)
+      // Logic request
       const res = axios({
         method: 'POST',
         url: '/api/auth/register',
@@ -67,12 +72,11 @@ export function RegisterFormSection() {
           'Content-Type': 'application/json',
         },
       });
-      console.log(data);
-      setTimeout(() => router.push('/login'), 3000);
+      // router.push('/login')
       // Xử lí khi thành công
       res.then((data) => {
         setErrMail(undefined);
-        setTimeout(() => router.push('/login'), 3000);
+        router.push('/login')
       });
       let mailErr;
       let messageErrMail;
@@ -173,7 +177,7 @@ export function RegisterFormSection() {
         {/* Button register */}
         <Button
           className="mt-[32px] w-full mobile:text-base mobile:leading-6 mobile:font-bold"
-          primary
+          disabled={disabled} primary={!disabled}
           classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
         >
           Đăng ký
@@ -185,7 +189,7 @@ export function RegisterFormSection() {
             Đăng nhập
           </Button>
         </div>
-      </FormProviderBox >
-    </div >
+      </FormProviderBox>
+    </div>
   );
 }
