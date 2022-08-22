@@ -41,7 +41,7 @@ const login = () => {
   } else {
     return (
       <Page title="Login" isHeader={false}>
-        <div className="app pt-[120px] mobile:pt-0">
+        <div className="app pt-[120px] mobile:pt-0 z-10 ">
           <div className="flex justify-center">
             <div className="flex w-[1136px] mobile:w-[375px] mobile:justify-center">
               {/* Image */}
