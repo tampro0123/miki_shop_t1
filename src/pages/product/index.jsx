@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Page from 'src/components/Page';
 import Banner from 'src/assets/product/banner.jpg';
 import { useRouter } from 'next/router';
@@ -17,7 +17,7 @@ export default function Products({ products, pageCount }) {
     setSortValue(e.target.value);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     filterSearch({ router, sort: sortValue });
   }, [sortValue]);
 
