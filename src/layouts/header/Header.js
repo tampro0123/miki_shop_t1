@@ -64,7 +64,7 @@ export default function Header() {
                 <a className="mr-2 text-16 hover:text-3rd-text duration-500 before:block before:absolute before:w-[90px] before:top-[110px] before:h-3">Sản phẩm</a>
               </Link>
               <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 peer" />
-              <div className='hidden absolute group-hover:flex flex-col top-[114px] bg-white p-2 shadow-lg rounded-b-8 pr-3'>
+              <div className='hidden z-30 absolute group-hover:flex flex-col top-[114px] bg-white p-2 shadow-lg rounded-b-8 pr-3'>
                 <Link href='/product?category=nhan&sort=+'>
                   <a className="hover:bg-Neutral/3 px-2 py-1">
                     Nhẫn

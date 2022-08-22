@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <div className=' relative h-[629px] text-white'>
       <Image src={HeroImg} layout='responsive' placeholder='blur' alt='beautiful girl'
-        className='-z-10'
+        className='relative -z-10'
       />
       <h2 className='absolute text-[96px] top-[137px] right-[325px]'>
         Thế Giới Nữ Trang
@@ -17,7 +17,7 @@ export default function HeroSection() {
         Tôn vinh vẻ đẹp phái nữ - Trao quà tặng - Trao yêu thương
       </p>
       <div className='absolute bg-white h-[2px] w-[824px] top-[373px] left-1/2 transform -translate-x-1/2'></div>
-      <Button secondary className='absolute left-1/2 transform -translate-x-1/2 top-[434px]' >Tìm hiểu thêm</Button>
+      <Button secondary className='absolute z-30 left-1/2 transform -translate-x-1/2 top-[434px]' >Tìm hiểu thêm</Button>
     </div>
   )
 }
