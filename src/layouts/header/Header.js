@@ -5,8 +5,14 @@ import { useState, useEffect } from "react"
 // Import component, function, asset
 import { CaretDown, LogoIcon, SearchIcon, CartIcon, UserIcon } from 'src/components/Icons/icons.js';
 import HeaderMobile from 'src/layouts/header/HeaderMobile';
-
+import { useRecoilState } from 'recoil'
+import { useRouter } from 'next/router';
+import { dataUser } from 'src/recoils/dataUser.js'
+import axios from 'axios';
 export default function Header() {
+  const router = useRouter()
+  const [idUser, setIdUser] = useState('')
+  const [valueUser, setValueUser] = useRecoilState(dataUser)
   // Set width window when resize
   const [windowWidth, setWindowWidth] = useState(undefined);
   // Get size window to respondsive
@@ -18,9 +24,34 @@ export default function Header() {
       return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     }
   }, []);
+  useEffect(() => {
+    setIdUser(valueUser.id)
+  }, [valueUser])
+  function handleClick() {
+    if (valueUser.id) {
+      const data = axios({
+        method: 'POST',
+        url: '/api/auth/logout',
+        data: {
+          id: valueUser.id,
+        },
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + valueUser.accessToken
+        }
+      })
+        .then(value => {
+          console.log(value)
+          setValueUser({})
+          return setTimeout(() => router.replace('/login'), 2000)
+        })
+        .catch(err => console.error(err))
+
+    }
+  }
   return (
     <header className="flex justify-center">
-      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between overflow-hidden w-[1136px] mobile:w-[375px] py-[24px]">
+      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px]">
         <div className="flex items-end">
           <ul className="flex justify-between gap-[42px]">
             <li className="py-[4px]">
@@ -33,27 +64,27 @@ export default function Header() {
                 <a className="mr-2 text-16 hover:text-3rd-text duration-500 before:block before:absolute before:w-[90px] before:top-[110px] before:h-3">Sản phẩm</a>
               </Link>
               <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 peer" />
-              <div className='hidden absolute group-hover:flex flex-col top-[114px] bg-white p-2 shadow-lg rounded-b-8 pr-3 z-50'>
-                  <Link href='/product?category=nhan&sort=+'>
+              <div className='hidden z-30 absolute group-hover:flex flex-col top-[114px] bg-white p-2 shadow-lg rounded-b-8 pr-3'>
+                <Link href='/product?category=nhan&sort=+'>
                   <a className="hover:bg-Neutral/3 px-2 py-1">
                     Nhẫn
                   </a>
-                  </Link>
-                  <Link href='/product?category=lac-tay&sort=+'>
+                </Link>
+                <Link href='/product?category=lac-tay&sort=+'>
                   <a className="hover:bg-Neutral/3 px-2 py-1">
                     Lắc tay
                   </a>
-                  </Link>
-                  <Link href='/product?category=day-chuyen&sort=+'>
+                </Link>
+                <Link href='/product?category=day-chuyen&sort=+'>
                   <a className="hover:bg-Neutral/3 px-2 py-1">
                     Dây chuyền
                   </a>
-                  </Link>
-                  <Link href='/product?category=bong-tai&sort=+'>
+                </Link>
+                <Link href='/product?category=bong-tai&sort=+'>
                   <a className="hover:bg-Neutral/3 px-2 py-1">
                     Bông tai
                   </a>
-                  </Link>
+                </Link>
               </div>
             </li>
             <li className="py-[4px]">
@@ -85,9 +116,25 @@ export default function Header() {
               <CartIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
             </a>
           </Link>
-          <Link href="/">
-            <a className="py-[4px]">
+          <Link href={idUser ? '/' : '/login'}>
+            <a className="py-[4px] relative group">
               <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
+              {idUser ?
+                <div className="absolute z-20 
+             max-w-[900px] w-[200px]
+              bg-bgr left-[-20px] top-full hidden transition-500 group-hover:block">
+                  <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
+                    <li className="text-16 hover:text-3rd-text duration-500">Thông tin</li>
+                    <li className="text-16 hover:text-3rd-text duration-500">Giỏ hàng của bạn</li>
+                    <li className="text-16 hover:text-3rd-text duration-500"
+                      onClick={() => handleClick()}
+                    >Đăng xuất</li>
+                  </ul>
+                </div>
+                :
+                ''
+              }
+
             </a>
           </Link>
         </div>

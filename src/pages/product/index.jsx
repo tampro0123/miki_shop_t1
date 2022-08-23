@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Page from 'src/components/Page';
 import Banner from 'src/assets/product/banner.jpg';
 import { useRouter } from 'next/router';
@@ -10,15 +10,23 @@ import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Products({ products, pageCount }) {
   const router = useRouter();
-  const sortChecked = useRef(' ');
   const [sortValue, setSortValue] = useState(' ');
-  const [order, setOrder] = useState('');
+  const [orderValue, setOrderValue] = useState('');
   const handleSort = (e) => {
+    if(e.target.id == 'sale') {
     setSortValue(e.target.id);
+    setOrderValue("desc");
+  } else {
+    setSortValue(e.target.id);
+    setOrderValue("");
+  }
   };
-  useLayoutEffect(() => {
-    filterSearch({ router, sort: sortValue });
-  }, [sortValue]);
+  const handleOrder = (e) => {
+    setOrderValue(e.target.value);
+  };
+  useEffect(() => {
+    filterSearch({ router, sort: sortValue,  order: orderValue});
+  }, [sortValue, orderValue]);
 
   return (
     <Page title={'Products'}>
@@ -34,8 +42,8 @@ export default function Products({ products, pageCount }) {
                   id="price"
                   className={
                     sortValue == "price"
-                      ? 'cursor-pointer p-2 bg-red-600 text-white'
-                      : 'cursor-pointer p-2 bg-white text-primary-text'
+                      ? 'cursor-pointer py-2 px-6 bg-red-600 text-white'
+                      : 'cursor-pointer py-2 px-6 bg-white text-primary-text'
                   }
                 >
                   Giá
@@ -45,8 +53,8 @@ export default function Products({ products, pageCount }) {
                   id="sale"
                   className={
                     sortValue == "sale"
-                      ? 'cursor-pointer p-2 bg-red-600 text-white'
-                      : 'cursor-pointer p-2 bg-white text-primary-text'
+                      ? 'cursor-pointer p-2 px-4 bg-red-600 text-white'
+                      : 'cursor-pointer p-2 px-4 bg-white text-primary-text'
                   }
                 >
                   Ưu đãi
@@ -56,22 +64,33 @@ export default function Products({ products, pageCount }) {
                   id="time"
                   className={
                     sortValue == "time"
-                      ? 'cursor-pointer p-2 bg-red-600 text-white'
-                      : 'cursor-pointer p-2 bg-white text-primary-text'
+                      ? 'cursor-pointer p-2 px-4 bg-red-600 text-white'
+                      : 'cursor-pointer p-2 px-4 bg-white text-primary-text'
                   }
                 >
                   Thời gian
                 </div>
               </div>
-              <select className="p-2 border-none">
-                <option disabled value="price-up">
+              {
+                sortValue == "sale" ?
+              <select className="p-2 border-none" onChange={handleOrder}>
+                <option disabled value="">
                   Lọc
                 </option>
-                <option defaultValue value="price-up">
+                <option  value="desc">Giảm dần</option>
+                <option value="">
                   Tăng dần
                 </option>
-                <option value="lasted">Giảm dần</option>
+              </select> : <select className="p-2 border-none" onChange={handleOrder}>
+                <option disabled value="">
+                  Lọc
+                </option>
+                <option value="">
+                  Tăng dần
+                </option>
+                <option  value="desc">Giảm dần</option>
               </select>
+              }
             </div>
           </div>
           <ProductItem products={products} />
@@ -86,9 +105,10 @@ export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
   const sort = query.sort || '';
   const category = query.category || '';
+  const order = query.order || '';
   const [{ data }, { data: res }] = await Promise.all([
     request.get(`products/all?category=${category}`),
-    request.get(`products/all?page=${page}&category=${category}&limit=16&sort=${sort}`),
+    request.get(`products/all?page=${page}&category=${category}&limit=16&sort=${sort}&order=${order}`),
   ]);
   return {
     props: {

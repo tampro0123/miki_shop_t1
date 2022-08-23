@@ -1,5 +1,5 @@
-import withAuth from 'src/middlewares/withAuth';
-import withRoles from 'src/middlewares/withRoles';
+import withAuth from 'src/middleware/withAuth';
+import withRoles from 'src/middleware/withRoles';
 
 import Products from 'src/models/Products';
 import dbConnect from 'src/utils/dbConnect.js';

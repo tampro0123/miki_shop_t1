@@ -2,8 +2,13 @@ import Image from 'next/image';
 import React from 'react';
 import AboutImg from 'public/static/Home/AboutSection/about-img.jpg';
 import Button from 'src/components/Button';
+import { useRouter } from 'next/router';
 
 export default function AboutSection() {
+  const router = useRouter()
+  const handleClickBtn = () => {
+    router.push('/aboutus/brandandhistory')
+  }
   return (
     <div className="container flex justify-between">
       <div className="w-[48%] font-bold">
