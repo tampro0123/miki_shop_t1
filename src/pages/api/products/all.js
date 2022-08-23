@@ -10,7 +10,10 @@ const handler = async (req, res) => {
     case 'GET':
       try {
         const pageInstance = page - 1;
-        if (page == 0) return res.status(404).json({ success: false, message: 'No page found' });
+        const totalItems = await Products.countDocuments()
+        const totalPages = Math.ceil(totalItems / +limit)
+
+        if (page == 0 || page > totalPages) return res.status(404).json({ success: false, message: 'No page found' });
 
         //create sorting option
         let orderInstance = 1;
@@ -18,7 +21,6 @@ const handler = async (req, res) => {
           orderInstance = -1;
         }
 
-        const totalItems = await Products.countDocuments()
 
         if (page || limit || sort || category) {
           const findInstance = {};
@@ -53,7 +55,7 @@ const handler = async (req, res) => {
             product: product,
             perPage: +limit,
             totalItems,
-            totalPages: Math.ceil(totalItems / +limit)
+            totalPages
           });
         }
 
@@ -62,7 +64,7 @@ const handler = async (req, res) => {
           success: true,
           product: product,
           totalItems,
-          totalPages: Math.ceil(totalItems / +limit)
+          totalPages
         });
       } catch (err) {
         return res.status(500).json({ success: false, message: err });
