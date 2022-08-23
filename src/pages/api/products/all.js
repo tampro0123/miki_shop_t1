@@ -18,6 +18,8 @@ const handler = async (req, res) => {
           orderInstance = -1;
         }
 
+        const totalItems = await Products.countDocuments()
+
         if (page || limit || sort || category) {
           const findInstance = {};
           if (category) findInstance.category = category;
@@ -36,13 +38,22 @@ const handler = async (req, res) => {
             default:
               sortInstance['name'] = orderInstance;
           }
-          const product = await Products.find(findInstance).sort(sortInstance)
+          const product = await Products.find(findInstance, {
+            name: 1,
+            discount: 1,
+            slug: 1,
+            "storage.price": 1,
+            images: 1
+          }).sort(sortInstance)
             .limit(limit)
             .skip(limit * pageInstance);
 
           return res.status(200).json({
             success: true,
             product: product,
+            perPage: +limit,
+            totalItems,
+            totalPages: Math.ceil(totalItems / +limit)
           });
         }
 
@@ -50,6 +61,8 @@ const handler = async (req, res) => {
         return res.status(200).json({
           success: true,
           product: product,
+          totalItems,
+          totalPages: Math.ceil(totalItems / +limit)
         });
       } catch (err) {
         return res.status(500).json({ success: false, message: err });
