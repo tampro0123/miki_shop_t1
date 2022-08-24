@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { LogoIcon } from 'src/components/Icons';
 import { RegisterFormSection } from 'src/sections/auth';
 import imgRegister from 'src/assets/Register/Register.jpg';
-import CircleBgr from 'src/components/circles';
+import CircleBgr from 'src/components/Circles';
 import Page from 'src/components/Page';
 
 const Register = () => {
