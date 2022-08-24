@@ -11,7 +11,7 @@ const searchHandler = async (req, res) => {
             try {
                 const product = await Products.aggregate([
                     { $match: { $text: { $search: filterText } } },
-                    { $project: { name: 1, "storage.price": 1, "images.src": 1 } },
+                    { $project: { name: 1, "storage.price": 1, "image.src": 1, slug: 1 } },
                     { $sort: { score: { $meta: "textScore" } } },
                 ]);
 
