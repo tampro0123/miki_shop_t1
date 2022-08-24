@@ -4,6 +4,6 @@ import persistAtom from 'src/utils/recoilPersist';
 
 export const cartState = atom({
   key: 'authentication',
-  default: [],
+  default: {},
   effects_UNSTABLE: [persistAtom], //auto persist and sync with local-storage
 });
