@@ -18,7 +18,7 @@ export default function AboutSection() {
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim
           velit mollit. Exercitation veniam consequat sunt nostrud amet.
         </p>
-        <Button primary className="mt-[94px] hover-btn-primary relative z-10">
+        <Button onClick={handleClickBtn} primary className="mt-[94px] hover-btn-primary relative z-10">
           Tìm hiểu thêm
         </Button>
       </div>
@@ -28,3 +28,4 @@ export default function AboutSection() {
     </div>
   );
 }
+

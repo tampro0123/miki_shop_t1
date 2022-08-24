@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil'
 import { useRouter } from 'next/router';
 import { dataUser } from 'src/recoils/dataUser.js'
 import axios from 'axios';
+import Search from 'src/components/Search/Search';
 export default function Header() {
   const router = useRouter()
   const [idUser, setIdUser] = useState('')
@@ -108,8 +109,9 @@ export default function Header() {
         </div>
         <div className="flex gap-[25px] items-end">
           <div className="flex items-center h-[40px] border-[1px] border-primary-text bg-white px-[15px] rounded-8">
-            <input placeholder="Tìm kiếm" type="text" className="h-[32px] text-[14px] px-[5px] border-0 outline-0" />
-            <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
+            <Search/>
+            {/* <input placeholder="Tìm kiếm" type="text" className="h-[32px] text-[14px] px-[5px] border-0 outline-0" />
+            <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " /> */}
           </div>
           <Link href="/">
             <a className="py-[4px]">

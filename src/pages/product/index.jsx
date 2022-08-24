@@ -10,7 +10,7 @@ import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Products({ products, pageCount }) {
   const router = useRouter();
-  const [sortValue, setSortValue] = useState(' ');
+  const [sortValue, setSortValue] = useState('price');
   const [orderValue, setOrderValue] = useState('');
   const handleSort = (e) => {
     if(e.target.id == 'sale') {
@@ -42,8 +42,8 @@ export default function Products({ products, pageCount }) {
                   id="price"
                   className={
                     sortValue == "price"
-                      ? 'cursor-pointer py-2 px-6 bg-red-600 text-white'
-                      : 'cursor-pointer py-2 px-6 bg-white text-primary-text'
+                      ? 'cursor-pointer py-2 px-6 bg-red-600 text-white mr-3'
+                      : 'cursor-pointer py-2 px-6 bg-white text-primary-text mr-3'
                   }
                 >
                   Giá
@@ -53,8 +53,8 @@ export default function Products({ products, pageCount }) {
                   id="sale"
                   className={
                     sortValue == "sale"
-                      ? 'cursor-pointer p-2 px-4 bg-red-600 text-white'
-                      : 'cursor-pointer p-2 px-4 bg-white text-primary-text'
+                      ? 'cursor-pointer p-2 px-4 bg-red-600 text-white mr-3'
+                      : 'cursor-pointer p-2 px-4 bg-white text-primary-text mr-3'
                   }
                 >
                   Ưu đãi
@@ -64,8 +64,8 @@ export default function Products({ products, pageCount }) {
                   id="time"
                   className={
                     sortValue == "time"
-                      ? 'cursor-pointer p-2 px-4 bg-red-600 text-white'
-                      : 'cursor-pointer p-2 px-4 bg-white text-primary-text'
+                      ? 'cursor-pointer p-2 px-4 bg-red-600 text-white mr-3'
+                      : 'cursor-pointer p-2 px-4 bg-white text-primary-text mr-3'
                   }
                 >
                   Thời gian
