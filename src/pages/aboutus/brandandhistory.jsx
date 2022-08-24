@@ -9,7 +9,7 @@ import Img3 from 'src/assets/Brand/Rectangle 4171.jpg'
 export default function BrandAndHistory() {
   return (
     <Page title={'Brand And History'}>
-        <div className='app'>
+        <div className='app -z-10'>
             <div className='relative'>
                 <Image
                 src={banner}

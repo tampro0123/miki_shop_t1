@@ -7,7 +7,7 @@ import Page from 'src/components/Page'
 export default function Career() {
   return (
     <Page title='Career'>
-    <div className='app'>
+    <div className='app -z-10'>
         <div className='container m-0'>
         <h1 className='text-[32px] font-bold leading-10 mb-[32px]'>Cơ hội việc làm tại Miki</h1>
         <Image
