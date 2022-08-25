@@ -52,7 +52,7 @@ export default function Header() {
   }
   return (
     <header className="flex justify-center">
-      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px] overflow-hidden">
+      {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px]">
         <div className="flex items-end">
           <ul className="flex justify-between gap-[42px]">
             <li className="py-[4px]">
