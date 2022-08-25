@@ -51,7 +51,8 @@ function Search() {
     <div>
       <HeadlessTippy
         interactive
-        visible={showResult && searchResult.length > 0}
+        visible={showResult && debouncedValue}
+        placement='bottom'
         render={(attrs) => (
           <div className="" tabIndex="-1" {...attrs}>
             <div className={' flex flex-col relative w-[550px] bg-gray-100 border border-t-2 shadow-lg  rounded-sm'}>
@@ -60,11 +61,14 @@ function Search() {
               </div>
               <div className="w-full h-[2px] bg-slate-500 mt-7"></div>
               {searchResult.length > 0 && (
-                <div className={searchResult.length > 3 ? "mt-3 overflow-y-scroll h-[450px]" : "mt-3"}>
+                <div className={searchResult.length > 3 ? "mt-3 overflow-y-scroll h-[400px]" : "mt-3"}>
                  {searchResult.map((e) => (
                   <SearchItem key={e._id} product={e} />
                  ))}
                 </div>
+              )}
+              {searchResult.length == 0  && searchValue  && (
+               <p className='text-center text-xl font-semibold text-red-500 my-3'>Không tìm thấy sản phẩm nào</p>
               )}
             </div>
           </div>
