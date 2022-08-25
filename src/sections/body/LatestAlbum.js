@@ -10,7 +10,7 @@ export default function LatestAlbum() {
     router.push('/aboutus/brandandhistory')
   }
   return (
-    <div className="h-[732px] w-full relative mt-[120px] text-white ">
+    <div className="h-[732px] w-full relative mt-[120px] mobile:mt-[72px] text-white ">
       <Image
         src={BestSeller}
         alt="nice girl"

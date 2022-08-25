@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { LogoIcon } from 'src/components/icons';
 import { LoginFormSection } from 'src/sections/auth';
 import imgLogin from 'src/assets/Login/Login.jpg';
-import CircleBgr from 'src/components/circles';
+import CircleBgr from 'src/components/Circles';
 import { useRecoilValue } from 'recoil'
 import { dataUser } from 'src/recoils/dataUser'
 import { useRouter } from 'next/router'
