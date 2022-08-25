@@ -7,7 +7,7 @@ export default function SearchItem({ product }) {
   return (
     <Link href={`/product/${product.slug}`}>
         <a>
-        <div className="flex hover:bg-slate-200 h-[80px] mb-3 px-2 cursor-pointer flex-grow-0">
+        <div className="flex hover:bg-slate-200 h-[80px] px-2 cursor-pointer flex-grow-0 border-b-2">
           <Image
             src={product.images[0].src}
             width={80}
