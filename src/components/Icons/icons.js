@@ -530,3 +530,8 @@ export const Paypal = () => <svg xmlns="http://www.w3.org/2000/svg" width="50" h
 export const Navbar = () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
   <path d="M0 12H18V10H0V12ZM0 7H18V5H0V7ZM0 0V2H18V0H0Z" fill="black" />
 </svg>
+
+
+export const Close = () => <svg className='cursor-pointer' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <path d="M10 10.1834L21.8166 22M10 21.8166L21.8166 10" stroke="black" strokeWidth="1.5" />
+</svg>

@@ -5,7 +5,7 @@ import Button from 'src/components/Button'
 
 export default function HeroSection() {
   return (
-    <div className=' relative h-[629px] text-white'>
+    <div className='relative h-[629px] text-white'>
       <Image src={HeroImg} layout='responsive' placeholder='blur' alt='beautiful girl'
         className='relative -z-10'
       />
