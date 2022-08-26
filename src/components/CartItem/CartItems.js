@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { cartState } from 'src/recoils/cartState'
-import { Add, Sub, Close } from 'src/components/Icons';
+import { Add, Sub, Close2 } from 'src/components/Icons';
 import FormatPrice from 'src/utils/formatPrice';
 export default function CartItems() {
     const [dataItems, setDataItems] = useRecoilState(cartState)
@@ -28,10 +28,25 @@ export default function CartItems() {
 
     }
     function addQuantity(item) {
-        const itemIndex = inforProducts.findIndex(e => e.id === item.id);
-        console.log(item.quantity + 1)
-        dataItems[itemIndex].quantity += 1;
-        setDataItems({ ...dataItems });
+        // const itemIndex = inforProducts.findIndex(e => e.id === item.id);
+        const html = inforProducts.map(data => {
+            if (data.id == item) {
+                return { ...data, quantity: data.quantity + 1 }
+
+            }
+            return data
+        })
+        setDataItems(html)
+    }
+    function subQuantity(item) {
+        // const itemIndex = inforProducts.findIndex(e => e.id === item.id);
+        const html = inforProducts.map(data => {
+            if (data.id == item && data.quantity > 0) {
+                return { ...data, quantity: data.quantity - 1 }
+            }
+            return data
+        })
+        setDataItems(html)
     }
     useEffect(() => {
         setInforProducts(dataItems)
@@ -51,11 +66,10 @@ export default function CartItems() {
                             </div>
                             <div className="flex-1 ">
                                 <div>
-                                    <div className='mb-8 flex justify-between items-center'>
+                                    <div className='mb-8 flex justify-between items-start'>
                                         <h3 className=" text-[20px] font-bold">{item.name}</h3>
                                         <button className="active:bg-black active:rounded-full" onClick={() => removeItem(item)}>
-                                            <Close />
-
+                                            <Close2 />
                                         </button>
                                     </div>
                                     <p>size : {item.size}</p>
@@ -63,12 +77,13 @@ export default function CartItems() {
                                 <div>
                                     <div className='flex items-center '>
                                         <button className="active:bg-black active:rounded-full"
+                                            onClick={() => subQuantity(item.id)}
                                         >
                                             <Sub />
                                         </button>
                                         <p className="text-[20px] font-bold leading-7 w-7 text-center mx-4">{item.quantity}</p>
                                         <button className="active:bg-black active:rounded-full"
-                                            onClick={() => addQuantity(item)}>
+                                            onClick={() => addQuantity(item.id)}>
                                             <Add />
                                         </button>
                                     </div>

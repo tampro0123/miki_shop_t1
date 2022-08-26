@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'src/components/Button';
 import { Add, Sub } from 'src/components/Icons';
 import { RatingReview } from 'src/components/Rating';
@@ -8,19 +8,17 @@ import { cartState } from 'src/recoils/cartState'
 import { useSetRecoilState } from 'recoil'
 export default function CardDetail({ product }) {
   const Images = product.images;
-  const [mainImg, setMainImg] = useState(Images[0].src);
   const setCartState = useSetRecoilState(cartState)
-  console.log(product)
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(product.storage[0].price);
   const [size, setSize] = useState();
+  const [mainImg, setMainImg] = useState(product.images[0].src);
 
   // State click size
   const [sizeQuantity, setSizeQuantity] = useState();
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState();
 
-  const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
   function handleGetProduct() {
     setCartState((prev) => {
       return [
@@ -38,6 +36,11 @@ export default function CardDetail({ product }) {
       ]
     })
   }
+  const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
+  useEffect(() => {
+    setMainImg(product.images[0].src);
+  }, [product.slug])
+
   const handleSubAmount = () => {
     amount > 0 && setAmount((prev) => prev - 1);
   };
@@ -60,40 +63,34 @@ export default function CardDetail({ product }) {
   return (
     <div className="flex justify-between">
       <div className="flex flex-col ">
-        {Images.length < 3 ? (
+        {product.images.length < 3 ? (
           <div></div>
-        ) : Images.length < 4 ? (
+        ) : product.images.length < 4 ? (
           <div className="flex flex-col min-h-[485px] justify-between">
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[0].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[0].src)} />
+
+              <Image src={product.images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[0].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[1].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[1].src)} />
+              <Image src={product.images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[1].src)} />
             </div>
             <div className="shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[2].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[2].src)} />
+              <Image src={product.images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[2].src)} />
             </div>
           </div>
         ) : (
           <div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[0].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[0].src)} />
+              <Image src={product.images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[0].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8">
-              <Image src={Images[1].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[1].src)} />
+              <Image src={product.images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[1].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[2].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[2].src)} />
+              <Image src={product.images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[2].src)} />
             </div>
             <div className="shadow-md overflow-hidden rounded-8">
-              <Image src={Images[3].src} width="156" height="107" objectFit="cover"
-                onClick={() => setMainImg(Images[3].src)} />
+              <Image src={product.images[3].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[3].src)} />
             </div>
           </div>
         )}

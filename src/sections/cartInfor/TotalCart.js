@@ -1,6 +1,17 @@
 import React from 'react'
 import Button from 'src/components/Button';
+import { useState, useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
+import { totalCart } from 'src/recoils/cartState'
+import FormatPrice from 'src/utils/formatPrice';
 export default function TotalCart() {
+    const toltalValue = useRecoilValue(totalCart)
+    const [discount, setDiscount] = useState(20)
+    const [ship, setShip] = useState(30000)
+    const [total, setTotal] = useState()
+    useEffect(() => {
+        setTotal(toltalValue)
+    }, [toltalValue])
     return (
         <div>
             <h1 className="text-[24px] mb-[48px] font-bold">Tạm tính</h1>
@@ -13,21 +24,25 @@ export default function TotalCart() {
              border-b-solid border-b-[#D8D8D8] '>
                 <div className='flex mb-[28px] justify-between'>
                     <p>Giá sản phẩm </p>
-                    <p className='text-[20px] font-bold text-[#000]'>1.797.000đ</p>
+                    <p className='text-[20px] font-bold text-[#000]'><FormatPrice price={total} /></p>
                 </div>
                 <div className='flex mb-[28px] justify-between'>
                     <p>Phí giao hàng  </p>
-                    <p className='text-[20px] font-bold text-[#000]'>1.797.000đ</p>
+                    <p className='text-[20px] font-bold text-[#000]'>
+                        <FormatPrice price={total * (discount / 100)} />
+                    </p>
                 </div>
                 <div className='flex justify-between'>
                     <p>Giảm giá  </p>
-                    <p className='text-[20px] font-bold text-[#000]'>1.797.000đ</p>
+                    <p className='text-[20px] font-bold text-[#000]'><FormatPrice price={ship} /></p>
                 </div>
             </div>
             <div className='mt-[48px]'>
                 <div className='mb-[40px] flex justify-between items-center'>
                     <h3 className='font-bold text-[20px]'>Tổng</h3>
-                    <p className='text-[24px] font-bold text-[#92715A]'>1.797.000đ</p>
+                    <p className='text-[24px] font-bold text-[#92715A]'>
+                        <FormatPrice price={total + discount + ship} />
+                    </p>
                 </div>
                 <div className='flex justify-end'>
                     <Button primary className="hover-btn-primary shadow-md">
