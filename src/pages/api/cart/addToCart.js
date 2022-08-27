@@ -35,6 +35,9 @@ const addToCarthandler = async (req, res) => {
                   product: product.id,
                   size: product.size,
                   quantity: product.quantity,
+                  name: product.name,
+                  image: product.image,
+                  price: product.price
                 },
               },
             },
