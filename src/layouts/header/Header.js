@@ -127,7 +127,7 @@ export default function Header() {
           <div className="flex items-center h-[40px] border-[1px] border-primary-text bg-white px-[15px] rounded-8">
             <Search />
           </div>
-          <Link href="/">
+          <Link href="/cart">
             <a className="py-[4px] relative">
               <CartIcon classNameIcon=" cursor-pointer hover:scale-90 duration-300 " />
               {quantityProduct.length > 0 ?

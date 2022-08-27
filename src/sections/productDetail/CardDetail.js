@@ -23,7 +23,6 @@ export default function CardDetail({ product }) {
   const [sizeQuantity, setSizeQuantity] = useState();
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState();
-
   async function handleGetProduct() {
     const data = await axiosAuth({
       method: "POST",
@@ -91,16 +90,15 @@ export default function CardDetail({ product }) {
         ) : product.images.length < 4 ? (
           <div className="flex flex-col min-h-[485px] justify-between">
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-
               <Image src={product.images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[0].src)} />
-            </div>
+            </div >
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
               <Image src={product.images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[1].src)} />
             </div>
             <div className="shadow-md overflow-hidden rounded-8 bg-white">
               <Image src={product.images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[2].src)} />
             </div>
-          </div>
+          </div >
         ) : (
           <div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
@@ -116,8 +114,9 @@ export default function CardDetail({ product }) {
               <Image src={product.images[3].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[3].src)} />
             </div>
           </div>
-        )}
-      </div>
+        )
+        }
+      </div >
       <div className="mx-10 shadow-md overflow-hidden rounded-16 bg-white">
         <Image src={mainImg} width="450" height="485" />
       </div>
@@ -210,6 +209,6 @@ export default function CardDetail({ product }) {
           </Button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
