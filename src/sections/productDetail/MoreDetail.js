@@ -174,7 +174,7 @@ export default function MoreDetail({ product, feedbacks }) {
               {feedbacks.length != 0 ? (
                 feedbacks.map((feedback, index) => {
                   return (
-                    <div key={feedback.content} className="mb-9 w-full">
+                    <div key={Math.random()} className="mb-9 w-full">
                       <div className="flex">
                         <div className="rounded-full overflow-hidden mr-3">
                           <Image
@@ -230,7 +230,7 @@ export default function MoreDetail({ product, feedbacks }) {
               {Rate5Star.length != 0
                 ? Rate5Star.map((feedback, index) => {
                     return (
-                      <div key={feedback.user.email} className="mb-9 w-full flex">
+                      <div key={Math.random()} className="mb-9 w-full flex">
                         <div className="rounded-full overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
@@ -259,7 +259,7 @@ export default function MoreDetail({ product, feedbacks }) {
               {Rate4Star.length != 0
                 ? Rate4Star.map((feedback, index) => {
                     return (
-                      <div key={feedback.user.birthday} className="mb-9 w-full flex">
+                      <div key={Math.random()} className="mb-9 w-full flex">
                         <div className="rounded-full overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
@@ -288,7 +288,7 @@ export default function MoreDetail({ product, feedbacks }) {
               {Rate3Star.length != 0
                 ? Rate3Star.map((feedback, index) => {
                     return (
-                      <div key={feedback.user.password} className="mb-9 w-full flex">
+                      <div key={Math.random()} className="mb-9 w-full flex">
                         <div className="rounded-full overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
@@ -317,7 +317,7 @@ export default function MoreDetail({ product, feedbacks }) {
               {Rate2Star.length != 0
                 ? Rate2Star.map((feedback, index) => {
                     return (
-                      <div key={feedback.user.username} className="mb-9 w-full flex">
+                      <div key={Math.random()} className="mb-9 w-full flex">
                         <div className="rounded-full overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
@@ -346,7 +346,7 @@ export default function MoreDetail({ product, feedbacks }) {
               {Rate1Star.length != 0
                 ? Rate1Star.map((feedback, index) => {
                     return (
-                      <div key={feedback.user.username.image} className="mb-9 w-full flex">
+                      <div key={Math.random()} className="mb-9 w-full flex">
                         <div className="rounded-full overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
 import { FormProviderBox, SlectOption, TextArea, TextField } from 'src/components/hook-form';
-import convertToBase64 from 'src/sections/handleAction/functionHanle/convertImg.js';
+import convertToBase64 from 'src/sections/handleAction/functionHandle/convertImg.js';
 import * as yup from 'yup';
 
 export default function createProduct() {
@@ -198,7 +198,7 @@ export default function createProduct() {
           onChange={(e) => baseImgMain(e)}
           name="imageMain"
         />
-        {viewImg ? (
+        {viewImg ?
           <div>
             <div className="border-[1px] border-dashed border-[#333] w-[200px]">
               <Image width="200px" height="200px" objectFit="cover" src={viewImg} alt="Ảnh sản phẩm" />
@@ -226,7 +226,7 @@ export default function createProduct() {
               </div>
             ))}
           </div>
-        ) : (
+        ) :
           ''
         }
 

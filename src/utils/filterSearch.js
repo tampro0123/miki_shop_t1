@@ -7,7 +7,7 @@ const filterSearch = ({router, page, category, sort, search, order, scroll = fal
     if(page) query.page = page;
     if(search) query.search = search;
     if(sort) query.sort = sort;
-    if(order) query.sort = order;
+    if(order) query.order = order;
 
     router.push({
         pathname: path,

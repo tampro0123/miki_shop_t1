@@ -24,6 +24,7 @@ export default function CardDetail({ product }) {
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState();
 
+
   async function handleGetProduct() {
     const data = await axiosAuth({
       method: "POST",
@@ -91,7 +92,6 @@ export default function CardDetail({ product }) {
         ) : product.images.length < 4 ? (
           <div className="flex flex-col min-h-[485px] justify-between">
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-
               <Image src={product.images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[0].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
