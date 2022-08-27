@@ -11,7 +11,10 @@ import Button from 'src/components/Button';
 import { FacebookColor, GoogleColor } from 'src/components/icons';
 import { useSetRecoilState } from "recoil"
 import { dataUser } from 'src/recoils/dataUser.js'
+import { useRecoilState } from 'recoil'
+import { cartState } from 'src/recoils/cartState'
 export function LoginFormSection() {
+  const [valueCart, setValueCart] = useRecoilState(cartState)
   // click button then disable
   const [disabled, setDisabled] = useState(false);
   // Data user
@@ -66,8 +69,9 @@ export function LoginFormSection() {
           userName: value.data.user.username,
           email: value.data.user.email,
           avatar: value.data.user.image,
-          role: value.data.user.role
+          role: value.data.user.role,
         })
+        setValueCart(value.data.user.cart)
         router.push('/')
       });
       // Get error
