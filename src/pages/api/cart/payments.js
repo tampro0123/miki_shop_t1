@@ -7,8 +7,8 @@ import dbConnect from 'src/utils/dbConnect.js';
 
 
 const paymentsHandler = async (req, res) => {
-  await connectDB();
-  const { dbConnect } = req;
+  await dbConnect();
+  const { method } = req;
   const { userId } = req.body;
 
   switch (method) {
