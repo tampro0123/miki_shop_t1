@@ -15,9 +15,10 @@ const addToCarthandler = async (req, res) => {
         const currentUser = await User.findById(userId);
         const cart = await currentUser.cart;
         const index = cart.findIndex(
-          (item) => ((item.product.toString() === product.id) && (item.product.size === product.size))
+          (item) => ((item.product.toString() == product.id) && (item.size == product.size))
         );
-        let message = "Số lượng không hợp lệ";
+        let message = "Sản phẩm không hợp lệ!";
+        console.log(index);
 
         if (index !== -1) {
           cart.splice(index, 1);
