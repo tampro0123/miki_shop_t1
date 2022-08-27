@@ -11,14 +11,16 @@ import { cartState } from 'src/recoils/cartState'
 import { dataUser } from 'src/recoils/dataUser.js'
 import axios from 'axios';
 import Search from 'src/components/Search/Search';
+import axiosAuth from 'src/utils/axios'
+import useLocalStorage from 'src/hooks/useLocalStorage'
 export default function Header() {
   const router = useRouter()
-
-  const [idUser, setIdUser] = useState('')
+  const user = useLocalStorage('recoil-persist', 'userState')
+  const [idUser, setIdUser] = useState()
   const [valueUser, setValueUser] = useRecoilState(dataUser)
   const [quantityProduct, setQuantityProduct] = useState({})
   // Set width window when resize
-  const valueCart = useRecoilValue(cartState)
+  const [valueCart, setValueCart] = useRecoilState(cartState)
   useEffect(() => {
     setQuantityProduct(valueCart)
   }, [valueCart])
@@ -32,12 +34,18 @@ export default function Header() {
       return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     }
   }, []);
+
   useEffect(() => {
     setIdUser(valueUser.id)
   }, [valueUser])
+
+  useEffect(() => {
+    setValueUser(user)
+  }, [])
+
   function handleClick() {
     if (valueUser.id) {
-      const data = axios({
+      const data = axiosAuth({
         method: 'POST',
         url: '/api/auth/logout',
         data: {
@@ -45,16 +53,17 @@ export default function Header() {
         },
         headers: {
           "Content-type": "application/json",
-          Authorization: "Bearer " + valueUser.accessToken
+          Authorization: "Bearer " + valueUser.accessToken,
+          withCredentials: true,
         }
       })
         .then(value => {
           console.log(value)
           setValueUser({})
+          setValueCart([])
           return setTimeout(() => router.replace('/login'))
         })
         .catch(err => console.error(err))
-
     }
   }
   return (

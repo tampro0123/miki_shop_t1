@@ -11,7 +11,7 @@ const addToCarthandler = async (req, res) => {
   switch (method) {
     case "POST":
       try {
-
+        console.log(userId, product)
         const currentUser = await User.findById(userId);
         const cart = await currentUser.cart;
         const index = cart.findIndex(
@@ -35,6 +35,9 @@ const addToCarthandler = async (req, res) => {
                   product: product.id,
                   size: product.size,
                   quantity: product.quantity,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
                 },
               },
             },

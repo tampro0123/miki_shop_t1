@@ -6,7 +6,12 @@ import { RatingReview } from 'src/components/Rating';
 import FormatPrice from 'src/utils/formatPrice';
 import { cartState } from 'src/recoils/cartState'
 import { useSetRecoilState } from 'recoil'
+import axios from 'axios'
+import { dataUser } from 'src/recoils/dataUser.js'
+import { useRecoilValue } from 'recoil'
+import axiosAuth from 'src/utils/axios'
 export default function CardDetail({ product }) {
+  const inforUser = useRecoilValue(dataUser)
   const Images = product.images;
   const setCartState = useSetRecoilState(cartState)
   const [amount, setAmount] = useState(0);
@@ -19,7 +24,23 @@ export default function CardDetail({ product }) {
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState();
 
-  function handleGetProduct() {
+  async function handleGetProduct() {
+    const data = await axiosAuth({
+      method: "POST",
+      url: '/api/cart/addToCart',
+      data: {
+        userId: inforUser.id,
+        product: {
+          id: product._id,
+          size: size,
+          quantity: amount,
+          price: price,
+          name: product.name,
+          image: product.images[0].src
+        }
+      },
+    })
+    console.log(data.data)
     setCartState((prev) => {
       return [
         ...prev,
@@ -59,6 +80,8 @@ export default function CardDetail({ product }) {
     }
     amount < sizeQuantity && setAmount((prev) => prev + 1);
   };
+  // console.log(inforUser)
+
 
   return (
     <div className="flex justify-between">

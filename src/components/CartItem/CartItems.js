@@ -3,50 +3,106 @@ import { useRecoilState } from 'recoil'
 import { cartState } from 'src/recoils/cartState'
 import { Add, Sub, Close2 } from 'src/components/Icons';
 import FormatPrice from 'src/utils/formatPrice';
+import axios from 'axios'
+import { dataUser } from 'src/recoils/dataUser.js'
+import { useRecoilValue } from 'recoil'
+import axiosAuth from 'src/utils/axios'
 export default function CartItems() {
+    const inforUser = useRecoilValue(dataUser)
     const [dataItems, setDataItems] = useRecoilState(cartState)
     const [inforProducts, setInforProducts] = useState([])
-    console.log(dataItems)
     const [scroll, setScroll] = useState('')
-    const [test, setTest] = useState([
-        {
-            name: 1,
-            text: 'dasd'
-        },
-        {
-            name: 2,
-            text: 'dadsadsd'
-        },
-    ])
-
-    const removeItem = (item) => {
+    const removeItem = async (item) => {
         const itemIndex = inforProducts.findIndex(e => e.id === item.id);
-        setDataItems([
-            ...inforProducts.slice(0, itemIndex),
-            ...inforProducts.slice(itemIndex + 1)
-        ])
-
-    }
-    function addQuantity(item) {
-        // const itemIndex = inforProducts.findIndex(e => e.id === item.id);
         const html = inforProducts.map(data => {
-            if (data.id == item) {
+            if ((data.id === item.id) && (data.size === item.size)) {
+                return setDataItems([
+                    ...inforProducts.slice(0, itemIndex),
+                    ...inforProducts.slice(itemIndex + 1)
+                ])
+
+            }
+            return data
+        })
+        const data = await axiosAuth({
+            method: "POST",
+            url: '/api/cart/addToCart',
+            data: {
+                userId: inforUser.id,
+                product: {
+                    id: item.id,
+                    size: item.size,
+                    quantity: 0,
+                }
+            },
+        })
+        console.log(data.data)
+    }
+    async function addQuantity(item) {
+        let objData = {}
+        const html = inforProducts.map(data => {
+            if ((data.id === item.id) && (data.size === item.size)) {
+                objData.id = item.id;
+                objData.quantity = data.quantity + 1;
+                objData.size = data.size;
+                objData.name = data.name,
+                    objData.price = data.price,
+                    objData.image = data.images[0].src
                 return { ...data, quantity: data.quantity + 1 }
 
             }
             return data
         })
         setDataItems(html)
+        const data = await axiosAuth({
+            method: "POST",
+            url: '/api/cart/addToCart',
+            data: {
+                userId: inforUser.id,
+                product: {
+                    id: objData.id,
+                    size: objData.size,
+                    quantity: objData.quantity,
+                    name: objData.name,
+                    price: objData.price,
+                    image: objData.image
+                }
+            },
+        })
+        console.log(data.data)
     }
-    function subQuantity(item) {
-        // const itemIndex = inforProducts.findIndex(e => e.id === item.id);
+    async function subQuantity(item) {
+        let objData = {}
         const html = inforProducts.map(data => {
-            if (data.id == item && data.quantity > 0) {
+            if ((data.id === item.id) && (data.size === item.size)) {
+                objData.id = item.id;
+                objData.quantity = data.quantity - 1;
+                objData.size = data.size;
+                objData.name = data.name
+                objData.price = data.price
+                objData.image = data.images[0].src
                 return { ...data, quantity: data.quantity - 1 }
+
             }
             return data
         })
         setDataItems(html)
+        const data = await axiosAuth({
+            method: "POST",
+            url: '/api/cart/addToCart',
+            data: {
+                userId: inforUser.id,
+                product: {
+                    id: objData.id,
+                    size: objData.size,
+                    quantity: objData.quantity,
+                    name: objData.name,
+                    price: objData.price,
+                    image: objData.image
+                }
+            },
+        })
+        console.log(data.data)
     }
     useEffect(() => {
         setInforProducts(dataItems)
@@ -77,13 +133,13 @@ export default function CartItems() {
                                 <div>
                                     <div className='flex items-center '>
                                         <button className="active:bg-black active:rounded-full"
-                                            onClick={() => subQuantity(item.id)}
+                                            onClick={() => subQuantity(item)}
                                         >
                                             <Sub />
                                         </button>
                                         <p className="text-[20px] font-bold leading-7 w-7 text-center mx-4">{item.quantity}</p>
                                         <button className="active:bg-black active:rounded-full"
-                                            onClick={() => addQuantity(item.id)}>
+                                            onClick={() => addQuantity(item)}>
                                             <Add />
                                         </button>
                                     </div>

@@ -4,11 +4,24 @@ import { useState, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import { totalCart } from 'src/recoils/cartState'
 import FormatPrice from 'src/utils/formatPrice';
+import axiosAuth from 'src/utils/axios'
+import { dataUser } from 'src/recoils/dataUser.js'
 export default function TotalCart() {
     const toltalValue = useRecoilValue(totalCart)
-    const [discount, setDiscount] = useState(20)
+    const [discount, setDiscount] = useState(5)
     const [ship, setShip] = useState(30000)
-    const [total, setTotal] = useState()
+    const [total, setTotal] = useState(0)
+    const inforUser = useRecoilValue(dataUser)
+    async function handlePayment() {
+        const data = await axiosAuth({
+            method: "POST",
+            url: '/api/cart/payments',
+            data: {
+                userId: inforUser.id,
+            },
+        })
+        console.log(data.data)
+    }
     useEffect(() => {
         setTotal(toltalValue)
     }, [toltalValue])
@@ -29,23 +42,23 @@ export default function TotalCart() {
                 <div className='flex mb-[28px] justify-between'>
                     <p>Phí giao hàng  </p>
                     <p className='text-[20px] font-bold text-[#000]'>
-                        <FormatPrice price={total * (discount / 100)} />
+                        <FormatPrice price={ship} />
                     </p>
                 </div>
                 <div className='flex justify-between'>
                     <p>Giảm giá  </p>
-                    <p className='text-[20px] font-bold text-[#000]'><FormatPrice price={ship} /></p>
+                    <p className='text-[20px] font-bold text-[#000]'><FormatPrice price={total * (discount / 100)} /></p>
                 </div>
             </div>
             <div className='mt-[48px]'>
                 <div className='mb-[40px] flex justify-between items-center'>
                     <h3 className='font-bold text-[20px]'>Tổng</h3>
                     <p className='text-[24px] font-bold text-[#92715A]'>
-                        <FormatPrice price={total + discount + ship} />
+                        <FormatPrice price={total - (total * (discount / 100)) + ship} />
                     </p>
                 </div>
                 <div className='flex justify-end'>
-                    <Button primary className="hover-btn-primary shadow-md">
+                    <Button primary className="hover-btn-primary shadow-md" onClick={handlePayment}>
                         Thanh toán
                     </Button>
                 </div>
