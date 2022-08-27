@@ -1,74 +1,119 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'src/components/Button';
 import { Add, Sub } from 'src/components/Icons';
 import { RatingReview } from 'src/components/Rating';
 import FormatPrice from 'src/utils/formatPrice';
-
+import { cartState } from 'src/recoils/cartState'
+import { useSetRecoilState } from 'recoil'
+import axios from 'axios'
+import { dataUser } from 'src/recoils/dataUser.js'
+import { useRecoilValue } from 'recoil'
+import axiosAuth from 'src/utils/axios'
 export default function CardDetail({ product }) {
+  const inforUser = useRecoilValue(dataUser)
   const Images = product.images;
-  const [mainImg, setMainImg] = useState(Images[0].src);
-
+  const setCartState = useSetRecoilState(cartState)
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(product.storage[0].price);
   const [size, setSize] = useState();
+  const [mainImg, setMainImg] = useState(product.images[0].src);
 
-// State click size
+  // State click size
   const [sizeQuantity, setSizeQuantity] = useState();
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState();
 
-  const [warning, setWarning] = useState({warningMaxAmount: false, warningChooseSize: false});
+  async function handleGetProduct() {
+    const data = await axiosAuth({
+      method: "POST",
+      url: '/api/cart/addToCart',
+      data: {
+        userId: inforUser.id,
+        product: {
+          id: product._id,
+          size: size,
+          quantity: amount,
+          price: price,
+          name: product.name,
+          image: product.images[0].src
+        }
+      },
+    })
+    console.log(data.data)
+    setCartState((prev) => {
+      return [
+        ...prev,
+        {
+          id: product._id,
+          name: product.name,
+          category: price.category,
+          size: size,
+          quantity: amount,
+          desc: product.description,
+          image: product.images[0].src,
+          price: price
+        }
+      ]
+    })
+  }
+  const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
+  useEffect(() => {
+    setMainImg(product.images[0].src);
+  }, [product.slug])
 
   const handleSubAmount = () => {
     amount > 0 && setAmount((prev) => prev - 1);
   };
   const handleAddAmount = () => {
     if (amount == Number(sizeQuantity)) {
-      setWarning({...warning, warningMaxAmount: true});
+      setWarning({ ...warning, warningMaxAmount: true });
       setTimeout(() => {
-        setWarning({...warning, warningMaxAmount: false});
+        setWarning({ ...warning, warningMaxAmount: false });
       }, 3000);
     }
     if (!size) {
-      setWarning({...warning, warningChooseSize: true});
+      setWarning({ ...warning, warningChooseSize: true });
       setTimeout(() => {
-        setWarning({...warning, warningChooseSize: false});
+        setWarning({ ...warning, warningChooseSize: false });
       }, 3000);
     }
     amount < sizeQuantity && setAmount((prev) => prev + 1);
   };
+  // console.log(inforUser)
+
 
   return (
     <div className="flex justify-between">
       <div className="flex flex-col ">
-        {Images.length < 3 ? (
+        {product.images.length < 3 ? (
           <div></div>
-        ) : Images.length < 4 ? (
+        ) : product.images.length < 4 ? (
           <div className="flex flex-col min-h-[485px] justify-between">
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[0].src)}/>
+
+              <Image src={product.images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[0].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[1].src)} />
+              <Image src={product.images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[1].src)} />
             </div>
             <div className="shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[2].src)} />
+              <Image src={product.images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[2].src)} />
             </div>
           </div>
         ) : (
           <div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[0].src)}/>
+              <Image src={product.images[0].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[0].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8">
-              <Image src={Images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[1].src)} />
+              <Image src={product.images[1].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[1].src)} />
             </div>
             <div className="mb-[12px] shadow-md overflow-hidden rounded-8 bg-white">
-              <Image src={Images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[2].src)} />
+              <Image src={product.images[2].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[2].src)} />
             </div>
             <div className="shadow-md overflow-hidden rounded-8">
-              <Image src={Images[3].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(Images[3].src)} />
+              <Image src={product.images[3].src} width="156" height="107" objectFit="cover" onClick={() => setMainImg(product.images[3].src)} />
             </div>
           </div>
         )}
@@ -117,6 +162,7 @@ export default function CardDetail({ product }) {
             {product.storage.map((e, index) => (
               <span
                 key={e.size}
+
                 className={
                   e.quantity > 0
                     ? index == sizeIndex
@@ -126,15 +172,15 @@ export default function CardDetail({ product }) {
                 }
                 onClick={
                   () => {
-                  if (e.quantity > 0) {
-                    setSizeChecked(index);
-                    setPrice(e.price);
-                    setSize(e.size);
-                    setSizeQuantity(e.quantity);
-                    setStocking(e.quantity);
-                    setAmount(0);
-                  }
-                }}
+                    if (e.quantity > 0) {
+                      setSizeChecked(index);
+                      setPrice(e.price);
+                      setSize(e.size);
+                      setSizeQuantity(e.quantity);
+                      setStocking(e.quantity);
+                      setAmount(0);
+                    }
+                  }}
               >
                 {e.size}
               </span>
@@ -159,7 +205,7 @@ export default function CardDetail({ product }) {
           <Button primary className="hover-btn-primary mr-[48px] shadow-md">
             Mua ngay
           </Button>
-          <Button secondary className="border-2 border-solid border-btn shadow-md">
+          <Button secondary onClick={() => handleGetProduct()} className="border-2 border-solid border-btn shadow-md">
             Thêm vào giỏ hàng
           </Button>
         </div>
