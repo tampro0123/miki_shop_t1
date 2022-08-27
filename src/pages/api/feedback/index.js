@@ -57,7 +57,7 @@ const FeedbackHandler = async (req, res) => {
         }
 
         //Kiểm tra xem có file media không sau đó upload theo phân loại nếu có
-        if (media.src) {
+        if (media?.src) {
           const path = media.src;
           const options = {
             upload_preset: 'feedbacks',
@@ -99,6 +99,7 @@ const FeedbackHandler = async (req, res) => {
           message: 'Bạn đã đánh giá thành công!',
         });
       } catch (error) {
+        console.log(error);
         return res.status(500).json({
           success: false,
           error: error,
