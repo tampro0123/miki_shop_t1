@@ -4,6 +4,7 @@ import SearchItem from './SearchItem';
 import useDebounce from 'src/hooks/useDebounce';
 import { Loading, SearchIcon } from '../Icons';
 import axios from 'axios';
+import request from 'src/utils/request';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
@@ -23,7 +24,7 @@ function Search() {
     const fetchApi = async () => {
       const result = await axios({
         method: 'POST',
-        url: 'http://localhost:3000/api/search',
+        url: 'search',
         data: {filterText},
       })
       const products = await result.data;
@@ -51,7 +52,8 @@ function Search() {
     <div>
       <HeadlessTippy
         interactive
-        visible={showResult && searchResult.length > 0}
+        visible={showResult && debouncedValue}
+        placement='bottom'
         render={(attrs) => (
           <div className="" tabIndex="-1" {...attrs}>
             <div className={' flex flex-col relative w-[550px] bg-gray-100 border border-t-2 shadow-lg  rounded-sm'}>
@@ -60,30 +62,32 @@ function Search() {
               </div>
               <div className="w-full h-[2px] bg-slate-500 mt-7"></div>
               {searchResult.length > 0 && (
-                <div className={searchResult.length > 5 ? "mt-3 overflow-y-scroll h-[450px]" : "mt-3"}>
+                <div className={searchResult.length > 3 ? "mt-3 overflow-y-scroll h-[400px]" : "mt-3"}>
                  {searchResult.map((e) => (
                   <SearchItem key={e._id} product={e} />
                  ))}
                 </div>
+              )}
+              {searchResult.length == 0  && searchValue  && (
+               <p className='text-center text-xl font-semibold text-red-500 my-3'>Không tìm thấy sản phẩm nào</p>
               )}
             </div>
           </div>
         )}
         onClickOutside={handleHideResult}
       >
-        <div className="flex items-center">
+        <div className="flex items-center w-[200px]">
           <input
             ref={inputRef}
             value={searchValue}
             placeholder="Tìm kiếm sản phẩm"
-            className="h-[32px] text-[14px] px-[5px] border-0 outline-0"
+            className="h-[32px] text-[14px] px-[5px] border-0 outline-0 flex-1 w-[150px]"
             spellCheck={false}
             onChange={handleChange}
             onFocus={() => setShowResult(true)}
           />
 
           {isPending && <Loading />}
-
           <button className="" onMouseDown={(e) => e.preventDefault()}>
             <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
           </button>
