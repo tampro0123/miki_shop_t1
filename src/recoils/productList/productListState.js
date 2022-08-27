@@ -23,6 +23,18 @@ export const productsState = atom({
             price: 599000,
             quantity: 1,
         },
+        {
+            id: 3,
+            name: "Lira Earrings",
+            price: 599000,
+            quantity: 2,
+        },
+        {
+            id: 4,
+            name: "Lira Earrings",
+            price: 599000,
+            quantity: 5,
+        },
     ],
 });
 

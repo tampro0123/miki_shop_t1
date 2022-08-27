@@ -1,6 +1,7 @@
 import withAuth from 'src/middleware/withAuth';
 import Feedback from 'src/models/Feedback';
 import Products from 'src/models/Products';
+import Buyer from 'src/models/Buyer';
 import dbConnect from 'src/utils/dbConnect.js';
 import { cloudinary } from 'src/utils/cloudinary.js';
 
@@ -25,13 +26,27 @@ const FeedbackHandler = async (req, res) => {
     case 'POST':
       try {
         //Check user đã đánh giá hay chưa
-        const feedbacks = await Feedback.find({ targetId, user: userId });
-        if (feedbacks.length > 0) {
+
+        const buyer = await Buyer.findOne({ user: userId, targetId });
+
+        if (!buyer) {
+          return res.status(403).json({
+            success: false,
+            message: 'Bạn không có quyền đánh giá sản phẩm này! Vui lòng mua trước'
+          })
+        }
+
+        if (buyer.isFeedback) {
           return res.status(409).json({
             success: false,
-            message: 'Bạn đã đánh giá sản phẩm này rồi!',
+            message: "Bạn đã đánh giá sản phẩm này rồi!",
           });
         }
+
+        await Buyer.findOneAndUpdate(
+          { user: userId, targetId },
+          { $set: { isFeedback: true } }
+        )
 
         //Khởi tạo 1 media Object global
         const _id = new mongoose.Types.ObjectId();
@@ -42,7 +57,7 @@ const FeedbackHandler = async (req, res) => {
         }
 
         //Kiểm tra xem có file media không sau đó upload theo phân loại nếu có
-        if (media.src) {
+        if (media?.src) {
           const path = media.src;
           const options = {
             upload_preset: 'feedbacks',
@@ -84,6 +99,7 @@ const FeedbackHandler = async (req, res) => {
           message: 'Bạn đã đánh giá thành công!',
         });
       } catch (error) {
+        console.log(error);
         return res.status(500).json({
           success: false,
           error: error,

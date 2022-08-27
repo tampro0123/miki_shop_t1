@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from "react"
 // Import component, function, asset
-import { CaretDown, LogoIcon, SearchIcon, CartIcon, UserIcon } from 'src/components/Icons/icons.js';
+import { CaretDown, LogoIcon, CartIcon, UserIcon } from 'src/components/Icons/icons.js';
 import HeaderMobile from 'src/layouts/header/HeaderMobile';
 import { useRecoilState } from 'recoil'
 import { useRouter } from 'next/router';
@@ -109,7 +109,7 @@ export default function Header() {
         </div>
         <div className="flex gap-[25px] items-end">
           <div className="flex items-center h-[40px] border-[1px] border-primary-text bg-white px-[15px] rounded-8">
-            <Search/>
+            <Search />
           </div>
           <Link href="/">
             <a className="py-[4px]">

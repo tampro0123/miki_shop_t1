@@ -4,7 +4,6 @@ import SearchItem from './SearchItem';
 import useDebounce from 'src/hooks/useDebounce';
 import { Loading, SearchIcon } from '../Icons';
 import axios from 'axios';
-import request from 'src/utils/request';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
@@ -24,7 +23,7 @@ function Search() {
     const fetchApi = async () => {
       const result = await axios({
         method: 'POST',
-        url: 'search',
+        url: 'http://localhost:3000/api/search',
         data: {filterText},
       })
       const products = await result.data;
