@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { cartState } from 'src/recoils/cartState'
 export default function cart() {
     const value = useRecoilValue(cartState)
-    console.log(value)
+
     return (
         <Page title="Cart">
             <div className="app mt-[24px] ">

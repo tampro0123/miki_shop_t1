@@ -6,11 +6,22 @@ import request from 'src/utils/request';
 
 export default function allProduct({ products, pageCount }) {
   return (
-    <Page title={'Tất cả sản phẩm'}>
+    <Page title={'Sản phẩm tìm kiếm'}>
       <div className="app ">
         <div className="container mt-0">
-          <ProductItem products={products} />
-          {pageCount > 1 && <Pagination pageCount={pageCount} />}
+        {products.length > 0 ? (
+            <ProductItem products={products} />
+          ) : (
+            <div className="mt-10">
+              <p className='text-center text-5xl text-red-500'>
+              Không tìm thấy sản phẩm nào
+              </p>
+              </div>
+          )}
+          {
+            pageCount > 1 &&
+          <Pagination pageCount={pageCount} />
+          }
         </div>
       </div>
     </Page>
@@ -19,7 +30,8 @@ export default function allProduct({ products, pageCount }) {
 
 export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
-  const products = await request.get(`products/all?page=${page}&limit=16`);
+  const keyWord = query.keyword;
+  const products = await request.get(`search?page=${page}&limit=16&keyword=${keyWord}`);
   return {
     props: {
       products: products.data.product,

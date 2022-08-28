@@ -5,8 +5,23 @@ const searchHandler = async (req, res) => {
     await dbConnect();
     const { method } = req;
     const { filterText } = req.body;
+    const { keyword } = req.query;
 
     switch (method) {
+        case 'GET':
+            try {
+                const product = await Products.aggregate([
+                    { $match: { $text: { $search: keyword } } },
+                    { $project: { name: 1, "storage.price": 1, "images.src": 1, slug: 1 } },
+                    { $sort: { score: { $meta: "textScore" } } },
+                ]);
+
+                return res.status(200).json({ success: true, product: product });
+            } catch (err) {
+                console.log(err);
+                return res.status(500).json({ success: false, message: err });
+            }
+            break;
         case 'POST':
             try {
                 const product = await Products.aggregate([
