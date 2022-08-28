@@ -17,4 +17,3 @@ export const totalCart = selector({
     }, 0) : 0
   }
 })
-
