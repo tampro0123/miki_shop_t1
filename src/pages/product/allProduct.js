@@ -10,7 +10,7 @@ export default function allProduct({ products, pageCount }) {
       <div className="app ">
         <div className="container mt-0">
           <ProductItem products={products} />
-          <Pagination pageCount={pageCount} />
+          {pageCount > 1 && <Pagination pageCount={pageCount} />}
         </div>
       </div>
     </Page>
