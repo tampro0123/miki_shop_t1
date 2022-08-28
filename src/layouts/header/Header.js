@@ -36,7 +36,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    setIdUser(valueUser.id)
+    setIdUser(valueUser?.id)
   }, [valueUser])
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function Header() {
               </Link>
             </li>
             <li className="flex items-center py-[4px] group static">
-              <Link href="/">
+              <Link href="/product/allProduct">
                 <a className="mr-2 text-16 hover:text-3rd-text duration-500 before:block before:absolute before:w-[90px] before:top-[110px] before:h-3">Sản phẩm</a>
               </Link>
               <CaretDown classNameIcon="cursor-pointer hover:scale-90 duration-300 peer" />

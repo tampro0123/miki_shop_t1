@@ -4,6 +4,7 @@ import SearchItem from './SearchItem';
 import useDebounce from 'src/hooks/useDebounce';
 import { Loading, SearchIcon } from '../Icons';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
@@ -14,6 +15,15 @@ function Search() {
   const debouncedValue = useDebounce(filterText, 500);
   const [isPending, startTransition] = useTransition();
   const inputRef = useRef();
+  const router = useRouter();
+  const handleEnterInput = (e) => {
+    console.log(e);
+    window.addEventListener('keydown', () => {
+      if(searchValue) {
+        router.push(`/product/search?keyword=${searchValue}`);
+      }
+    })
+  }
 
   useEffect(() => {
     if (!debouncedValue.trim()) {
@@ -83,7 +93,9 @@ function Search() {
             className="h-[32px] text-[14px] px-[5px] border-0 outline-0 flex-1 w-[150px]"
             spellCheck={false}
             onChange={handleChange}
-            onFocus={() => setShowResult(true)}
+            onFocus={() => {
+              handleEnterInput();
+              setShowResult(true)}}
           />
 
           {isPending && <Loading />}

@@ -12,7 +12,7 @@ export default function MoreDetail({ product, feedbacks }) {
   const Rate3Star = feedbacks.filter((feedback) => feedback.rate == 3);
   const Rate4Star = feedbacks.filter((feedback) => feedback.rate == 4);
   const Rate5Star = feedbacks.filter((feedback) => feedback.rate == 5);
-
+  console.log(feedbacks)
 
   const [tabIndex, setTabIndex] = useState(0);
   const [rateIndex, setRateIndex] = useState(0);
