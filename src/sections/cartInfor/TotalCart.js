@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from 'src/components/Button';
 import { useState, useEffect } from 'react'
-<<<<<<< HEAD
 import { useRouter } from "next/router"
 import { useRecoilValue } from 'recoil'
 import { totalCart } from 'src/recoils/cartState'
@@ -9,33 +8,11 @@ import FormatPrice from 'src/utils/formatPrice';
 import { dataUser } from 'src/recoils/dataUser.js'
 export default function TotalCart() {
     const router = useRouter()
-=======
-import { useRecoilValue } from 'recoil'
-import { totalCart } from 'src/recoils/cartState'
-import FormatPrice from 'src/utils/formatPrice';
-import axiosAuth from 'src/utils/axios'
-import { dataUser } from 'src/recoils/dataUser.js'
-export default function TotalCart() {
->>>>>>> 0deabbc394f400a3e043edeb724909b392006c66
     const toltalValue = useRecoilValue(totalCart)
     const [discount, setDiscount] = useState(5)
     const [ship, setShip] = useState(30000)
     const [total, setTotal] = useState(0)
     const inforUser = useRecoilValue(dataUser)
-<<<<<<< HEAD
-
-=======
-    async function handlePayment() {
-        const data = await axiosAuth({
-            method: "POST",
-            url: '/api/cart/payments',
-            data: {
-                userId: inforUser.id,
-            },
-        })
-        console.log(data.data)
-    }
->>>>>>> 0deabbc394f400a3e043edeb724909b392006c66
     useEffect(() => {
         setTotal(toltalValue)
     }, [toltalValue])
@@ -72,11 +49,7 @@ export default function TotalCart() {
                     </p>
                 </div>
                 <div className='flex justify-end'>
-<<<<<<< HEAD
                     <Button primary className="hover-btn-primary shadow-md" onClick={() => router.replace("/payment")}>
-=======
-                    <Button primary className="hover-btn-primary shadow-md" onClick={handlePayment}>
->>>>>>> 0deabbc394f400a3e043edeb724909b392006c66
                         Thanh toán
                     </Button>
                 </div>
