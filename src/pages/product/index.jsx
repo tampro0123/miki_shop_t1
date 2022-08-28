@@ -87,7 +87,7 @@ export default function Products({ products, pageCount }) {
             </div>
           </div>
           <ProductItem products={products} />
-          <Pagination pageCount={pageCount} />
+          {pageCount > 1 && <Pagination pageCount={pageCount} />}
         </div>
       </div>
     </Page>
