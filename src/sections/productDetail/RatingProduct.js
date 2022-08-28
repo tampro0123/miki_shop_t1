@@ -30,7 +30,7 @@ export default function RatingProduct({ product}) {
         data: {
           rate: rating,
           content: textValue,
-          userId: '62f775840fda632100da4db3',
+          userId: ids.id,
           targetId: product._id,
           media: { type: typeCmt, src: mediaCmt },
         },
