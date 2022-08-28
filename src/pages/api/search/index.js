@@ -4,13 +4,14 @@ import dbConnect from 'src/utils/dbConnect.js';
 const searchHandler = async (req, res) => {
     await dbConnect();
     const { method } = req;
+    const { filterText } = req.body;
+    const { keyword } = req.query;
 
     switch (method) {
         case 'GET':
             try {
-                const { filterText } = req.query;
                 const product = await Products.aggregate([
-                    { $match: { $text: { $search: filterText } } },
+                    { $match: { $text: { $search: keyword } } },
                     { $project: { name: 1, "storage.price": 1, "images.src": 1, slug: 1 } },
                     { $sort: { score: { $meta: "textScore" } } },
                 ]);
@@ -23,7 +24,6 @@ const searchHandler = async (req, res) => {
             break;
         case 'POST':
             try {
-                const { filterText } = req.body;
                 const product = await Products.aggregate([
                     { $match: { $text: { $search: filterText } } },
                     { $project: { name: 1, "storage.price": 1, "images.src": 1, slug: 1 } },
