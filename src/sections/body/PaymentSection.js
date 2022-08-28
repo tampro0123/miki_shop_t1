@@ -8,8 +8,16 @@ import { useState } from "react"
 import Button from 'src/components/Button';
 import { DeliveryAddressSection, PaymentMethodsSection, ProductsSection } from "src/sections/form"
 import { FormProviderBox } from 'src/components/hook-form';
+import { dataUser } from 'src/recoils/dataUser';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import axiosAuth from 'src/utils/axios';
+import { cartState } from 'src/recoils/cartState';
+import { useRouter } from 'next/router';
 
 const PaymentSection = () => {
+    const router = useRouter()
+    const idUser = useRecoilValue(dataUser)
+    const setCart = useSetRecoilState(cartState)
     // Create the option status in Payment methods section
     const [option, setOption] = useState(undefined)
     // Create schema validate form
@@ -53,6 +61,18 @@ const PaymentSection = () => {
             phoneNumber: "",
         }
     });
+    async function handlePayment() {
+        const data = await axiosAuth({
+            method: "POST",
+            url: '/api/cart/payments',
+            data: {
+                userId: idUser.id,
+            },
+        })
+        setCart([])
+        router.replace("/")
+        console.log(data.data)
+    }
     const { handleSubmit, reset } = methods;
     // Handle submit and logic
     const onSubmit = (data) => { console.log(data) }
@@ -74,7 +94,7 @@ const PaymentSection = () => {
                 </div>
                 <div className="flex mobile:mx-[16px]">
                     {/* Button submit */}
-                    <Button primary className="mobile:py-[8px] mobile:px-[31.5px]" classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black">Thanh toán</Button>
+                    <Button primary onClick={handlePayment} className="mobile:py-[8px] mobile:px-[31.5px]" classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black">Thanh toán</Button>
                     {/* Button switch to cart page  */}
                     <Button to="/" text className="text-black ml-[179px] mobile:ml-[37px]">Trở lại giỏ hàng</Button>
                 </div>

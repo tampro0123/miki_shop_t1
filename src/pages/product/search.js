@@ -9,7 +9,7 @@ export default function allProduct({ products, pageCount }) {
     <Page title={'Sản phẩm tìm kiếm'}>
       <div className="app ">
         <div className="container mt-0">
-          {products.length > 0 ? (
+        {products.length > 0 ? (
             <ProductItem products={products} />
           ) : (
             <div className="mt-10">
