@@ -12,9 +12,8 @@ export default function MoreDetail({ product, feedbacks }) {
   const Rate3Star = feedbacks.filter((feedback) => feedback.rate == 3);
   const Rate4Star = feedbacks.filter((feedback) => feedback.rate == 4);
   const Rate5Star = feedbacks.filter((feedback) => feedback.rate == 5);
-  console.log(feedbacks)
 
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(3);
   const [rateIndex, setRateIndex] = useState(0);
 
   return (
@@ -176,13 +175,14 @@ export default function MoreDetail({ product, feedbacks }) {
                   return (
                     <div key={Math.random()} className="mb-9 w-full">
                       <div className="flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>
@@ -231,13 +231,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate5Star.map((feedback, index) => {
                     return (
                       <div key={Math.random()} className="mb-9 w-full flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>
@@ -260,13 +261,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate4Star.map((feedback, index) => {
                     return (
                       <div key={Math.random()} className="mb-9 w-full flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>
@@ -289,13 +291,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate3Star.map((feedback, index) => {
                     return (
                       <div key={Math.random()} className="mb-9 w-full flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>
@@ -318,13 +321,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate2Star.map((feedback, index) => {
                     return (
                       <div key={Math.random()} className="mb-9 w-full flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>
@@ -347,13 +351,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate1Star.map((feedback, index) => {
                     return (
                       <div key={Math.random()} className="mb-9 w-full flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
                             src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>

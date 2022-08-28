@@ -9,8 +9,19 @@ export default function allProduct({ products, pageCount }) {
     <Page title={'Sản phẩm tìm kiếm'}>
       <div className="app ">
         <div className="container mt-0">
-          <ProductItem products={products} />
+          {products.length > 0 ? (
+            <ProductItem products={products} />
+          ) : (
+            <div className="mt-10">
+              <p className='text-center text-5xl text-red-500'>
+              Không tìm thấy sản phẩm nào
+              </p>
+              </div>
+          )}
+          {
+            pageCount > 1 &&
           <Pagination pageCount={pageCount} />
+          }
         </div>
       </div>
     </Page>
