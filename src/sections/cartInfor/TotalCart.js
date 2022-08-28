@@ -8,23 +8,11 @@ import FormatPrice from 'src/utils/formatPrice';
 import { dataUser } from 'src/recoils/dataUser.js'
 export default function TotalCart() {
     const router = useRouter()
-
     const toltalValue = useRecoilValue(totalCart)
     const [discount, setDiscount] = useState(5)
     const [ship, setShip] = useState(30000)
     const [total, setTotal] = useState(0)
     const inforUser = useRecoilValue(dataUser)
-
-    async function handlePayment() {
-        const data = await axiosAuth({
-            method: "POST",
-            url: '/api/cart/payments',
-            data: {
-                userId: inforUser.id,
-            },
-        })
-        console.log(data.data)
-    }
     useEffect(() => {
         setTotal(toltalValue)
     }, [toltalValue])

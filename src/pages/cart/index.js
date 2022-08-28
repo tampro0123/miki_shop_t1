@@ -14,11 +14,6 @@ export default function cart() {
                     <div className="mt-[48px]">
                         <CartUser />
                     </div>
-                    {/* {value.length ?
-                        :
-                        (<h1>Chưa có sản phẩm</h1>)
-                    } */}
-
                 </div>
             </div>
         </Page>
