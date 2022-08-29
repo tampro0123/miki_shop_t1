@@ -11,12 +11,9 @@ export default function cart() {
             <div className="app mt-[24px] ">
                 <div className="container mt-0">
                     <p>Breadcum</p>
-                    {/* {value.length ? */}
                     <div className="mt-[48px]">
                         <CartUser />
                     </div>
-                    {/* :
-                        <h1>Chưa có sản phẩm</h1>} */}
                 </div>
             </div>
         </Page>

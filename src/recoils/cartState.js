@@ -16,4 +16,8 @@ export const totalCart = selector({
       return total + (item.price * item.quantity)
     }, 0) : 0
   }
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> e875f149818b5cfaeb07500e1bf8cb996f844a93

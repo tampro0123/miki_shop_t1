@@ -114,4 +114,4 @@ const FeedbackHandler = async (req, res) => {
   }
 };
 
-export default withAuth(FeedbackHandler);
+export default FeedbackHandler;

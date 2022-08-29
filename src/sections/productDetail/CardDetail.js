@@ -39,7 +39,6 @@ export default function CardDetail({ product }) {
         }
       },
     })
-    console.log(data.data)
     setCartState((prev) => {
       return [
         ...prev,
@@ -79,9 +78,6 @@ export default function CardDetail({ product }) {
     }
     amount < sizeQuantity && setAmount((prev) => prev + 1);
   };
-  // console.log(inforUser)
-
-
   return (
     <div className="flex justify-between">
       <div className="flex flex-col ">

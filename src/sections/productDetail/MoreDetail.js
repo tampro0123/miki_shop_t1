@@ -13,8 +13,7 @@ export default function MoreDetail({ product, feedbacks }) {
   const Rate4Star = feedbacks.filter((feedback) => feedback.rate == 4);
   const Rate5Star = feedbacks.filter((feedback) => feedback.rate == 5);
 
-
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(3);
   const [rateIndex, setRateIndex] = useState(0);
 
   return (
@@ -169,27 +168,28 @@ export default function MoreDetail({ product, feedbacks }) {
             </div>
           </div>
           {/* tab rating star */}
-          {/* <div className="mb-4 mt-5">
+          <div className="mb-4 mt-5">
             <div className={rateIndex == 0 ? 'block' : 'hidden'}>
               {feedbacks.length != 0 ? (
                 feedbacks.map((feedback, index) => {
                   return (
                     <div key={Math.random()} className="mb-9 w-full">
                       <div className="flex">
-                        <div className="rounded-full overflow-hidden mr-3">
+                        <div className=" overflow-hidden mr-3">
                           <Image
-                            src={feedback?.user?.image}
+                            src={feedback.user.image}
                             width="54"
                             height="54"
                             placeholder="empty"
                             objectFit="cover"
+                            className='rounded-full'
                           />
                         </div>
                         <div>
-                          <p>{feedback?.user?.username}</p>
-                          <RatingReview value={feedback?.rate} />
+                          <p>{feedback.user.username}</p>
+                          <RatingReview value={feedback.rate} />
                           <p>
-                            <FormatDate date={feedback?.updatedAt} />
+                            <FormatDate date={feedback.updatedAt} />
                           </p>
                         </div>
                         <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
@@ -231,13 +231,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate5Star.map((feedback, index) => {
                   return (
                     <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className="rounded-full overflow-hidden mr-3">
+                      <div className=" overflow-hidden mr-3">
                         <Image
                           src={feedback.user.image}
                           width="54"
                           height="54"
                           placeholder="empty"
                           objectFit="cover"
+                          className='rounded-full'
                         />
                       </div>
                       <div>
@@ -260,24 +261,25 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate4Star.map((feedback, index) => {
                   return (
                     <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className="rounded-full overflow-hidden mr-3">
+                      <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback?.user?.image}
+                          src={feedback.user.image}
                           width="54"
                           height="54"
                           placeholder="empty"
                           objectFit="cover"
+                          className='rounded-full'
                         />
                       </div>
                       <div>
-                        <p>{feedback?.user?.username}</p>
-                        <RatingReview value={feedback?.rate} />
-                        <FormatDate date={feedback?.updatedAt} />
+                        <p>{feedback.user.username}</p>
+                        <RatingReview value={feedback.rate} />
+                        <FormatDate date={feedback.updatedAt} />
                       </div>
                       <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
                       <div>
                         <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback?.content}</p>
+                        <p className="pl-3">{feedback.content}</p>
                       </div>
                     </div>
                   );
@@ -289,13 +291,14 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate3Star.map((feedback, index) => {
                   return (
                     <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className="rounded-full overflow-hidden mr-3">
+                      <div className=" overflow-hidden mr-3">
                         <Image
                           src={feedback.user.image}
                           width="54"
                           height="54"
                           placeholder="empty"
                           objectFit="cover"
+                          className='rounded-full'
                         />
                       </div>
                       <div>
@@ -318,24 +321,25 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate2Star.map((feedback, index) => {
                   return (
                     <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className="rounded-full overflow-hidden mr-3">
+                      <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback?.user?.image}
+                          src={feedback.user.image}
                           width="54"
                           height="54"
                           placeholder="empty"
                           objectFit="cover"
+                          className='rounded-full'
                         />
                       </div>
                       <div>
-                        <p>{feedback?.user.username}</p>
-                        <RatingReview value={feedback?.rate} />
-                        <FormatDate date={feedback?.updatedAt} />
+                        <p>{feedback.user.username}</p>
+                        <RatingReview value={feedback.rate} />
+                        <FormatDate date={feedback.updatedAt} />
                       </div>
                       <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
                       <div>
                         <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback?.content}</p>
+                        <p className="pl-3">{feedback.content}</p>
                       </div>
                     </div>
                   );
@@ -347,31 +351,32 @@ export default function MoreDetail({ product, feedbacks }) {
                 ? Rate1Star.map((feedback, index) => {
                   return (
                     <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className="rounded-full overflow-hidden mr-3">
+                      <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback?.user?.image}
+                          src={feedback.user.image}
                           width="54"
                           height="54"
                           placeholder="empty"
                           objectFit="cover"
+                          className='rounded-full'
                         />
                       </div>
                       <div>
-                        <p>{feedback?.user?.username}</p>
-                        <RatingReview value={feedback?.rate} />
-                        <FormatDate date={feedback?.updatedAt} />
+                        <p>{feedback.user.username}</p>
+                        <RatingReview value={feedback.rate} />
+                        <FormatDate date={feedback.updatedAt} />
                       </div>
                       <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
                       <div>
                         <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback?.content}</p>
+                        <p className="pl-3">{feedback.content}</p>
                       </div>
                     </div>
                   );
                 })
                 : ''}
             </div>
-          </div> */}
+          </div>
           <RatingProduct product={product} />
         </div>
       </div>
