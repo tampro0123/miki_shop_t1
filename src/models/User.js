@@ -17,13 +17,8 @@ const UserSchema = new Schema(
         size: { type: String, required: true },
         quantity: { type: Number, required: true },
         name: { type: String, required: true },
-<<<<<<< HEAD
-        price: { type: Number, required: true },
-        image: { type: String, required: true },
-=======
         image: { type: String, required: true },
         price: { type: Number, required: true },
->>>>>>> a261745fd2798bb761fd4fd3674e3412c897200c
       },
     ],
   },

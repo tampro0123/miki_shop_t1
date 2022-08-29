@@ -47,7 +47,7 @@ export default function CartItems() {
                 objData.size = data.size;
                 objData.name = data.name,
                     objData.price = data.price,
-                    objData.image = data.images[0].src
+                    objData.image = data.image
                 return { ...data, quantity: data.quantity + 1 }
 
             }
@@ -74,13 +74,14 @@ export default function CartItems() {
     async function subQuantity(item) {
         let objData = {}
         const html = inforProducts.map(data => {
+            console.log(data)
             if ((data.id === item.id) && (data.size === item.size)) {
                 objData.id = item.id;
                 objData.quantity = data.quantity - 1;
                 objData.size = data.size;
                 objData.name = data.name
                 objData.price = data.price
-                objData.image = data.images[0].src
+                objData.image = data.image
                 return { ...data, quantity: data.quantity - 1 }
 
             }
