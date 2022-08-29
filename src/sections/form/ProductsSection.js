@@ -1,7 +1,7 @@
 // Import library
 import React, { useEffect, useState } from 'react';
 // Import component, function, asset
-import { productsState } from "src/recoils/productList/productListState"
+import { cartState } from "src/recoils/cartState"
 import { useRecoilState } from "recoil";
 import { Background } from "src/components/Icons"
 import { ProductsTitle } from "src/sections/form"
@@ -9,7 +9,9 @@ import ProductSection from '../productDetail/ProductSection';
 
 export const ProductsSection = () => {
     // get State from storage recoil
-    const [products, setProducts] = useRecoilState(productsState)
+    const [product, setProduct] = useRecoilState(cartState)
+    const [products, setProducts] = useState([])
+    useEffect(() => { setProducts(product) }, [product])
     // Set width window when resize
     const [windowWidth, setWindowWidth] = useState(undefined);
     // Get size window to respondsive
@@ -29,7 +31,7 @@ export const ProductsSection = () => {
                     {/* Render list product */}
                     <div className="h-[300px] overflow-y-scroll pr-[16px]">
                         {products?.map((product) => (
-                            <ProductSection key={product.id} setProducts={setProducts} product={product} />
+                            <ProductSection key={product.id} product={product} />
                         ))}
                     </div>
                     {/* Title total */}

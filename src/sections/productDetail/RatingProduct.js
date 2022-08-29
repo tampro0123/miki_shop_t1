@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil';
 import Button from 'src/components/Button';
@@ -7,7 +8,7 @@ import { RatingStar, ratingValue } from 'src/components/Rating'
 import convertToBase64 from '../handleAction/functionHandle/convertImg';
 
 export default function RatingProduct({ product}) {
-    
+    const router = useRouter();
   // value of rating cmt
   const [lengthText, setLengthText] = useState(0);
   const [textValue, setTextVaLue] = useState();
@@ -33,7 +34,11 @@ export default function RatingProduct({ product}) {
           targetId: product._id,
           media: { type: typeCmt, src: mediaCmt },
         },
-      }).catch((error) => {
+      })
+      .then(() => {
+        router.reload(undefined,{scroll: false});
+      })
+      .catch((error) => {
         setErr({...err , errSend: error.response.data.message})
         setTimeout(() => {
             setErr({...err , errSend: ''})
