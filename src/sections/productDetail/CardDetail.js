@@ -6,13 +6,11 @@ import { RatingReview } from 'src/components/Rating';
 import FormatPrice from 'src/utils/formatPrice';
 import { cartState } from 'src/recoils/cartState'
 import { useSetRecoilState } from 'recoil'
-import axios from 'axios'
 import { dataUser } from 'src/recoils/dataUser.js'
 import { useRecoilValue } from 'recoil'
 import axiosAuth from 'src/utils/axios'
 export default function CardDetail({ product }) {
   const inforUser = useRecoilValue(dataUser)
-  const Images = product.images;
   const setCartState = useSetRecoilState(cartState)
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(product.storage[0].price);
@@ -41,7 +39,6 @@ export default function CardDetail({ product }) {
         }
       },
     })
-    console.log(data.data)
     setCartState((prev) => {
       return [
         ...prev,
@@ -61,6 +58,8 @@ export default function CardDetail({ product }) {
   const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
   useEffect(() => {
     setMainImg(product.images[0].src);
+    setAmount(0);
+    setSizeChecked();
   }, [product.slug])
 
   const handleSubAmount = () => {
@@ -81,7 +80,6 @@ export default function CardDetail({ product }) {
     }
     amount < sizeQuantity && setAmount((prev) => prev + 1);
   };
-  // console.log(inforUser)
 
 
   return (
