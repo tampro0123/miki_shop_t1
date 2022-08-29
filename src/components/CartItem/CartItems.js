@@ -74,7 +74,7 @@ export default function CartItems() {
     async function subQuantity(item) {
         let objData = {}
         const html = inforProducts.map(data => {
-            if ((data.id === item.id) && (data.size === item.size)) {
+            if ((data.id === item.id) && (data.size === item.size) && (data.quantity > 1)) {
                 objData.id = item.id;
                 objData.quantity = data.quantity - 1;
                 objData.size = data.size;
