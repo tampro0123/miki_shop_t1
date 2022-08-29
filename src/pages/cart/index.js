@@ -4,8 +4,6 @@ import CartUser from 'src/sections/cartInfor/CartUser'
 import { useRecoilValue } from 'recoil'
 import { cartState } from 'src/recoils/cartState'
 export default function cart() {
-    const value = useRecoilValue(cartState)
-
     return (
         <Page title="Cart">
             <div className="app mt-[24px] ">
