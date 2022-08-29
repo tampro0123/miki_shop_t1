@@ -29,7 +29,7 @@ const login = () => {
   const [loading, SetLoading] = useState(true)
   useEffect(() => {
     SetLoading(true)
-    if (user.role) {
+    if (user?.role) {
       router.replace('/')
     }
     if (!user.role) {

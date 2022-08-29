@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Button from 'src/components/Button';
@@ -97,6 +98,7 @@ export default function RatingProduct({ product }) {
             maxLength="250"
             className="w-full min-h-[70px] px-3 py-2 rounded-8 border border-l border-black"
             placeholder="Nhập mô tả tại đây"
+
             value={textValue}
             onChange={handleTextChange}
           />

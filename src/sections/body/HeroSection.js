@@ -5,6 +5,7 @@ import Image from 'next/image'
 import HeroImg from 'public/static/Home/HeroSection/hero-img.jpg'
 import HeroImgMobile from 'public/static/Home/HeroSection/hero-img-mobile.png'
 import Button from 'src/components/Button'
+import { useRouter } from 'next/router'
 
 export default function HeroSection() {
   // Set width window when resize

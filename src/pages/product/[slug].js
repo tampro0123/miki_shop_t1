@@ -14,7 +14,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
       <div className="app ">
         <div className="container m-0">
           <CardDetail product={product} />
-          <MoreDetail product={product} feedbacks={feedbacks}/>
+          <MoreDetail product={product} feedbacks={feedbacks} />
           <div className="flex justify-center mt-[60px]">
             <Separate />
           </div>
@@ -44,7 +44,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const slug = context.params.slug;
   const res = await request.get(`products/${slug}`)
-  const {_id : targetId, category} = await res.data.product;
+  const { _id: targetId, category } = await res.data.product;
   const [{ data: feedbacks }, { data }] = await axios.all([
     request.get(`feedback/${targetId}`),
     request.get(`products/all?page=1&limit=4&category=${category}`),

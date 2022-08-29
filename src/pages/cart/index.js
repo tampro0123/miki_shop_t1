@@ -15,6 +15,5 @@ export default function cart() {
                 </div>
             </div>
         </Page>
-
     )
 }
