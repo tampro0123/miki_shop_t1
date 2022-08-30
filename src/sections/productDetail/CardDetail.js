@@ -6,13 +6,11 @@ import { RatingReview } from 'src/components/Rating';
 import FormatPrice from 'src/utils/formatPrice';
 import { cartState } from 'src/recoils/cartState'
 import { useSetRecoilState } from 'recoil'
-import axios from 'axios'
 import { dataUser } from 'src/recoils/dataUser.js'
 import { useRecoilValue } from 'recoil'
 import axiosAuth from 'src/utils/axios'
 export default function CardDetail({ product }) {
   const inforUser = useRecoilValue(dataUser)
-  const Images = product.images;
   const setCartState = useSetRecoilState(cartState)
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(product.storage[0].price);
@@ -25,42 +23,52 @@ export default function CardDetail({ product }) {
   const [sizeIndex, setSizeChecked] = useState();
 
 
+
   async function handleGetProduct() {
-    const data = await axiosAuth({
-      method: "POST",
-      url: '/api/cart/addToCart',
-      data: {
-        userId: inforUser.id,
-        product: {
-          id: product._id,
-          size: size,
-          quantity: amount,
-          price: price,
-          name: product.name,
-          image: product.images[0].src
-        }
-      },
-    })
-    console.log(data.data)
-    setCartState((prev) => {
-      return [
-        ...prev,
-        {
-          id: product._id,
-          name: product.name,
-          category: price.category,
-          size: size,
-          quantity: amount,
-          desc: product.description,
-          image: product.images[0].src,
-          price: price
-        }
-      ]
-    })
+    if (size) {
+      const data = await axiosAuth({
+        method: "POST",
+        url: '/api/cart/addToCart',
+        data: {
+          userId: inforUser.id,
+          product: {
+            id: product._id,
+            size: size,
+            quantity: amount,
+            price: price,
+            name: product.name,
+            image: product.images[0].src
+          }
+        },
+      })
+      setCartState((prev) => {
+        return [
+          ...prev,
+          {
+            id: product._id,
+            name: product.name,
+            category: price.category,
+            size: size,
+            quantity: amount,
+            desc: product.description,
+            image: product.images[0].src,
+            price: price
+          }
+        ]
+      })
+    } else {
+      setWarning({ ...warning, warningChooseSize: true });
+      setTimeout(() => {
+        setWarning({ ...warning, warningChooseSize: false });
+      }, 3000);
+    }
   }
   const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
   useEffect(() => {
     setMainImg(product.images[0].src);
+    setAmount(0);
+    setSizeChecked();
+    setSize();
   }, [product.slug])
 
   const handleSubAmount = () => {
@@ -79,9 +87,8 @@ export default function CardDetail({ product }) {
         setWarning({ ...warning, warningChooseSize: false });
       }, 3000);
     }
-    amount < sizeQuantity && setAmount((prev) => prev + 1);
+    amount < sizeQuantity && size && setAmount((prev) => prev + 1);
   };
-  // console.log(inforUser)
 
 
   return (
