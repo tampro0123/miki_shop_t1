@@ -20,7 +20,7 @@ const CartSchema = new Schema(
         price: { type: Number, required: true },
       },
     ],
-    payments: { type: String, default: true },
+    payment: { type: String, required: true },
   },
   {
     collection: "carts",

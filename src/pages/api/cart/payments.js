@@ -28,7 +28,7 @@ const paymentsHandler = async (req, res) => {
           user: userId,
           name: firstName + " " + lastName,
           phoneNumber,
-          address: city + ", " + district + ", " + ward + ", " + specificAddress,
+          address: specificAddress + ", " + ward + ", " + district + ", " + city,
           products: cart,
           payment: check[0]
         });
