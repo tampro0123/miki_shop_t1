@@ -126,7 +126,24 @@ export default function createProduct() {
     label: 'mt-6 pl-[8px] mb-[8px]',
     area: 'w-full rounded-lg border-solid border-border-1 border-[1px] p-[10px]',
   };
-  const optionCategory = ['Nhẫn', 'Vòng cổ', 'Bông tai', 'Lắc'];
+  const optionCategory = [
+    {
+      value: 'nhan',
+      name: "Nhẫn"
+    },
+    {
+      value: 'day-chuyen',
+      name: "Dây chuyền"
+    },
+    {
+      value: 'bong-tai',
+      name: "Bông tai"
+    },
+    {
+      value: 'lac',
+      name: "Lắc"
+    },
+  ];
   return (
     <>
       {!isSwr && (
