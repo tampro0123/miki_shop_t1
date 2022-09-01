@@ -1,29 +1,27 @@
-import { useState, useEffect } from 'react'
+
+import { useEffect, useState } from 'react'
 import Page from 'src/components/Page';
 import CartUser from 'src/sections/cartInfor/CartUser'
 import { useRecoilValue } from 'recoil'
 import { cartState } from 'src/recoils/cartState'
-import { EmptyCart, Close } from 'src/components/Icons'
+import CartEmpty from 'src/sections/cartInfor/CartEmpty'
 export default function cart() {
-    const value = useRecoilValue(cartState)
-
-    const [dataCart, setDataCart] = useState([])
+    const cartItems = useRecoilValue(cartState);
+    const [dataItems, setDataItems] = useState([]);
     useEffect(() => {
-        setDataCart(value)
-    }, [value])
+        setDataItems(cartItems)
+    }, [cartItems])
     return (
         <Page title="Cart">
             <div className="app mt-[24px] ">
                 <div className="container mt-0">
                     <p>Breadcum</p>
-                    {dataCart.length ?
+                    {dataItems.length ?
                         <div className="mt-[48px]">
                             <CartUser />
                         </div>
                         :
-                        <div>
-                            <EmptyCart />
-                        </div>
+                        <CartEmpty />
                     }
                 </div>
             </div>

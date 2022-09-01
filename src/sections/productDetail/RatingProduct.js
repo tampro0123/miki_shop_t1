@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+
+import React, { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Button from 'src/components/Button';
 import { ImgAndVideo } from 'src/components/Icons';
 import { RatingStar, ratingValue } from 'src/components/Rating';
@@ -13,14 +14,19 @@ export default function RatingProduct({ product }) {
   const router = useRouter();
   // value of rating cmt
   const [lengthText, setLengthText] = useState(0);
-  const [textValue, setTextVaLue] = useState();
+  const [textValue, setTextVaLue] = useState('');
   const [mediaCmt, setMediaCmt] = useState('');
   const [typeCmt, setTypeCmt] = useState('');
 
-  const rating = useRecoilValue(ratingValue);
+  const [rating, setRating] = useRecoilState(ratingValue);
 
   const [err, setErr] = useState({ errSend: '', ratingMessErr: false, cmtMessErr: false });
 
+
+  useEffect(() => {
+    setRating(null);
+    setTextVaLue('')
+  }, [product.slug])
   const handleSubmitCmt = async () => {
     if (rating && textValue) {
       const res = axiosAuth({
@@ -92,6 +98,8 @@ export default function RatingProduct({ product }) {
             maxLength="250"
             className="w-full min-h-[70px] px-3 py-2 rounded-8 border border-l border-black"
             placeholder="Nhập mô tả tại đây"
+
+            value={textValue}
             onChange={handleTextChange}
           />
           {err.cmtMessErr && <span className="text-red-600">Vui lòng bình luận sản phẩm</span>}
@@ -99,7 +107,7 @@ export default function RatingProduct({ product }) {
         </div>
         <div className="flex items-center">
           <span className="font-bold">Thêm hình ảnh/video sản phẩm nếu có:</span>
-          <input id="image" className="hidden" type="file" onChange={(e) => handleImgCmt(e)}></input>
+          <input id="image" className="hidden" type="file"  onChange={(e) => handleImgCmt(e)}></input>
           <label htmlFor="image" className="inline-block cursor-pointer">
             <ImgAndVideo />
           </label>
