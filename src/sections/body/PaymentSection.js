@@ -53,7 +53,7 @@ const PaymentSection = () => {
         resolver: yupResolver(schema),
         defaultValues: {
             firstName: "",
-            lastNafirstNameme: "",
+            lastName: "",
             city: "",
             district: "",
             ward: "",
@@ -61,21 +61,35 @@ const PaymentSection = () => {
             phoneNumber: "",
         }
     });
-    async function handlePayment() {
-        const data = await axiosAuth({
+
+    const { handleSubmit, reset } = methods;
+    // Handle submit and logic
+    const onSubmit = async (data) => {
+        const res = await axiosAuth({
             method: "POST",
             url: '/api/cart/payments',
             data: {
                 userId: idUser.id,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                city: data.city,
+                district: data.district,
+                ward: data.phoneNumber,
+                specificAddress: data.specificAddress,
+                phoneNumber: data.phoneNumber,
+                check: data.check,
             },
         })
-        setCart([])
-        router.replace("/")
+        res.then((value) => {
+            setCart([])
+            router.replace("/")
+        })
+        res.catch(err => {
+            console.log(err)
+        })
+
         console.log(data.data)
     }
-    const { handleSubmit, reset } = methods;
-    // Handle submit and logic
-    const onSubmit = (data) => { console.log(data) }
     // UI
     return (
         <div className="w-[1136px] mobile:w-[375px] text-align">
@@ -94,7 +108,7 @@ const PaymentSection = () => {
                 </div>
                 <div className="flex mobile:mx-[16px]">
                     {/* Button submit */}
-                    <Button primary onClick={handlePayment} className="mobile:py-[8px] mobile:px-[31.5px]" classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black">Thanh toán</Button>
+                    <Button primary type="submit" className="mobile:py-[8px] mobile:px-[31.5px]" classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black">Thanh toán</Button>
                     {/* Button switch to cart page  */}
                     <Button to="/" text className="text-black ml-[179px] mobile:ml-[37px]">Trở lại giỏ hàng</Button>
                 </div>
