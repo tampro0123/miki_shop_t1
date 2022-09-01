@@ -6,6 +6,9 @@ require("./User");
 const CartSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    address: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     products: [
       {
         _id: false,
@@ -17,7 +20,7 @@ const CartSchema = new Schema(
         price: { type: Number, required: true },
       },
     ],
-    payments: { type: Boolean, default: true },
+    payments: { type: String, default: true },
   },
   {
     collection: "carts",

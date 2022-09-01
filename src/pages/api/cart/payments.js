@@ -9,7 +9,7 @@ import dbConnect from 'src/utils/dbConnect.js';
 const paymentsHandler = async (req, res) => {
   await dbConnect();
   const { method } = req;
-  const { userId } = req.body;
+  const { userId, city, district, ward, specificAddress, firstName, lastName, phoneNumber, check } = req.body;
 
   switch (method) {
     case "POST":
@@ -24,7 +24,14 @@ const paymentsHandler = async (req, res) => {
           });
         }
 
-        await Cart.create({ user: userId, products: cart });
+        await Cart.create({
+          user: userId,
+          name: firstName + " " + lastName,
+          phoneNumber,
+          address: city + ", " + district + ", " + ward + ", " + specificAddress,
+          products: cart,
+          payment: check[0]
+        });
 
         for (const cartItem of cart) {
           await Products.findOneAndUpdate(
