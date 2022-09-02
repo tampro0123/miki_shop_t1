@@ -8,6 +8,7 @@ import Button from 'src/components/Button'
 import { useRouter } from 'next/router'
 
 export default function HeroSection() {
+  const router = useRouter();
   // Set width window when resize
   const [windowWidth, setWindowWidth] = useState(undefined);
   // Get size window to respondsive
@@ -31,7 +32,7 @@ export default function HeroSection() {
         Tôn vinh vẻ đẹp phái nữ - Trao quà tặng - Trao yêu thương
       </p>
       <div className='absolute bg-white h-[2px] w-[824px] top-[373px] left-1/2 transform -translate-x-1/2 mobile:hidden'></div>
-      <Button secondary className='absolute z-30 left-1/2 transform -translate-x-1/2 top-[434px] mobile:top-[354px] mobile:px-[110px] mobile:left-[16px] mobile:-translate-x-0' >Tìm hiểu thêm</Button>
+      <Button secondary onClick={() => router.push('/aboutus/brandandhistory')} className='absolute z-30 left-1/2 transform -translate-x-1/2 top-[434px] mobile:top-[354px] mobile:px-[110px] mobile:left-[16px] mobile:-translate-x-0' >Tìm hiểu thêm</Button>
     </div>
   )
 }
