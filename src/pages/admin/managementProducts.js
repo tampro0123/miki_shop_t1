@@ -20,7 +20,7 @@ export default function managementProducts() {
           <div className='flex justify-between'>
             <input type='text' placeholder='Search' className='border-[1px] 
               border-solid border-[#ccc] px-[10px] mr-[10px] rounded-8 w-[350px]'/>
-            <Link href="/management/addProduct">
+            <Link href="/admin/addProduct">
               <a target="_blank">
                 <Button primary className='hover-btn-primary'>
                   Thêm mới
