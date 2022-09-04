@@ -41,6 +41,20 @@ module.exports = {
       boxShadow: {
         product: '0px 0px 60px 10px rgba(15, 15, 15, 0.1)',
       },
+      keyframes: {
+        loading: {
+          '0%': { transform: 'rotate(0deg))', boxShadow: "1px 5px 2px #e65c00" },
+          '50%': { transform: 'rotate(180deg)', boxShadow: "1px 5px 2px #18b201" },
+          '100%': { transform: 'rotate(360deg)', boxShadow: "1px 5px 2px #0456c8" },
+        },
+        text: {
+          '50%': { color: "black" },
+        },
+      },
+      animation: {
+        loading: 'loading 2s linear infinite',
+        text: 'text 3s ease-in-out infinite',
+      },
     },
   },
   plugins: [],
