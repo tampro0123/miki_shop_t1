@@ -3,16 +3,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { RecoilRoot } from 'recoil';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import { useRouter } from 'next/router';
-
-import Progress from 'src/components/progress/Progress.js';
-import useProgressStore from 'src/hooks/useProgress';
+import Progress from 'src/components/progress/Progress';
 
 function MyApp({ Component, pageProps }) {
-  const setIsAnimating = useProgressStore((state) => state.setIsAnimating);
-  const isAnimating = useProgressStore((state) => state.isAnimating);
+  const [isAnimating, setIsAnimating] = useState(false)
   const router = useRouter();
   useEffect(() => {
     const handleStart = () => {
