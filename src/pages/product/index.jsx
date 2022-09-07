@@ -41,7 +41,7 @@ export default function Products({ products, pageCount }) {
 export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
   const sort = query.sort || ' ';
-  const category = query.category || ' ';
+  const category = query.category ;
   const order = query.order || ' ';
   const [{ data }, { data: res }] = await Promise.all([
     request.get(`products/all?category=${category}`),
