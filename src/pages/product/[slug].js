@@ -25,7 +25,7 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
             },
             {
               href: `/product?category=${product.category}&sort=price&order=+`,
-              label: product.name.split(' ')[0],
+              label: product.category === 'nhan' ?  product.name.split(' ')[0] : `${product.name.split(' ')[0]} ${product.name.split(' ')[1]}`,
             },
             {
               href: `/product/${product.slug}`,
