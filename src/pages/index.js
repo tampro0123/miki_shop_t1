@@ -8,7 +8,6 @@ import LatestAlbum from 'src/sections/body/LatestAlbum.js';
 import Products from 'src/sections/body/Products.js';
 import CircleBgr from 'src/components/Circles';
 import AboutSection from 'src/sections/body/AboutSection.js';
-import Loading from 'src/components/Loading';
 
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {

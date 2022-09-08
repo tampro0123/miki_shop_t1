@@ -13,7 +13,7 @@ export default function CartEmpty() {
             </div>
             <p className='text-center text-[#AC3131] text-[23px] font-bold'>Giỏ hàng của bạn đang trống!!!</p>
             <div className='flex justify-center mt-[30px]'>
-                <Button primary className="hover-btn-primary shadow-md" to='/product'>Tiếp tục mua hàng</Button>
+                <Button primary className="hover-btn-primary shadow-md" to='/product/allProduct'>Tiếp tục mua hàng</Button>
             </div>
         </div>
     )
