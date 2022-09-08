@@ -19,6 +19,8 @@
     "mongoose": "^6.4.4",
     "mongoose-slug-generator": "^1.0.4",
     "next": "^12.2.2",
+    "nodemailer": "^6.7.8",
+    "rand-token": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
