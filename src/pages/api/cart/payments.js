@@ -9,7 +9,7 @@ import dbConnect from 'src/utils/dbConnect.js';
 const paymentsHandler = async (req, res) => {
   await dbConnect();
   const { method } = req;
-  const { userId, city, district, ward, specificAddress, firstName, lastName, phoneNumber, check } = req.body;
+  const { userId, city, district, ward, specificAddress, firstName, lastName, phoneNumber, check, receipt } = req.body;
 
   switch (method) {
     case "POST":
@@ -30,7 +30,8 @@ const paymentsHandler = async (req, res) => {
           phoneNumber,
           address: specificAddress + ", " + ward + ", " + district + ", " + city,
           products: cart,
-          payment: check[0]
+          payment: check[0],
+          receipt
         });
 
         for (const cartItem of cart) {
