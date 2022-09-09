@@ -11,13 +11,14 @@ import { FormProviderBox } from 'src/components/hook-form';
 import { dataUser } from 'src/recoils/dataUser';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import axiosAuth from 'src/utils/axios';
-import { cartState } from 'src/recoils/cartState';
+import { cartState, totalCart } from 'src/recoils/cartState';
 import { useRouter } from 'next/router';
 
 const PaymentSection = () => {
     const router = useRouter()
     const idUser = useRecoilValue(dataUser)
     const setCart = useSetRecoilState(cartState)
+    const total = useRecoilValue(totalCart)
     // Create the option status in Payment methods section
     const [option, setOption] = useState(undefined)
     // Create schema validate form
@@ -64,29 +65,23 @@ const PaymentSection = () => {
 
     const { handleSubmit, reset } = methods;
     // Handle submit and logic
-    const onSubmit = async (data) => {
-        const res = await axiosAuth({
+    const onSubmit = (data) => {
+        axiosAuth({
             method: "POST",
             url: '/api/cart/payments',
             data: {
                 userId: idUser.id,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                city: data.city,
-                district: data.district,
-                ward: data.phoneNumber,
-                specificAddress: data.specificAddress,
-                phoneNumber: data.phoneNumber,
-                check: data.check,
+                receipt: total,
+                ...data
             },
         })
-        res.then((value) => {
-            setCart([])
-            router.replace("/")
-        })
-        res.catch(err => {
-            console.log(err)
-        })
+            .then((value) => {
+                setCart([])
+                router.replace("/")
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
         console.log(data.data)
     }

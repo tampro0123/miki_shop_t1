@@ -5,6 +5,7 @@ import CardDetail from 'src/sections/productDetail/CardDetail';
 import MoreDetail from 'src/sections/productDetail/MoreDetail';
 import { Separate } from 'src/components/Icons';
 import ProductItem from 'src/components/ProductItem/ProductItem';
+import BreadCrumb from 'src/components/BreadCrumb/BreadCrumb';
 
 const DetailProduct = ({ product, productList, feedbacks }) => {
 
@@ -13,6 +14,24 @@ const DetailProduct = ({ product, productList, feedbacks }) => {
     <Page title={product.name}>
       <div className="app ">
         <div className="container m-0">
+          <BreadCrumb params={[
+            {
+              href: '/',
+              label: 'Trang chủ'
+            },
+            {
+              href: '/product/allProduct',
+              label: 'Tất cả sản phẩm '
+            },
+            {
+              href: `/product?category=${product.category}&sort=price&order=+`,
+              label: product.category === 'nhan' ?  product.name.split(' ')[0] : `${product.name.split(' ')[0]} ${product.name.split(' ')[1]}`,
+            },
+            {
+              href: `/product/${product.slug}`,
+              label: product.name
+            }
+          ]} />
           <CardDetail product={product} />
           <MoreDetail product={product} feedbacks={feedbacks} />
           <div className="flex justify-center mt-[60px]">
