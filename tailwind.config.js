@@ -42,11 +42,10 @@ module.exports = {
       boxShadow: {
         product: '0px 0px 60px 10px rgba(15, 15, 15, 0.1)',
       },
-<<<<<<< HEAD
       boxShadow: {
         'shadow-btn': '0 0 2px 3px #ffd1b9',
         'shadow-gray': '0 0 5px 3px rgba(0,0,0,0.2)'
-=======
+      },
       keyframes: {
         loading: {
           '0%': { transform: 'rotate(0deg))', boxShadow: "1px 5px 2px #e65c00" },
@@ -60,7 +59,6 @@ module.exports = {
       animation: {
         loading: 'loading 2s linear infinite',
         text: 'text 3s ease-in-out infinite',
->>>>>>> c82dbbbeb84c895391586e08c8b42d06cd93e5d7
       },
     },
   },
