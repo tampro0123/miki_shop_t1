@@ -3,21 +3,22 @@ import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from "react"
 // Import component, function, asset
-import { CaretDown, LogoIcon, CartIcon, UserIcon } from 'src/components/Icons/icons.js';
+import { CaretDown, LogoIcon, CartIcon, UserIcon, Logout, History, Dashboard, Bell } from 'src/components/Icons/icons.js';
 import HeaderMobile from 'src/layouts/header/HeaderMobile';
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { useRouter } from 'next/router';
 import { cartState } from 'src/recoils/cartState'
+import Image from 'next/image'
 import { dataUser } from 'src/recoils/dataUser.js'
-import axios from 'axios';
 import Search from 'src/components/Search/Search';
 import axiosAuth from 'src/utils/axios'
 import useLocalStorage from 'src/hooks/useLocalStorage'
 export default function Header() {
   const router = useRouter()
   const user = useLocalStorage('recoil-persist', 'userState')
-  const [idUser, setIdUser] = useState()
   const [valueUser, setValueUser] = useRecoilState(dataUser)
+  const [loading, setLoading] = useState(true)
+  const [active, setActive] = useState(false)
   const [quantityProduct, setQuantityProduct] = useState({})
   // Set width window when resize
   const [valueCart, setValueCart] = useRecoilState(cartState)
@@ -28,21 +29,13 @@ export default function Header() {
   // Get size window to respondsive
   useEffect(() => {
     setWindowWidth(window.innerWidth);
+    setValueUser(user)
+    setLoading(false)
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
-
       return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     }
   }, []);
-
-  useEffect(() => {
-    setIdUser(valueUser?.id)
-  }, [valueUser])
-
-  useEffect(() => {
-    setValueUser(user)
-  }, [])
-
   function handleClick() {
     if (valueUser.id) {
       const data = axiosAuth({
@@ -58,14 +51,17 @@ export default function Header() {
         }
       })
         .then(value => {
-          console.log(value)
           setValueUser({})
           setValueCart([])
-          return setTimeout(() => router.replace('/login'))
+          return router.replace('/login')
         })
         .catch(err => console.error(err))
     }
   }
+  if (loading) {
+    return <h1>Loading...</h1>
+  }
+  if (loading) <h1>Loading....</h1>
   return (
     <header className="flex justify-center">
       {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px]">
@@ -140,19 +136,43 @@ export default function Header() {
 
             </a>
           </Link>
-          <Link href={idUser ? '/' : '/login'}>
-            <a className="py-[4px] relative group">
-              <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
-              {idUser ?
-                <div className="absolute z-20 
-             max-w-[900px] w-[200px]
-              bg-bgr left-[-20px] top-full hidden transition-500 group-hover:block">
+          <Link href={valueUser?.id ? '' : '/login'}>
+            <a className="py-[4px] relative flex items-center group" onClick={() => setActive(!active)} onBlur={() => setActive(false)}>
+              {valueUser?.avatar ?
+                <img
+                  width='30px'
+                  height='30px'
+                  className="rounded-[50%]"
+                  src={valueUser.avatar}
+
+                />
+                :
+                <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
+              }
+              {valueUser?.id ?
+                <div className={active ? "absolute z-20  max-w-[900px] w-[250px] bg-bgr right-[-30px] top-[50px] block shadow-xl rounded-8 transition-500"
+                  : 'hidden'}>
                   <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
-                    <li className="text-16 hover:text-3rd-text duration-500">Thông tin</li>
-                    <li className="text-16 hover:text-3rd-text duration-500">Giỏ hàng của bạn</li>
-                    <li className="text-16 hover:text-3rd-text duration-500"
+                    <li onClick={() => router.push('/profile')} className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                      <UserIcon classNameIcon='w-[25px] ' />
+                      Thông tin cá nhân</li>
+                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                      <Bell iconClass='w-[25px]' />
+                      Thông báo
+                    </li>
+                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                      <History iconClass='w-[25px]' />
+                      Lịch sử mua hàng</li>
+                    {valueUser.role == 'admin' ?
+                      <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center" onClick={() => router.push('/admin')}>
+                        <Dashboard iconClass='w-[25px]' />
+                        Quản lí</li>
+                      : ''}
+                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
                       onClick={() => handleClick()}
-                    >Đăng xuất</li>
+                    >
+                      <Logout iconClass='w-[25px]' />
+                      Đăng xuất</li>
                   </ul>
                 </div>
                 :
