@@ -21,6 +21,7 @@ const CartSchema = new Schema(
       },
     ],
     payment: { type: String, required: true },
+    receipt: { type: Number, required: true },
   },
   {
     collection: "carts",
