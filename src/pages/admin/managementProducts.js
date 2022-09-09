@@ -20,7 +20,7 @@ export default function managementProducts() {
           <div className='flex justify-between'>
             <input type='text' placeholder='Search' className='border-[1px] 
               border-solid border-[#ccc] px-[10px] mr-[10px] rounded-8 w-[350px]'/>
-            <Link href="/management/addProduct">
+            <Link href="/admin/addProduct">
               <a target="_blank">
                 <Button primary className='hover-btn-primary'>
                   Thêm mới
@@ -80,7 +80,7 @@ export default function managementProducts() {
                               description: product.description,
                               discount: product.discount ? product.discount : 0,
                             })
-                            router.push(`/management/updateProduct?id=${product._id}`)
+                            router.push(`/admin/updateProduct?id=${product._id}`)
                           }
                           }
 

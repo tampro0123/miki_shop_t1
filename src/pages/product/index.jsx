@@ -8,7 +8,7 @@ import Pagination from 'src/components/Pagination/Pagination';
 import SortProduct from 'src/sections/sortProduct/SortProduct';
 import BreadCrumb from 'src/components/BreadCrumb/BreadCrumb';
 
-export default function Products({ products, pageCount }) {
+export default function Products( { products, pageCount, category }) {
   return (
     <Page title={'Products'}>
       <div className="app">
@@ -24,8 +24,8 @@ export default function Products({ products, pageCount }) {
               label: 'Tất cả sản phẩm '
             },
             {
-              href: `/product?category=${products[0].category}&sort=price&order=+`,
-              label: products[0].name.split(' ')[0],
+              href: `/product?category=${category}&sort=price&order=+`,
+              label: category == "nhan" ?  products[0].name.split(' ')[0] : `${products[0]?.name.split(' ')[0]} ${products[0]?.name.split(' ')[1]}`,
             },
           ]}
           />
@@ -51,6 +51,7 @@ export const getServerSideProps = async ({ query }) => {
     props: {
       products: res.product,
       pageCount: Math.ceil(data.product.length / 16),
+      category: category,
     },
   };
 };

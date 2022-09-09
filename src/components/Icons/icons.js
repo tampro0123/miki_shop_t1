@@ -548,6 +548,68 @@ export const Close2 = () => (
     <path d="M10 10.1834L21.8166 22M10 21.8166L21.8166 10" stroke="black" strokeWidth="1.5" />
   </svg>)
 
+export const Logout = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M22.6667 10.6667L20.7867 12.5467L22.8933 14.6667H12V17.3333H22.8933L20.7867 19.44L22.6667 21.3333L28 16L22.6667 10.6667ZM6.66667 6.66667H16V4H6.66667C5.2 4 4 5.2 4 6.66667V25.3333C4 26.8 5.2 28 6.66667 28H16V25.3333H6.66667V6.66667Z" fill="black" />
+  </svg>
+)
+export const Delete = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M21.3332 12V25.3333H10.6665V12H21.3332ZM19.3332 4H12.6665L11.3332 5.33333H6.6665V8H25.3332V5.33333H20.6665L19.3332 4ZM23.9998 9.33333H7.99984V25.3333C7.99984 26.8 9.19984 28 10.6665 28H21.3332C22.7998 28 23.9998 26.8 23.9998 25.3333V9.33333Z" fill="black" />
+  </svg>
+)
+
+export const Chart = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M6.66675 12.2667H10.6667V25.3334H6.66675V12.2667ZM14.1334 6.66675H17.8667V25.3334H14.1334V6.66675ZM21.6001 17.3334H25.3334V25.3334H21.6001V17.3334Z" fill="black" />
+  </svg>
+)
+
+export const More = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M15.9999 10.6666C17.4666 10.6666 18.6666 9.46659 18.6666 7.99992C18.6666 6.53325 17.4666 5.33325 15.9999 5.33325C14.5333 5.33325 13.3333 6.53325 13.3333 7.99992C13.3333 9.46659 14.5333 10.6666 15.9999 10.6666ZM15.9999 13.3333C14.5333 13.3333 13.3333 14.5333 13.3333 15.9999C13.3333 17.4666 14.5333 18.6666 15.9999 18.6666C17.4666 18.6666 18.6666 17.4666 18.6666 15.9999C18.6666 14.5333 17.4666 13.3333 15.9999 13.3333ZM15.9999 21.3333C14.5333 21.3333 13.3333 22.5333 13.3333 23.9999C13.3333 25.4666 14.5333 26.6666 15.9999 26.6666C17.4666 26.6666 18.6666 25.4666 18.6666 23.9999C18.6666 22.5333 17.4666 21.3333 15.9999 21.3333Z" fill="black" />
+  </svg>
+)
+
+export const History = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M24 28V4L20 6.66667L16 4L12 6.66667L8 4V28L12 26L16 28L20 26L24 28Z" stroke="#33363F" strokeWidth="2.66667" strokeLinejoin="round" />
+    <path d="M13.3333 12H18.6666" stroke="#33363F" strokeWidth="2.66667" strokeLinecap="round" />
+    <path d="M13.3333 20H18.6666" stroke="#33363F" strokeWidth="2.66667" strokeLinecap="round" />
+    <path d="M13.3333 16H18.6666" stroke="#33363F" strokeWidth="2.66667" strokeLinecap="round" />
+  </svg>
+)
+
+export const Dashboard = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M25.3333 6.66667V9.33333H20V6.66667H25.3333ZM12 6.66667V14.6667H6.66667V6.66667H12ZM25.3333 17.3333V25.3333H20V17.3333H25.3333ZM12 22.6667V25.3333H6.66667V22.6667H12ZM28 4H17.3333V12H28V4ZM14.6667 4H4V17.3333H14.6667V4ZM28 14.6667H17.3333V28H28V14.6667ZM14.6667 20H4V28H14.6667V20Z" fill="black" />
+  </svg>
+)
+
+export const Edit = ({ iconClass, ...rest }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className={iconClass}   {...rest} width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M2.99878 21.0013H6.74878L17.8088 9.94128L14.0588 6.19128L2.99878 17.2513V21.0013ZM4.99878 18.0813L14.0588 9.02128L14.9788 9.94128L5.91878 19.0013H4.99878V18.0813Z" fill="black" />
+    <path d="M18.3688 3.29128C17.9788 2.90128 17.3488 2.90128 16.9588 3.29128L15.1288 5.12128L18.8788 8.87128L20.7088 7.04128C21.0988 6.65128 21.0988 6.02128 20.7088 5.63128L18.3688 3.29128Z" fill="black" />
+  </svg>
+)
+
+export const Bell = ({ iconClass }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M12 21.75C13.1 21.75 14 20.85 14 19.75H10C10 20.85 10.9 21.75 12 21.75ZM18 15.75V10.75C18 7.68 16.37 5.11 13.5 4.43V3.75C13.5 2.92 12.83 2.25 12 2.25C11.17 2.25 10.5 2.92 10.5 3.75V4.43C7.64 5.11 6 7.67 6 10.75V15.75L4 17.75V18.75H20V17.75L18 15.75ZM16 16.75H8V10.75C8 8.27 9.51 6.25 12 6.25C14.49 6.25 16 8.27 16 10.75V16.75Z" fill="black" />
+  </svg>
+)
+
+export const ManagementOrder = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M19 3H14.82C14.4 1.84 13.3 1 12 1C10.7 1 9.6 1.84 9.18 3H5C3.9 3 3 3.9 3 5V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V5C21 3.9 20.1 3 19 3ZM12 3C12.55 3 13 3.45 13 4C13 4.55 12.55 5 12 5C11.45 5 11 4.55 11 4C11 3.45 11.45 3 12 3ZM19 21H5V5H7V8H17V5H19V21Z" fill="black" />
+  </svg>
+)
+export const Lock = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M18 8.5H17V6.5C17 3.74 14.76 1.5 12 1.5C9.24 1.5 7 3.74 7 6.5V8.5H6C4.9 8.5 4 9.4 4 10.5V20.5C4 21.6 4.9 22.5 6 22.5H18C19.1 22.5 20 21.6 20 20.5V10.5C20 9.4 19.1 8.5 18 8.5ZM9 6.5C9 4.84 10.34 3.5 12 3.5C13.66 3.5 15 4.84 15 6.5V8.5H9V6.5ZM18 20.5H6V10.5H18V20.5ZM12 17.5C13.1 17.5 14 16.6 14 15.5C14 14.4 13.1 13.5 12 13.5C10.9 13.5 10 14.4 10 15.5C10 16.6 10.9 17.5 12 17.5Z" fill="black" />
+  </svg>
+)
 export const Loading2 = () => (
   <svg className="inline mr-2 w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-slate-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z" /></svg>
+
 )
