@@ -37,7 +37,7 @@ const userHandler = async (req, res) => {
         }
 
         const options = {
-          upload_preset: 'users',
+          upload_preset: 'usersAvatar',
           public_id: user._id,
           overwrite: true,
         };
