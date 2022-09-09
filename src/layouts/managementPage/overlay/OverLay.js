@@ -26,7 +26,10 @@ export default function OverLay({ children }) {
       <LeftSide />
       <div className='max-w-[1280px] w-full ml-[420px]'>
         <HeaderAdmin />
-        {children}
+        <div className='mt-[170px]'>
+
+          {children}
+        </div>
       </div>
     </div>
   )

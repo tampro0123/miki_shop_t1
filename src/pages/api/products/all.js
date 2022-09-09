@@ -5,7 +5,6 @@ const handler = async (req, res) => {
   const { method } = req;
   const { page, limit, sort, order, category } = req.query;
   await dbConnect();
-
   switch (method) {
     case 'GET':
       try {

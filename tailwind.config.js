@@ -41,6 +41,10 @@ module.exports = {
       boxShadow: {
         product: '0px 0px 60px 10px rgba(15, 15, 15, 0.1)',
       },
+      boxShadow: {
+        'shadow-btn': '0 0 2px 3px #ffd1b9',
+        'shadow-gray': '0 0 5px 3px rgba(0,0,0,0.2)'
+      },
     },
   },
   plugins: [],

@@ -72,8 +72,7 @@ export default function createProduct() {
     if (data) {
       const dataAdd = axios({
         method: 'POST',
-        url: '../api/products/create',
-
+        url: '/api/products/create',
         data: {
           category: data.category,
           description: data.desc,

@@ -9,6 +9,7 @@ export function RadioField({
   styleInput,
   styleMessage,
   className,
+  select,
   ...passProps
 }) {
   const {
@@ -19,14 +20,16 @@ export function RadioField({
   return (
     <div className={className}>
       <label className={styleLabelList}>{label}</label>
-      {options.map((value) => (
-        <div key={value}>
-          <label className={styleLabelItem} htmlFor={value}>
-            {value}
-          </label>
-          <input className={styleInput} type="radio" value={value} {...passProps} {...register(name)} />
-        </div>
-      ))}
+      <div className={select}>
+        {options.map((value) => (
+          <div key={value}>
+            <label className={styleLabelItem} htmlFor={value}>
+              {value}
+            </label>
+            <input className={styleInput} type="radio" value={value} {...passProps} {...register(name)} />
+          </div>
+        ))}
+      </div>
       <span className={styleMessage}>{errors[name]?.message}</span>
     </div>
   );

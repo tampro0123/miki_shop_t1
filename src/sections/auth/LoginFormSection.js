@@ -70,7 +70,9 @@ export function LoginFormSection() {
           email: value.data.user.email,
           avatar: value.data.user.image,
           role: value.data.user.role,
+          birthday: value.data.user.birthday
         })
+        console.log(value)
         setValueCart(value.data.user.cart)
         router.push('/')
       });
