@@ -8,9 +8,10 @@ export default function BreadCrumb({ params = [] }) {
         <div className='mb-[32px] flex items-center'>
             {
                 params.map((e, i) => (
-                    <div key={i} className='inline-block '>
+                    <div
+                        key={e.href}
+                        className='inline-block '>
                         <Link
-                            key={e.href}
                             href={e.href}
                         >
                             <a

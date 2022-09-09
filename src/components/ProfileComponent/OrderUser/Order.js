@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { History, UserIcon } from 'src/components/Icons/icons.js';
 import CompleteShip from './Complete/CompleteShip';
+<<<<<<< HEAD
 import ShipOrder from './Delivery/ShipOrder';
+=======
+import ShipPurchase from './Delivery/ShipPurchase';
+>>>>>>> 8e8bd775689f8305d2526c6c1278c70d3002068f
 import ListOrder from './ListOrder/ListOrder';
 import ProcessOrder from './Process/ProcessOrder';
 export default function Order() {
@@ -25,7 +29,11 @@ export default function Order() {
             <div>
                 {check === 1 ? <ListOrder /> : ''}
                 {check === 2 ? <ProcessOrder /> : ''}
+<<<<<<< HEAD
                 {check === 3 ? <ShipOrder /> : ''}
+=======
+                {check === 3 ? <ShipPurchase /> : ''}
+>>>>>>> 8e8bd775689f8305d2526c6c1278c70d3002068f
                 {check === 4 ? <CompleteShip /> : ''}
             </div>
         </div>

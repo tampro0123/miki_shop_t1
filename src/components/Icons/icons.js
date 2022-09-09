@@ -558,6 +558,17 @@ export const Delete = ({ iconClass }) => (
   </svg>
 )
 
+export const Logout = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M22.6667 10.6667L20.7867 12.5467L22.8933 14.6667H12V17.3333H22.8933L20.7867 19.44L22.6667 21.3333L28 16L22.6667 10.6667ZM6.66667 6.66667H16V4H6.66667C5.2 4 4 5.2 4 6.66667V25.3333C4 26.8 5.2 28 6.66667 28H16V25.3333H6.66667V6.66667Z" fill="black" />
+  </svg>
+)
+export const Delete = ({ iconClass }) => (
+  <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M21.3332 12V25.3333H10.6665V12H21.3332ZM19.3332 4H12.6665L11.3332 5.33333H6.6665V8H25.3332V5.33333H20.6665L19.3332 4ZM23.9998 9.33333H7.99984V25.3333C7.99984 26.8 9.19984 28 10.6665 28H21.3332C22.7998 28 23.9998 26.8 23.9998 25.3333V9.33333Z" fill="black" />
+  </svg>
+)
+
 export const Chart = ({ iconClass }) => (
   <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
     <path d="M6.66675 12.2667H10.6667V25.3334H6.66675V12.2667ZM14.1334 6.66675H17.8667V25.3334H14.1334V6.66675ZM21.6001 17.3334H25.3334V25.3334H21.6001V17.3334Z" fill="black" />
@@ -610,4 +621,5 @@ export const Lock = ({ iconClass }) => (
 )
 export const Loading2 = () => (
   <svg className="inline mr-2 w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-slate-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z" /></svg>
+
 )

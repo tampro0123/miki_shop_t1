@@ -53,10 +53,6 @@ export default function LeftSide() {
                     <Link href="">
                         <a className='text-[18px] text-[#625f6e] block p-[15px] ml-[20px]'>Đăng xuất</a>
                     </Link>
-                    <ul className={check ? 'block' : 'hidden'} >
-                        <li>das</li>
-                        <li>das</li>
-                    </ul>
                 </div>
             </div>
         </div>
