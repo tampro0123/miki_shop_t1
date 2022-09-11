@@ -17,7 +17,7 @@ const resetPassWordHandler = async (req, res) => {
     case "POST":
       try {
         const tokenChecker = await PasswordToken.findOne({ token });
-
+        const email = await tokenChecker.email;
         if (!tokenChecker) {
           return res.status(404).json({ success: false, message: "Link is not valid" });
         }
@@ -30,7 +30,7 @@ const resetPassWordHandler = async (req, res) => {
           password: password,
         })
 
-        await PasswordToken.findOneAndDelete({ token })
+        await PasswordToken.deleteMany({ email })
 
         return res.status(200).json({ success: true, message: 'Your Password has been updated successfully!' })
 
