@@ -17,8 +17,9 @@ const resetPassWordHandler = async (req, res) => {
     case "POST":
       try {
         const tokenChecker = await PasswordToken.findOne({ token });
-        const email = await tokenChecker.email;
-        if (!tokenChecker) {
+        const { email, createdAt } = tokenChecker;
+        let date = new Date();
+        if (!tokenChecker || Date.parse(createdAt) + 300000 < date.gettime()) {
           return res.status(404).json({ success: false, message: "Link is not valid" });
         }
 
