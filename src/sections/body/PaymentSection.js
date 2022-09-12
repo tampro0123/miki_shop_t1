@@ -80,15 +80,13 @@ const PaymentSection = () => {
                 check: data.check,
             },
         })
-        res.then((value) => {
+        .then((value) => {
             setCart([])
             router.replace("/")
         })
-        res.catch(err => {
+        .catch(err => {
             console.log(err)
         })
-
-        console.log(data.data)
     }
     // UI
     return (

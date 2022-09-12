@@ -51,8 +51,10 @@ export function RegisterFormSection() {
     reset,
     formState: { errors },
   } = methods;
-
+  
   // Handle Submit
+  let mailErr;
+  let messageErrMail;
   const onSubmit = (data) => {
     // Logic request
     if (data) {
@@ -71,23 +73,20 @@ export function RegisterFormSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      })
       // router.push('/login')
       // Xử lí khi thành công
-      res.then((data) => {
+      .then((data) => {
         setErrMail(undefined);
         router.push('/auth/login')
-      });
-      let mailErr;
-      let messageErrMail;
+      })
       // Get error
-      res.catch((value) => {
+      .catch((value) => {
         mailErr = value?.response?.data?.errEmail;
         messageErrMail = value?.response?.data?.message;
         if (mailErr == false) {
           setErrMail(messageErrMail);
         }
-        console.log(value);
       });
       reset();
     }
