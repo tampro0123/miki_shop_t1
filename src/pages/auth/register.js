@@ -8,6 +8,7 @@ import { RegisterFormSection } from 'src/sections/auth';
 import imgRegister from 'src/assets/Register/Register.jpg';
 import CircleBgr from 'src/components/Circles';
 import Page from 'src/components/Page';
+import Link from 'next/link';
 
 const Register = () => {
   // Set width window when resize
@@ -32,11 +33,15 @@ const Register = () => {
             <Image height={"100%"} width={646} src={imgRegister} alt="imgRegister" className="rounded-l-16 mobile:hidden" />
             {/* Content */}
             <div className="w-[490px] bg-bgr-auth mobile:bg-transparent rounded-r-16">
+              <Link href='/'>
+              <a>
               <div className="flex items-center flex-col mt-14 mobile:mt-10">
                 {/* Respondsive Logo */}
                 <LogoIcon width={windowWidth <= 480 ? 17 : 40} height={windowWidth <= 480 ? 17 : 40} />
                 <h1 className="font-plf font-bold text-[40px] leading-[48px] mobile:text-[24px] mobile:leading-[32px]">MIKI JEWELRY</h1>
               </div>
+              </a>
+              </Link>
               {/* Form name */}
               <h3 className="text-xl leading-7 font-bold ml-10 mt-[72px] mobile:ml-[16px] mobile:text-base mobile:leading-4 mobile:mt-[26px]">Đăng ký tài khoản</h3>
               {/* Login form */}

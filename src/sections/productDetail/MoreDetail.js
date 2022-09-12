@@ -177,7 +177,7 @@ export default function MoreDetail({ product, feedbacks }) {
                       <div className="flex">
                         <div className=" overflow-hidden mr-3">
                           <Image
-                            src={feedback.user.image}
+                            src={feedback.user.avatar}
                             width="54"
                             height="54"
                             placeholder="empty"

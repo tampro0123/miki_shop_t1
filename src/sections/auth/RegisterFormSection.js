@@ -76,7 +76,7 @@ export function RegisterFormSection() {
       // Xử lí khi thành công
       res.then((data) => {
         setErrMail(undefined);
-        router.push('/login')
+        router.push('/auth/login')
       });
       let mailErr;
       let messageErrMail;

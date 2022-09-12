@@ -53,7 +53,7 @@ export default function Header() {
         .then(value => {
           setValueUser({})
           setValueCart([])
-          return router.replace('/login')
+          return router.replace('/auth/login')
         })
         .catch(err => console.error(err))
     }
@@ -136,7 +136,7 @@ export default function Header() {
 
             </a>
           </Link>
-          <Link href={valueUser?.id ? '' : '/login'}>
+          <Link href={valueUser?.id ? '' : '/auth/login'}>
             <a className="py-[4px] relative flex items-center group" onClick={() => setActive(!active)} onBlur={() => setActive(false)}>
               {valueUser?.avatar ?
                 <img

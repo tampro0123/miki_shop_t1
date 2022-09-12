@@ -32,7 +32,7 @@ const login = () => {
     if (user?.role) {
       router.replace('/')
     }
-    if (!user.role) {
+    if (!user?.role) {
       SetLoading(false)
     }
   }, [])
