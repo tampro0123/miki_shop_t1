@@ -28,7 +28,7 @@ export function ForgotPasswordFormSection() {
     reValidateMode: 'onBlur',
     resolver: yupResolver(schema),
   });
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
   // Handle Submit
   const onSubmit = (data) => {
@@ -58,7 +58,6 @@ export function ForgotPasswordFormSection() {
           setMessLog(null);
         }, 3000);
       })
-      reset();
     }
   };
 
@@ -88,7 +87,13 @@ export function ForgotPasswordFormSection() {
         >
           Gửi
         </Button>
-        <h1 className="text-sm mt-[32px]">Hoặc đăng nhập bằng</h1>
+        <div className="flex mt-4 items-center">
+          <h1 className="text-sm leading-[22px] mr-1">Bạn đã có tài khoản</h1>
+          <Button to="/auth/login" text className="text-base leading-6 font-bold">
+            Đăng nhập
+          </Button>
+        </div>
+        <h1 className="text-sm mt-4">Hoặc đăng nhập bằng</h1>
         {/* Login with facebook or google */}
         <div className="mt-6 flex w-full justify-between">
           <Button href="https://m.facebook.com/login" outline className="mr-[7px] mobile:w-[168px] mobile:h-[56px] text-base leading-[24px] rounded-[40px]">

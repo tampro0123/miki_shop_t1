@@ -52,9 +52,9 @@ export function RegisterFormSection() {
     formState: { errors },
   } = methods;
   
-  // Handle Submit
   let mailErr;
   let messageErrMail;
+  // Handle Submit
   const onSubmit = (data) => {
     // Logic request
     if (data) {
@@ -184,7 +184,7 @@ export function RegisterFormSection() {
         {/* Go to regiter page */}
         <div className="flex mt-4 items-center mb-[84px]">
           <h1 className="text-sm leading-[22px] mr-1">Bạn đã có tài khoản</h1>
-          <Button to="/login" text className="text-base leading-6 font-bold">
+          <Button to="/auth/login" text className="text-base leading-6 font-bold">
             Đăng nhập
           </Button>
         </div>
