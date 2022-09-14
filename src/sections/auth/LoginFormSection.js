@@ -117,7 +117,7 @@ export function LoginFormSection() {
           passwordErr={errPassword}
         />
         {/* Button forgot password */}
-        <Button to="/forgot-password" text className="text-sm leading-[22px] font-medium text-black">
+        <Button to="/auth/forgot-password" text className="text-sm leading-[22px] font-medium text-black">
           Quên mật khẩu?
         </Button>
         {/* Button Sign in */}
@@ -151,7 +151,7 @@ export function LoginFormSection() {
         {/* Go to regiter page */}
         <div className="flex mt-4 items-center mb-[84px]">
           <h1 className="text-sm leading-[22px] mr-1">Bạn chưa có tài khoản</h1>
-          <Button to="/register" className="text-base leading-6 font-bold">
+          <Button to="/auth/register" className="text-base leading-6 font-bold text-price-text">
             Đăng ký
           </Button>
         </div>

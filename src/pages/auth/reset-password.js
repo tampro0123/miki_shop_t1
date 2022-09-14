@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState, useEffect } from "react"
 // Import component, function, asset
 import { LogoIcon } from 'src/components/icons';
-import { LoginFormSection } from 'src/sections/auth';
+import { ResetPasswordFormSection } from 'src/sections/auth';
 import imgLogin from 'src/assets/Login/Login.jpg';
 import CircleBgr from 'src/components/Circles';
 import { useRecoilValue } from 'recoil'
@@ -12,7 +12,7 @@ import { dataUser } from 'src/recoils/dataUser'
 import { useRouter } from 'next/router'
 import Page from 'src/components/Page';
 import Link from 'next/link';
-const login = () => {
+const ResetPassword = () => {
   // Set width window when resize
   const [windowWidth, setWindowWidth] = useState(undefined);
   // Get size window to respondsive
@@ -45,7 +45,7 @@ const login = () => {
           <div className="flex justify-center">
             <div className="flex w-[1136px] mobile:w-[375px] mobile:justify-center">
               {/* Image */}
-              <Image height={"100%"} width={646} src={imgLogin} alt="imgRegister" className="rounded-l-16 mobile:hidden" />
+              <Image height={700} width={646} src={imgLogin} alt="imgRegister" className="rounded-l-16 mobile:hidden" />
               {/* Content */}
               <div className="w-[490px] bg-bgr-auth mobile:bg-transparent rounded-r-16">
                 <div className="flex items-center flex-col mt-14 mobile:mt-10">
@@ -58,9 +58,9 @@ const login = () => {
                   </Link>
                 </div>
                 {/* Form name */}
-                <h3 className="text-xl leading-7 font-bold ml-10 mt-[72px] mobile:ml-[16px] mobile:text-base mobile:leading-4 mobile:mt-[26px]">Đăng nhập</h3>
-                {/* Login form */}
-                <LoginFormSection />
+                <h3 className="text-xl leading-7 font-bold ml-10 mt-[72px] mobile:ml-[16px] mobile:text-base mobile:leading-4 mobile:mt-[26px]">Thay đổi mật khẩu</h3>
+                {/* forgot form */}
+                <ResetPasswordFormSection />
               </div>
             </div>
           </div>
@@ -79,4 +79,4 @@ const login = () => {
   }
 };
 
-export default login;
+export default ResetPassword;

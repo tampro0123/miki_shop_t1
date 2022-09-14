@@ -51,7 +51,9 @@ export function RegisterFormSection() {
     reset,
     formState: { errors },
   } = methods;
-
+  
+  let mailErr;
+  let messageErrMail;
   // Handle Submit
   const onSubmit = (data) => {
     // Logic request
@@ -71,23 +73,20 @@ export function RegisterFormSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      })
       // router.push('/login')
       // Xử lí khi thành công
-      res.then((data) => {
+      .then((data) => {
         setErrMail(undefined);
-        router.push('/login')
-      });
-      let mailErr;
-      let messageErrMail;
+        router.push('/auth/login')
+      })
       // Get error
-      res.catch((value) => {
+      .catch((value) => {
         mailErr = value?.response?.data?.errEmail;
         messageErrMail = value?.response?.data?.message;
         if (mailErr == false) {
           setErrMail(messageErrMail);
         }
-        console.log(value);
       });
       reset();
     }
@@ -185,7 +184,7 @@ export function RegisterFormSection() {
         {/* Go to regiter page */}
         <div className="flex mt-4 items-center mb-[84px]">
           <h1 className="text-sm leading-[22px] mr-1">Bạn đã có tài khoản</h1>
-          <Button to="/login" text className="text-base leading-6 font-bold">
+          <Button to="/auth/login" text className="text-base leading-6 font-bold">
             Đăng nhập
           </Button>
         </div>
