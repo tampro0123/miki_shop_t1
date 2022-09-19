@@ -22,6 +22,7 @@ const CartSchema = new Schema(
     ],
     payment: { type: String, required: true },
     receipt: { type: Number, required: true },
+    status: { type: String, enum: ['PENDING', 'SHIPPING', 'SUCCESS', 'CANCELLED'], default: 'PENDING' },
   },
   {
     collection: "carts",

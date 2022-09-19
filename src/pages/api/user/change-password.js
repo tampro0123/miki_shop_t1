@@ -9,8 +9,6 @@ const changePassWordHandler = async (req, res) => {
   const { method } = req;
   const { userId, password, newPassword } = req.body;
 
-  console.log(token);
-
   switch (method) {
     case "POST":
       try {

@@ -27,6 +27,24 @@ const editUserHandler = async (req, res) => {
           return res.status(404).json({ success: false, message: "User not found" });
         }
 
+        if (!avatar) {
+          await User.findByIdAndUpdate(
+            id,
+            {
+              username,
+              birthday,
+              gender,
+              phoneNumber,
+            },
+            { new: true }
+          );
+
+          return res.status(201).json({
+            success: true,
+            message: 'User updated',
+          });
+        }
+
         const options = {
           upload_preset: 'usersAvatar',
           public_id: user._id,
