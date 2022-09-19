@@ -547,7 +547,6 @@ export const Close2 = () => (
   <svg className='cursor-pointer' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
     <path d="M10 10.1834L21.8166 22M10 21.8166L21.8166 10" stroke="black" strokeWidth="1.5" />
   </svg>)
-
 export const Logout = ({ iconClass }) => (
   <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
     <path d="M22.6667 10.6667L20.7867 12.5467L22.8933 14.6667H12V17.3333H22.8933L20.7867 19.44L22.6667 21.3333L28 16L22.6667 10.6667ZM6.66667 6.66667H16V4H6.66667C5.2 4 4 5.2 4 6.66667V25.3333C4 26.8 5.2 28 6.66667 28H16V25.3333H6.66667V6.66667Z" fill="black" />
@@ -558,6 +557,7 @@ export const Delete = ({ iconClass }) => (
     <path d="M21.3332 12V25.3333H10.6665V12H21.3332ZM19.3332 4H12.6665L11.3332 5.33333H6.6665V8H25.3332V5.33333H20.6665L19.3332 4ZM23.9998 9.33333H7.99984V25.3333C7.99984 26.8 9.19984 28 10.6665 28H21.3332C22.7998 28 23.9998 26.8 23.9998 25.3333V9.33333Z" fill="black" />
   </svg>
 )
+
 
 export const Chart = ({ iconClass }) => (
   <svg className={iconClass} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
