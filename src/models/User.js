@@ -4,12 +4,15 @@ require("./Products");
 
 const UserSchema = new Schema(
   {
+    googleId: { type: String, default: '' },
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true },
+    phoneNumber: { type: String, default: '' },
+    gender: { type: String, default: 'other' },
     birthday: { type: Date, required: true },
     password: { type: String, required: true, minLength: 8 },
     role: { type: String, default: 'user' },
-    image: { type: String, required: true, default: 'https://res.cloudinary.com/miki-shop-dev/image/upload/v1660383816/users/jnzskcdcgw64n3lorpro.jpg' },
+    avatar: { type: String, required: true, default: 'https://res.cloudinary.com/miki-shop-dev/image/upload/v1660383816/users/jnzskcdcgw64n3lorpro.jpg' },
     cart: [
       {
         _id: false,

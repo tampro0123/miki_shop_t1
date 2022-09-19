@@ -23,7 +23,6 @@ const uploadHandler = async (req, res) => {
     case 'PATCH':
       const { name, image, subImage, description, discount, category, storage } = req.body;
       const currentProduct = await Products.findById(id);
-
       try {
         //Kiểm tra xem có thay đổi image hay không
         if (!image && subImage.length < 1) {

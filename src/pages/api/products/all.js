@@ -5,7 +5,6 @@ const handler = async (req, res) => {
   const { method } = req;
   const { page, limit, sort, order, category } = req.query;
   await dbConnect();
-
   switch (method) {
     case 'GET':
       try {
@@ -44,6 +43,7 @@ const handler = async (req, res) => {
             name: 1,
             discount: 1,
             slug: 1,
+            category: 1,
             "storage.price": 1,
             images: 1
           }).sort(sortInstance)

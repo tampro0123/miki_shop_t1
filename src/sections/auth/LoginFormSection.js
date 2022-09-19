@@ -68,9 +68,13 @@ export function LoginFormSection() {
           id: value.data.user._id,
           userName: value.data.user.username,
           email: value.data.user.email,
-          avatar: value.data.user.image,
+          avatar: value.data.user.avatar,
           role: value.data.user.role,
+          birthday: value.data.user.birthday,
+          phoneNumber: value.data.user.phoneNumber,
+          gender: value.data.user.gender,
         })
+        console.log(value)
         setValueCart(value.data.user.cart)
         router.push('/')
       });

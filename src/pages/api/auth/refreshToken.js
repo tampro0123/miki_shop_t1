@@ -4,10 +4,10 @@ import jwt from 'jsonwebtoken';
 import { generateAccessToken, generateRefreshToken } from 'src/utils/generateToken';
 import cookie from 'cookie';
 
-dbConnect();
 
 const refreshTokenHandler = async (req, res) => {
   const { method } = req;
+  await dbConnect();
 
   switch (method) {
     case 'POST':

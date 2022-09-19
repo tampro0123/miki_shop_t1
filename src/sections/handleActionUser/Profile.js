@@ -5,7 +5,7 @@ import { inforUser } from 'src/recoils/inforUser'
 import convertToBase64 from 'src/sections/handleAction/functionHandle/convertImg'
 export default function Profile() {
     const [loading, setLoading] = useState(true)
-    const [avata, setAvata] = useRecoilState(inforUser)
+    const [data, setData] = useRecoilState(inforUser)
     const [changeAvata, setChangeData] = useState('')
     useEffect(() => {
         setLoading(false)
@@ -18,24 +18,22 @@ export default function Profile() {
         convertArr.forEach(async (item) => {
             let base64 = await convertToBase64(item);
             setChangeData(base64);
-            setAvata(prev => ({
+            setData(prev => ({
                 ...prev,
                 image: base64
             }))
         });
     }
-    console.log(changeAvata)
-    console.log(avata)
     return (
         <div className="px-[40px] mt-[30px] flex gap-[10px]">
             <img
-                width='100px'
-                height='100px'
+                width='120px'
+                height='120px'
                 className='rounded-8'
-                src={changeAvata || avata.image}
+                src={changeAvata || data.avatar}
             />
             <div>
-                <p className='text-[20px] font-bold mb-[20px] '>{avata.name}</p>
+                <p className='text-[20px] font-bold mb-[20px] '>{data.name}</p>
                 <Button primary
                     className="bg-[#7367f0] px-0 py-0"
                     classHover="hover:bg-bgr-auth hover:border-[1px] hover:text-black duration-300 hover:border-black"
