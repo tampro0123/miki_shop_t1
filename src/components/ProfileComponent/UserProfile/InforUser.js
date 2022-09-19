@@ -8,8 +8,9 @@ import Button from '../../Button'
 import FormEdit from './FormEdit'
 export default function InforUser() {
     const data = useRecoilValue(dataUser)
+    console.log(data)
     const [loading, setLoading] = useState(true)
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState(data.avatar)
     const [edit, setEdit] = useState(false)
     const [userName, setUserName] = useState(data.userName)
     const onChangeData = (e) => {
@@ -49,7 +50,7 @@ export default function InforUser() {
                 </div>
             </div>
             <div>
-                <FormEdit />
+                <FormEdit avatar={avatar} />
             </div>
         </div >
     )
