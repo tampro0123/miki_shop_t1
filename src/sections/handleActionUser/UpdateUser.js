@@ -11,27 +11,26 @@ import { useRouter } from 'next/router'
 export default function CreateUser() {
     const router = useRouter();
     const { id } = router.query;
+    console.log(id)
     const [loading, setLoading] = useState(true)
     const [dataUser, setDataUser] = useRecoilState(inforUser)
     const schema = yup.object().shape({
-        nameUser: yup.string().required('Nhập tên người dùng'),
-        // emailUser: yup.string().required("Không để trống email")
+        // email: yup.string().required("Không để trống email")
         //     .matches(
         //         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         //         'Email không tồn tại'
         //     ),
-        password: yup.string().trim().required('Vui lòng nhập mật khẩu').min(8, 'Nhập mật khẩu từ 6 đến 8 kí tự'),
-
     });
     const methods = useForm({
         resolver: yupResolver(schema),
         reValidateMode: 'onBlur',
         defaultValues: {
-            nameUser: dataUser.name,
-            emailUser: dataUser.email,
-            password: dataUser.password,
+            username: dataUser.name,
+            email: dataUser.email,
             role: dataUser.role,
             birthday: dataUser?.birthday?.substring(0, dataUser?.birthday.indexOf('T')),
+            gender: dataUser.gender,
+            phoneNumber: dataUser.phoneNumber
         }
     });
     const { handleSubmit, reset } = methods;
@@ -53,19 +52,21 @@ export default function CreateUser() {
             name: "Người dùng"
         },
     ]
-    const onSubmit = (data) => {
-        // const item = axiosAuth({
-        //     method: 'POST',
-        //     url: `api/user/${id}`,
-        //     data: {
-        //     },
-        // })
-        console.log(data)
+    const onSubmit = async (data) => {
+        const item = await axiosAuth({
+            method: 'PATCH',
+            url: `http://localhost:3000/api/user/edit/${id}`,
+            data: {
+                ...data,
+                avatar: dataUser.avatar
+            },
+        })
+        console.log(item)
     }
     useEffect(() => {
         setLoading(false)
     }, [])
-    const render = ['Nam', 'Nữ']
+    const gender = ['Nam', 'Nữ']
     if (loading) <h1>Loading....</h1>
     return (
         <FormProviderBox className="px-10 max-full mt-[20px]" methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +76,7 @@ export default function CreateUser() {
                     className="flex flex-col"
                     styleLabel={style.label}
                     label={'Tên người dùng: '}
-                    name="nameUser"
+                    name="username"
                     type="text"
                     styleMessage={style.message}
                     placeholder="Tên người dùng..."
@@ -86,22 +87,13 @@ export default function CreateUser() {
                     styleLabel={style.label}
                     styleMessage={style.message}
                     label={'Email : '}
-                    name="emailUser"
+                    name="email"
                     type="text"
+                    disabled
                     placeholder="Email..."
                 />
             </div>
             <div className="grid grid-cols-2 gap-[40px] w-full">
-                <TextField
-                    styleInput={style.lgInput}
-                    className="flex flex-col"
-                    styleMessage={style.message}
-                    styleLabel={style.label}
-                    label={'Mật khẩu: '}
-                    name="password"
-                    type="password"
-                    placeholder="Nhập mật khẩu..."
-                />
                 <TextField
                     styleInput={style.lgInput}
                     className="flex flex-col"
@@ -111,8 +103,6 @@ export default function CreateUser() {
                     name="birthday"
                     type="date"
                 />
-            </div>
-            <div className="grid grid-cols-2 gap-[40px] w-full">
                 <TextField
                     styleInput={style.lgInput}
                     className="flex flex-col"
@@ -123,12 +113,15 @@ export default function CreateUser() {
                     type="number"
                     placeholder="+12345678..."
                 />
+            </div>
+            <div className="grid grid-cols-2 gap-[40px] w-full">
+
                 <RadioField
-                    options={render}
+                    options={gender}
                     styleLabelList={style.label}
                     label={'Giới tính : '}
                     styleMessage={style.message}
-                    name="render"
+                    name="gender"
                     select='flex gap-[10px] h-12 items-center text-[20px]'
                     styleLabelItem='mr-[8px]'
                 />

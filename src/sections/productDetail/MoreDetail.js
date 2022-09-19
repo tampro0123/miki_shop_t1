@@ -12,7 +12,7 @@ export default function MoreDetail({ product, feedbacks }) {
   const Rate3Star = feedbacks.filter((feedback) => feedback.rate == 3);
   const Rate4Star = feedbacks.filter((feedback) => feedback.rate == 4);
   const Rate5Star = feedbacks.filter((feedback) => feedback.rate == 5);
-
+  console.log(feedbacks)
   const [tabIndex, setTabIndex] = useState(3);
   const [rateIndex, setRateIndex] = useState(0);
 
@@ -177,7 +177,7 @@ export default function MoreDetail({ product, feedbacks }) {
                       <div className="flex">
                         <div className=" overflow-hidden mr-3">
                           <Image
-                            src={feedback.user.image}
+                            src={feedback?.user?.avatar}
                             width="54"
                             height="54"
                             placeholder="empty"
@@ -233,7 +233,7 @@ export default function MoreDetail({ product, feedbacks }) {
                     <div key={Math.random()} className="mb-9 w-full flex">
                       <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback.user.image}
+                          src={feedback?.user?.avatar}
                           width="54"
                           height="54"
                           placeholder="empty"
@@ -263,7 +263,7 @@ export default function MoreDetail({ product, feedbacks }) {
                     <div key={Math.random()} className="mb-9 w-full flex">
                       <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback.user.image}
+                          src={feedback?.user?.avatar}
                           width="54"
                           height="54"
                           placeholder="empty"
@@ -293,7 +293,7 @@ export default function MoreDetail({ product, feedbacks }) {
                     <div key={Math.random()} className="mb-9 w-full flex">
                       <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback.user.image}
+                          src={feedback?.user?.avatar}
                           width="54"
                           height="54"
                           placeholder="empty"
@@ -323,7 +323,7 @@ export default function MoreDetail({ product, feedbacks }) {
                     <div key={Math.random()} className="mb-9 w-full flex">
                       <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback.user.image}
+                          src={feedback?.user?.avatar}
                           width="54"
                           height="54"
                           placeholder="empty"
@@ -353,13 +353,14 @@ export default function MoreDetail({ product, feedbacks }) {
                     <div key={Math.random()} className="mb-9 w-full flex">
                       <div className=" overflow-hidden mr-3">
                         <Image
-                          src={feedback.user.image}
+                          src={feedback?.user?.avatar}
                           width="54"
                           height="54"
                           placeholder="empty"
                           objectFit="cover"
                           className='rounded-full'
                         />
+
                       </div>
                       <div>
                         <p>{feedback.user.username}</p>

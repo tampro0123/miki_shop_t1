@@ -23,8 +23,9 @@ const userHandler = async (req, res) => {
 
           const users = await User.find(findInstance, {
             username: 1,
-            image: 1,
+            avatar: 1,
             role: 1,
+            email: 1,
           }).sort({ 'username': 1 })
             .limit(limit)
             .skip(limit * pageInstance);

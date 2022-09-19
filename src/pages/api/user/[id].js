@@ -3,12 +3,20 @@ import User from 'src/models/User';
 import { cloudinary } from 'src/utils/cloudinary';
 import dbConnect from 'src/utils/dbConnect.js';
 
+export const config = {
+  api:
+  {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
 
 const userHandler = async (req, res) => {
   await dbConnect();
   const { method } = req;
   const { id } = req.query;
-
+  console.log(id)
   switch (method) {
     case "GET":
       try {
@@ -36,8 +44,15 @@ const userHandler = async (req, res) => {
           return res.status(404).json({ success: false, message: "User not found" });
         }
 
+        if (!avatar) {
+          await User.findByIdAndUpdate(id, {
+            username, birthday, gender, phoneNumber,
+          }, { new: true });
+          return res.status(201).json({ success: true, message: 'User updated', });
+        }
+
         const options = {
-          upload_preset: 'users',
+          upload_preset: 'usersAvatar',
           public_id: user._id,
           overwrite: true,
         };

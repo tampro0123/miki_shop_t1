@@ -1,7 +1,6 @@
 // Import Library
 import Link from 'next/link';
-import React from 'react';
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 // Import component, function, asset
 import { CaretDown, LogoIcon, CartIcon, UserIcon, Logout, History, Dashboard, Bell } from 'src/components/Icons/icons.js';
 import HeaderMobile from 'src/layouts/header/HeaderMobile';
@@ -36,6 +35,18 @@ export default function Header() {
       return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     }
   }, []);
+  const navRef = useRef(null)
+  const onBlur = (e) => {
+    if (active && !navRef.current.contains(e.target)) {
+      setActive(prev => !prev)
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('click', onBlur)
+    return () => {
+      document.removeEventListener('click', onBlur)
+    }
+  }, [onBlur, active])
   function handleClick() {
     if (valueUser.id) {
       const data = axiosAuth({
@@ -63,7 +74,8 @@ export default function Header() {
   }
   if (loading) <h1>Loading....</h1>
   return (
-    <header className="flex justify-center">
+    <header
+      className="flex justify-center">
       {windowWidth <= 480 ? <HeaderMobile /> : <div className="flex justify-between w-[1136px] mobile:w-[375px] py-[24px]">
         <div className="flex items-end">
           <ul className="flex justify-between gap-[42px]">
@@ -137,12 +149,19 @@ export default function Header() {
             </a>
           </Link>
           <Link href={valueUser?.id ? '' : '/login'}>
-            <a className="py-[4px] relative flex items-center group" onClick={() => setActive(!active)} onBlur={() => setActive(false)}>
+            <a className="py-[4px] relative flex items-center group"
+              onClick={() => {
+                console.log(active)
+                setActive(prev => !prev)
+              }}
+              ref={navRef}
+            >
               {valueUser?.avatar ?
-                <img
+                <Image
                   width='30px'
                   height='30px'
-                  className="rounded-[50%]"
+                  className="rounded-[50%] "
+                  objectFit="cover"
                   src={valueUser.avatar}
 
                 />
@@ -153,9 +172,15 @@ export default function Header() {
                 <div className={active ? "absolute z-20  max-w-[900px] w-[250px] bg-bgr right-[-30px] top-[50px] block shadow-xl rounded-8 transition-500"
                   : 'hidden'}>
                   <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
-                    <li onClick={() => router.push('/profile')} className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
-                      <UserIcon classNameIcon='w-[25px] ' />
-                      Thông tin cá nhân</li>
+                    <li
+                      className="text-16 font-bold hover:text-3rd-text duration-500 ">
+                      <Link href='/profile'>
+                        <a className='flex gap-[5px] items-center'>
+                          <UserIcon classNameIcon='w-[25px] ' />
+                          <span>Thông tin cá nhân</span>
+                        </a>
+                      </Link>
+                    </li>
                     <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
                       <Bell iconClass='w-[25px]' />
                       Thông báo
@@ -184,6 +209,6 @@ export default function Header() {
         </div>
       </div>}
 
-    </header>
+    </header >
   );
 }

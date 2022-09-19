@@ -2,7 +2,6 @@ import User from 'src/models/User';
 import dbConnect from 'src/utils/dbConnect.js';
 import withAuth from 'src/middleware/withAuth';
 import withRoles from 'src/middleware/withRoles';
-import bcrypt from 'bcrypt';
 import { cloudinary } from 'src/utils/cloudinary.js';
 
 export const config = {
@@ -17,8 +16,7 @@ const editUserHandler = async (req, res) => {
   await dbConnect();
   const { method } = req;
   const { id } = req.query;
-  const { email, username, role, birthday, avatar, gender, phoneNumber, password } = req.body;
-
+  const { username, role, birthday, avatar, gender, phoneNumber } = req.body;
   switch (method) {
     case "PATCH":
       try {
@@ -29,22 +27,17 @@ const editUserHandler = async (req, res) => {
         }
 
         const options = {
-          upload_preset: 'users',
+          upload_preset: 'usersAvatar',
           public_id: user._id,
           overwrite: true,
         };
         const result = await cloudinary.uploader.upload(avatar, options);
 
-        const salt = await bcrypt.genSalt(10);
-        const passwordHash = await bcrypt.hash(password, salt);
-
         await User.findByIdAndUpdate(
           id,
           {
-            email,
             username,
             role,
-            password: passwordHash,
             birthday,
             avatar: result.secure_url,
             gender,
