@@ -36,7 +36,7 @@ const forgotPassWordHandler = async (req, res) => {
           to: email,
           subject: "MikiShop Reset Password",
           // text: "Đây là email text",
-          html: `<h2>Email from MikiShop</h2><p>Ấn vào <a href="http://localhost:3000/auth/reset-password?token=${token}">đây</a> để đặt lại mật khẩu của bạn </p>`,
+          html: `<h2>Email from MikiShop</h2><p>Ấn vào <a href="http://localhost:3000/auth/reset-password?token=${token}">đây</a> để đặt lại mật khẩu của bạn (hết hạn sau 5 phút)</p>`,
         };
 
         transporter.sendMail(options, (err, result) => {

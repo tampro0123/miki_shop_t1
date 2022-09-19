@@ -4,13 +4,13 @@ import { cloudinary } from 'src/utils/cloudinary';
 import dbConnect from 'src/utils/dbConnect.js';
 
 export const config = {
-  api:
-  {
+  api: {
     bodyParser: {
-      sizeLimit: '10mb',
+      sizeLimit: '10mb', // Set desired value here
     },
   },
 };
+
 
 const userHandler = async (req, res) => {
   await dbConnect();
@@ -45,10 +45,21 @@ const userHandler = async (req, res) => {
         }
 
         if (!avatar) {
-          await User.findByIdAndUpdate(id, {
-            username, birthday, gender, phoneNumber,
-          }, { new: true });
-          return res.status(201).json({ success: true, message: 'User updated', });
+          await User.findByIdAndUpdate(
+            id,
+            {
+              username,
+              birthday,
+              gender,
+              phoneNumber,
+            },
+            { new: true }
+          );
+
+          return res.status(201).json({
+            success: true,
+            message: 'User updated',
+          });
         }
 
         const options = {

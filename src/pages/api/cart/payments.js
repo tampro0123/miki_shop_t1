@@ -35,6 +35,16 @@ const paymentsHandler = async (req, res) => {
         });
 
         for (const cartItem of cart) {
+          const product = await Products.findById(cartItem.product);
+          const storage = product.storage.find(item => item.size == cartItem.size)
+
+          if (cartItem.quantity > storage.quantity) {
+            return res.status(400).json({
+              success: false,
+              message: `Sản phẩm ${cartItem.name} chỉ còn tối đa ${storage.quantity} sản phẩm!`
+            });
+          }
+
           await Products.findOneAndUpdate(
             { _id: cartItem.product, "storage.size": cartItem.size },
             { $inc: { "storage.$.quantity": -cartItem.quantity } }

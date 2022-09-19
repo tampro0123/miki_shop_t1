@@ -6,6 +6,7 @@ import cookie from 'cookie';
 
 
 const refreshTokenHandler = async (req, res) => {
+  await dbConnect();
   const { method } = req;
   await dbConnect();
 
