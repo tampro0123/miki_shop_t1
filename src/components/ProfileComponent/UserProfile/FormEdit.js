@@ -4,19 +4,17 @@ import { FormProviderBox, TextField, RadioField } from 'src/components/hook-form
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import Button from 'src/components/Button';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { dataUser } from 'src/recoils/dataUser';
-export default function FormEdit() {
-    const inforUser1 = useRecoilValue(dataUser)
+import axiosAuth from 'src/utils/axios';
+import Loading from 'src/components/Loading';
+export default function FormEdit({ avatar }) {
+    const [inforUser, setInforUser] = useRecoilState(dataUser)
+    console.log(inforUser)
     const [loading, setLoading] = useState(true)
     const genderRadio = ['Khác', 'Nam', 'Nữ']
     const schema = yup.object().shape({
-        nameUser: yup.string().required('Nhập tên người dùng'),
-        emailUser: yup.string().required("Không để trống email")
-            .matches(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                'Email không tồn tại'
-            ),
+        username: yup.string().required('Nhập tên người dùng'),
         phoneNumber: yup.string()
             .required('Vui lòng nhập số điện thoại')
             .matches(
@@ -30,9 +28,11 @@ export default function FormEdit() {
         resolver: yupResolver(schema),
         reValidateMode: 'onBlur',
         defaultValues: {
-            nameUser: inforUser1.userName,
-            emailUser: inforUser1.email,
-            birthday: inforUser1?.birthday?.substring(0, inforUser1?.birthday.indexOf('T')),
+            username: inforUser.userName,
+            emailUser: inforUser.email,
+            birthday: inforUser?.birthday,
+            phoneNumber: inforUser?.phoneNumber,
+            gender: inforUser?.gender
         }
     });
     const { handleSubmit, reset } = methods;
@@ -42,13 +42,36 @@ export default function FormEdit() {
         message: 'text-msgEr text-sm',
         label: 'mt-6 text-[rgba(0,0,0,0.6)] block pl-[8px] mb-[8px]',
     };
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        const res = await axiosAuth({
+            method: 'PATCH',
+            url: `http://localhost:3000/api/user/${inforUser.id}`,
+            data: {
+                ...data,
+                avatar,
+            }
+        })
+        console.log(res, data)
+        try {
+
+            setInforUser(prev => {
+                return {
+                    ...prev,
+                    ...data,
+                    avatar
+                }
+
+            })
+        } catch (err) {
+            console.log(err)
+        }
     }
     useEffect(() => {
         setLoading(false)
     }, [])
-    if (loading) <h1>Loading....</h1>
+    if (loading) {
+        return <div className='w-full h-full'><Loading /></div>
+    }
     return (
         <FormProviderBox className="px-10 max-full mt-[20px]" methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-[40px] w-full">
@@ -57,7 +80,7 @@ export default function FormEdit() {
                     className="flex flex-col"
                     styleLabel={style.label}
                     label={'Tên người dùng: '}
-                    name="nameUser"
+                    name="username"
                     type="text"
                     styleMessage={style.message}
                     placeholder="Tên người dùng..."
