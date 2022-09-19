@@ -1,9 +1,9 @@
 import withAuth from 'src/middleware/withAuth';
-import withCartOwner from 'src/middleware/withCartOwner';
+import withRoles from 'src/middleware/withRoles';
 import Cart from 'src/models/Cart';
 import dbConnect from 'src/utils/dbConnect.js';
 
-const paymentsHandler = async (req, res) => {
+const getAllCartHanlder = async (req, res) => {
   await dbConnect();
   const { method } = req;
   const { page = 1, limit = 0, status } = req.query;
@@ -34,6 +34,7 @@ const paymentsHandler = async (req, res) => {
 
         const carts = await Cart.find(findInstance, {
           createdAt: 1,
+          user: 1,
           name: 1,
           products: 1,
           payment: 1,
@@ -60,4 +61,4 @@ const paymentsHandler = async (req, res) => {
   }
 };
 
-export default withAuth(withCartOwner(paymentsHandler));
+export default withAuth(withRoles(getAllCartHanlder, 'admin'));
