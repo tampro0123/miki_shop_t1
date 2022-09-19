@@ -56,10 +56,27 @@ module.exports = {
         text: {
           '50%': { color: "black" },
         },
+        // For Toast
+        fromRight: {
+          '0%': { transform: 'translateX(100%)', opacity: 0 },
+          '10%': { transform: 'translateX(0)', opacity: 1 },
+          '15%': { transform: 'translateX(10%)', opacity: 1 },
+          '20%': { transform: 'translateX(0)', opacity: 1 },
+          '30%': { transform: 'translateY(0)', opacity: 1 },
+          '90%': { transform: 'translateY(0)', opacity: 1 },
+          '100%': { transform: 'translateY(100%)', opacity: 0 },
+        },
+        growWidth: {
+          '0%': { width: 0 },
+          '100%': { width: '100%' },
+        },
       },
       animation: {
         loading: 'loading 2s linear infinite',
         text: 'text 3s ease-in-out infinite',
+        // For Toast
+        fromRight: 'fromRight 3s ease-in-out',
+        growWidth: 'growWidth 3s ease-in-out',
       },
     },
   },

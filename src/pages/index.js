@@ -9,6 +9,7 @@ import Products from 'src/sections/body/Products.js';
 import CircleBgr from 'src/components/Circles';
 import AboutSection from 'src/sections/body/AboutSection.js';
 
+
 //always import from src folder, not "./", "../", "../../",...
 export default function Home() {
   return (
