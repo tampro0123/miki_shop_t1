@@ -9,24 +9,27 @@ export default function OverLay({ children }) {
   const user = useRecoilValue(dataUser)
   const router = useRouter()
   const [loading, SetLoading] = useState(true)
-  useEffect(() => {
-    SetLoading(true)
-    router.prefetch('/')
-    if (user.role !== 'admin') {
-      router.replace('/')
-    } else {
-      SetLoading(false)
-    }
-  }, [])
-  if (loading) {
-    return <>Loading...</>;
-  }
+  // useEffect(() => {
+  //   SetLoading(true)
+  //   router.prefetch('/')
+  //   if (user.role !== 'admin') {
+  //     router.replace('/')
+  //   } else {
+  //     SetLoading(false)
+  //   }
+  // }, [])
+  // if (loading) {
+  //   return <>Loading...</>;
+  // }
   return (
     <div className='flex'>
       <LeftSide />
       <div className='max-w-[1280px] w-full ml-[420px]'>
         <HeaderAdmin />
-        {children}
+        <div className='mt-[170px]'>
+
+          {children}
+        </div>
       </div>
     </div>
   )

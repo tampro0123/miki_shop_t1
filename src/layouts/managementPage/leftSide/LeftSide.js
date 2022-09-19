@@ -39,8 +39,8 @@ export default function LeftSide() {
 
                 </div>
                 <div className='mb-[25px] hover:translate-x-[10px] duration-500'>
-                    <Link href="">
-                        <a className='text-[18px] text-[#625f6e] block p-[15px] ml-[20px]'>Đặt hàng</a>
+                    <Link href="/admin/managementOrder">
+                        <a className='text-[18px] text-[#625f6e] block p-[15px] ml-[20px]'>Quản lí đơn hàng</a>
                     </Link>
 
                 </div>

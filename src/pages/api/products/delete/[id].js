@@ -8,7 +8,6 @@ const ProductHandler = async (req, res) => {
   const { method } = req;
   const { id } = req.query;
   await dbConnect();
-
   switch (method) {
     case 'DELETE':
       try {

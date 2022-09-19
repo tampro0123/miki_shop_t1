@@ -1,10 +1,10 @@
+import BreadCrumb from 'src/components/BreadCrumb/BreadCrumb';
 import { useEffect, useState } from 'react';
 import Page from 'src/components/Page';
 import CartUser from 'src/sections/cartInfor/CartUser';
 import { useRecoilValue } from 'recoil';
 import { cartState } from 'src/recoils/cartState';
 import CartEmpty from 'src/sections/cartInfor/CartEmpty';
-import BreadCrumb from 'src/components/BreadCrumb/BreadCrumb';
 export default function cart() {
   const cartItems = useRecoilValue(cartState);
   const [dataItems, setDataItems] = useState([]);
@@ -31,12 +31,12 @@ export default function cart() {
               },
             ]}
           />
-          {dataItems.length ? (
+          {!dataItems.length ? (
+            <CartEmpty />
+          ) : (
             <div className="mt-[48px]">
               <CartUser />
             </div>
-          ) : (
-            <CartEmpty />
           )}
         </div>
       </div>

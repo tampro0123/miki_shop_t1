@@ -17,7 +17,6 @@ const editUserHandler = async (req, res) => {
   const { method } = req;
   const { id } = req.query;
   const { username, role, birthday, avatar, gender, phoneNumber } = req.body;
-
   switch (method) {
     case "PATCH":
       try {
@@ -26,7 +25,6 @@ const editUserHandler = async (req, res) => {
         if (!user) {
           return res.status(404).json({ success: false, message: "User not found" });
         }
-
         if (!avatar) {
           await User.findByIdAndUpdate(
             id,
@@ -44,7 +42,6 @@ const editUserHandler = async (req, res) => {
             message: 'User updated',
           });
         }
-
         const options = {
           upload_preset: 'usersAvatar',
           public_id: user._id,

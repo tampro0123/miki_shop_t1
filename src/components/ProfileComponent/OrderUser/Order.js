@@ -27,7 +27,7 @@ export default function Order() {
                 {check === 2 ? <ProcessOrder /> : ''}
                 {check === 3 ? <ShipPurchase /> : ''}
                 {check === 4 ? <CompleteShip /> : ''}
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }

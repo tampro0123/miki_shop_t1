@@ -9,6 +9,7 @@ const user = useLocalStorage('recoil-persist', 'userState')
 const accessToken = user?.accessToken
 console.log(user)
 const axiosAuth = axios.create({
+    withCredentials: true,
     baseUrl: 'http://localhost:3000',
     headers: {
         'Content-Type': 'application/json',
