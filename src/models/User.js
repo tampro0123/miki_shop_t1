@@ -11,7 +11,7 @@ const UserSchema = new Schema(
     gender: { type: String, default: 'other' },
     birthday: { type: Date, required: true },
     password: { type: String, required: true, minLength: 8 },
-    role: { type: String, default: 'user' },
+    role: { type: String, enum: ['admin', 'user'], default: 'user' },
     avatar: { type: String, required: true, default: 'https://res.cloudinary.com/miki-shop-dev/image/upload/v1660383816/users/jnzskcdcgw64n3lorpro.jpg' },
     cart: [
       {
