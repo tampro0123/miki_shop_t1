@@ -5,10 +5,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import Button from 'src/components/Button';
 import { dataUser } from 'src/recoils/dataUser';
+import axiosAuth from 'src/utils/axios';
+import { useRecoilValue } from 'recoil';
 export default function ChangePass() {
+    const inforUser = useRecoilValue(dataUser)
     const [loading, setLoading] = useState(true)
     const schema = yup.object().shape({
-        oldPassword: yup.string().required('Vui lòng nhập mật khẩu'),
+        password: yup.string().required('Vui lòng nhập mật khẩu'),
         newPassword: yup.string().required('Vui lòng nhập mật khẩu'),
         conFirmPass: yup.string().oneOf([yup.ref('newPassword'), null], 'Mật khẩu không khớp')
     });
@@ -23,8 +26,16 @@ export default function ChangePass() {
         message: 'text-msgEr text-sm',
         label: ' text-[rgba(0,0,0,0.6)] block pl-[8px] mb-[8px]',
     };
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        const res = await axiosAuth({
+            method: 'POST',
+            url: `/api/user/change-password`,
+            data: {
+                ...data,
+                userId: inforUser.id
+            }
+        })
+        console.log(res)
     }
     useEffect(() => {
         setLoading(false)
@@ -38,7 +49,7 @@ export default function ChangePass() {
                     className="flex flex-col mb-6"
                     styleLabel={style.label}
                     label={'Mật khẩu cũ: '}
-                    name="oldPassword"
+                    name="password"
                     type="password"
                     styleMessage={style.message}
                     placeholder="Mật khẩu cũ..."
@@ -77,3 +88,4 @@ export default function ChangePass() {
         </FormProviderBox>
     )
 }
+
