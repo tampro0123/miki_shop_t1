@@ -11,12 +11,21 @@ import { FormProviderBox } from 'src/components/hook-form';
 import { dataUser } from 'src/recoils/dataUser';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import axiosAuth from 'src/utils/axios';
-import { cartState } from 'src/recoils/cartState';
+import { cartState, totalCart } from 'src/recoils/cartState';
 import { useRouter } from 'next/router';
 
+// Lấy showToast
+import { showToast } from 'src/utils/showToast';
+
+// Lấy atom toasts 
+import { toasts } from "src/recoils/toasts"
+import { useSetRecoilState } from "recoil"
 const PaymentSection = () => {
+    // Lấy hàm setState
+    const setToast = useSetRecoilState(toasts)
     const router = useRouter()
     const idUser = useRecoilValue(dataUser)
+    const totalPrice = useRecoilValue(totalCart)
     const setCart = useSetRecoilState(cartState)
     // Create the option status in Payment methods section
     const [option, setOption] = useState(undefined)
@@ -69,24 +78,19 @@ const PaymentSection = () => {
             method: "POST",
             url: '/api/cart/payments',
             data: {
-                userId: idUser.id,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                city: data.city,
-                district: data.district,
-                ward: data.phoneNumber,
-                specificAddress: data.specificAddress,
-                phoneNumber: data.phoneNumber,
-                check: data.check,
+                ...data,
+                receipt: totalPrice
             },
         })
-        .then((value) => {
-            setCart([])
-            router.replace("/")
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then((value) => {
+                setCart([])
+                router.replace("/")
+                showToast('success', 'Thành công', 'Bạn đã thanh toán thành công', 3000, setToast)
+            })
+            .catch(err => {
+                console.log(err)
+                showToast('error', 'Thất bại', err, 3000, setToast)
+            })
     }
     // UI
     return (
