@@ -19,7 +19,7 @@ import { showToast } from 'src/utils/showToast';
 
 // Lấy atom toasts 
 import { toasts } from "src/recoils/toasts"
-import { useSetRecoilState } from "recoil"
+
 const PaymentSection = () => {
     // Lấy hàm setState
     const setToast = useSetRecoilState(toasts)
@@ -79,13 +79,13 @@ const PaymentSection = () => {
             url: '/api/cart/payments',
             data: {
                 ...data,
+                userId: idUser.id,
                 receipt: totalPrice
             },
         })
             .then((value) => {
                 setCart([])
                 router.replace("/")
-                showToast('success', 'Thành công', 'Bạn đã thanh toán thành công', 3000, setToast)
             })
             .catch(err => {
                 console.log(err)
