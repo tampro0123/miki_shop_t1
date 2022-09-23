@@ -149,10 +149,13 @@ export default function Header() {
             </a>
           </Link>
 
-          <Link href={valueUser?.id ? '' : '/login'}>
-            <a className="py-[4px] relative flex items-center group"
+          {/* <Link href={valueUser?.id ? '' : 'auth/login'}> */}
+            <div className="py-[4px] relative flex items-center group"
               onClick={() => {
-                console.log(active)
+                !valueUser && router.push({
+                  ...router,
+                  pathname: '/auth/login'
+                })
                 setActive(prev => !prev)
               }}
               ref={navRef}
@@ -205,8 +208,8 @@ export default function Header() {
                 ''
               }
 
-            </a>
-          </Link>
+            </div>
+          {/* </Link> */}
         </div>
       </div>}
 
