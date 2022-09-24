@@ -13,7 +13,7 @@ const logoutHandler = async (req, res) => {
     case 'POST':
       try {
         //Xoá bỏ refreshToken tương ứng với user logout
-        await RefreshToken.findByIdAndDelete(id);
+        await RefreshToken.deleteMany({ user: id });
         res.setHeader(
           'Set-Cookie',
           cookie.serialize('refreshToken', '', {
