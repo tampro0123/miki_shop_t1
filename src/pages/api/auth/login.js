@@ -34,7 +34,7 @@ async function handler(req, res) {
           const accessToken = generateAccessToken(user);
           const refreshToken = generateRefreshToken(user);
           await RefreshToken.create({
-            _id: user._id,
+            user: user._id,
             refreshToken,
           });
 
