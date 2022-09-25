@@ -45,7 +45,7 @@ export default function Toast({ toast }) {
     }
 
     return (
-        <div className="flex items-center shadow-lg rounded-lg my-2 px-2 py-4 animate-fromRight relative">
+        <div className="flex items-center shadow-lg rounded-lg my-2 px-2 py-4 animate-fromRight relative bg-white">
             <div className="mx-[12px]">
                 {toastType?.map((item) => {
                     if (item.type === toast.type) {
