@@ -85,11 +85,13 @@ const PaymentSection = () => {
         })
             .then((value) => {
                 setCart([])
-                router.replace("/")
+                showToast('success', 'Thành công', "Bạn đã thanh toán thành công", 3000, setToast)
+                setTimeout(router.replace("/"), 3000)
+
             })
             .catch(err => {
                 console.log(err)
-                showToast('error', 'Thất bại', err, 3000, setToast)
+                showToast('error', 'Thất bại', err.message, 3000, setToast)
             })
     }
     // UI
