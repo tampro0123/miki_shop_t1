@@ -19,6 +19,12 @@ const editCartStatus = async (req, res) => {
             message: "Cart not found!"
           });
 
+        if (cart.status == 'SUCCESS')
+          return res.status(200).json({
+            success: false,
+            message: "Cart status can't channge!"
+          });
+
         await Cart.findByIdAndUpdate(cart.id, { status: 'CANCELLED' });
 
         return res.status(200).json({
