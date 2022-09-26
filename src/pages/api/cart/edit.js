@@ -1,5 +1,4 @@
 import withAuth from 'src/middleware/withAuth';
-import withRoles from 'src/middleware/withRoles';
 import Cart from 'src/models/Cart';
 import dbConnect from 'src/utils/dbConnect.js';
 
@@ -46,4 +45,4 @@ const editCartStatus = async (req, res) => {
   }
 };
 
-export default withAuth(withRoles(editCartStatus, 'admin'));
+export default withAuth(editCartStatus);
