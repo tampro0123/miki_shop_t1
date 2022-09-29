@@ -42,6 +42,7 @@ export default function CardDetail({ product }) {
         },
       })
       setCartState((prev) => {
+        
         return [
           ...prev,
           {
