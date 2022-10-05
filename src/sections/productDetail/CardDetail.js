@@ -5,13 +5,13 @@ import { Add, Sub } from 'src/components/Icons';
 import { RatingReview } from 'src/components/Rating';
 import FormatPrice from 'src/utils/formatPrice';
 import { cartState } from 'src/recoils/cartState'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { dataUser } from 'src/recoils/dataUser.js'
 import { useRecoilValue } from 'recoil'
 import axiosAuth from 'src/utils/axios'
 export default function CardDetail({ product }) {
   const inforUser = useRecoilValue(dataUser)
-  const setCartState = useSetRecoilState(cartState)
+  const [cart, setCart] = useRecoilState(cartState)
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(product.storage[0].price);
   const [size, setSize] = useState();
@@ -21,42 +21,71 @@ export default function CardDetail({ product }) {
   const [sizeQuantity, setSizeQuantity] = useState();
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState();
-
-
-
   async function handleGetProduct() {
     if (size) {
-      const data = await axiosAuth({
-        method: "POST",
-        url: '/api/cart/addToCart',
-        data: {
-          userId: inforUser.id,
-          product: {
-            id: product._id,
-            size: size,
-            quantity: amount,
-            price: price,
-            name: product.name,
-            image: product.images[0].src
-          }
-        },
-      })
-      setCartState((prev) => {
-        
-        return [
-          ...prev,
-          {
-            id: product._id,
-            name: product.name,
-            category: price.category,
-            size: size,
-            quantity: amount,
-            desc: product.description,
-            image: product.images[0].src,
-            price: price
-          }
-        ]
-      })
+      const check = cart.every((item) => {
+        return item.product !== product._id || item.size !== size;
+      });
+      console.log(check)
+      if (check) {
+        const data = await axiosAuth({
+          method: "POST",
+          url: '/api/cart/addToCart',
+          data: {
+            userId: inforUser.id,
+            product: {
+              id: product._id,
+              size: size,
+              quantity: amount,
+              price: price,
+              name: product.name,
+              image: product.images[0].src
+            }
+          },
+        })
+        console.log(data)
+        return setCart((prev) => {
+          return [
+            ...prev,
+            {
+              product: product._id,
+              name: product.name,
+              category: price.category,
+              size: size,
+              quantity: amount,
+              desc: product.description,
+              image: product.images[0].src,
+              price: price
+            }
+          ]
+        })
+      } else {
+        const newQuantity = cart.find((item) => item.product == product._id && item.size == size);
+        console.log(newQuantity)
+        const data = await axiosAuth({
+          method: "POST",
+          url: '/api/cart/addToCart',
+          data: {
+            userId: inforUser.id,
+            product: {
+              ...newQuantity,
+              quantity: newQuantity.quantity + amount,
+              id: newQuantity.product
+            }
+          },
+        })
+        let sameProduct = {
+          ...newQuantity,
+          quantity: newQuantity.quantity + amount
+        }
+        return setCart((prev) => {
+          return [
+            ...prev.filter((item) => item.product !== product._id || item.size !== size),
+            sameProduct
+          ]
+        })
+      }
+
     } else {
       setWarning({ ...warning, warningChooseSize: true });
       setTimeout(() => {
@@ -64,6 +93,7 @@ export default function CardDetail({ product }) {
       }, 3000);
     }
   }
+
   const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
   useEffect(() => {
     setMainImg(product.images[0].src);
@@ -90,7 +120,6 @@ export default function CardDetail({ product }) {
     }
     amount < sizeQuantity && size && setAmount((prev) => prev + 1);
   };
-
 
   return (
     <div className="flex justify-between">
@@ -154,7 +183,7 @@ export default function CardDetail({ product }) {
           ) : (
             <div>
               <span className="text-Neutral/2 text-2xl line-through">
-                {new Intl.NumberFormat('vi-VN').format(price)} đ
+                {new Intl.NumberFormat('vi-VN').format(price)}
               </span>
               <div className="inline-block ml-[18px] mr-4 w-[2px] h-[16px] bg-Neutral/2 "></div>
               <span className="text-white bg-[#A18A68] rounded-[4px] py-[4px] px-[7px] ">{`${product.discount} %`}</span>
