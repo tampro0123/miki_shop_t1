@@ -12,49 +12,33 @@ export default function CartItems() {
     const [dataItems, setDataItems] = useRecoilState(cartState)
     const [inforProducts, setInforProducts] = useState([])
     const [scroll, setScroll] = useState('')
-    const removeItem = async (item) => {
-        const itemIndex = inforProducts.findIndex(e => e.id === item.id);
-        const html = inforProducts.map(data => {
-            if ((data.id === item.id) && (data.size === item.size)) {
-                return setDataItems([
-                    ...inforProducts.slice(0, itemIndex),
-                    ...inforProducts.slice(itemIndex + 1)
-                ])
 
-            }
-            return data
-        })
-        const data = await axiosAuth({
-            method: "POST",
-            url: '/api/cart/addToCart',
-            data: {
-                userId: inforUser.id,
-                product: {
-                    id: item.id,
-                    size: item.size,
-                    quantity: 0,
-                }
-            },
-        })
-        console.log(data.data)
-    }
-    async function addQuantity(item) {
+    function handleQuantity(item, method) {
+        let newQuantity;
+        if (method === "ADD") {
+            newQuantity = 1
+        }
+        if (method === "SUB") {
+            newQuantity = -1
+        }
+
+
+
         let objData = {}
-        const html = inforProducts.map(data => {
-            if ((data.id === item.id) && (data.size === item.size)) {
-                objData.id = item.id;
-                objData.quantity = data.quantity + 1;
+        const quantity = inforProducts.map(data => {
+            if ((data.product === item.product) && (data.size === item.size)) {
+                objData.id = item.product;
+                objData.quantity = data.quantity + newQuantity;
                 objData.size = data.size;
                 objData.name = data.name,
                     objData.price = data.price,
                     objData.image = data.image
-                return { ...data, quantity: data.quantity + 1 }
-
+                return { ...data, quantity: objData.quantity }
             }
             return data
         })
-        setDataItems(html)
-        const data = await axiosAuth({
+        setDataItems(quantity)
+        const data = axiosAuth({
             method: "POST",
             url: '/api/cart/addToCart',
             data: {
@@ -69,40 +53,26 @@ export default function CartItems() {
                 }
             },
         })
-        console.log(data.data)
-    }
-    async function subQuantity(item) {
-        let objData = {}
-        const html = inforProducts.map(data => {
-            if ((data.id === item.id) && (data.size === item.size) && (data.quantity > 1)) {
-                objData.id = item.id;
-                objData.quantity = data.quantity - 1;
-                objData.size = data.size;
-                objData.name = data.name
-                objData.price = data.price
-                objData.image = data.image
-                return { ...data, quantity: data.quantity - 1 }
+            .then(res => console.log(res))
 
-            }
-            return data
-        })
-        setDataItems(html)
-        const data = await axiosAuth({
-            method: "POST",
-            url: '/api/cart/addToCart',
-            data: {
-                userId: inforUser.id,
-                product: {
-                    id: objData.id,
-                    size: objData.size,
-                    quantity: objData.quantity,
-                    name: objData.name,
-                    price: objData.price,
-                    image: objData.image
+
+        if (method === "REMOVE") {
+            let itemIndex = inforProducts.findIndex(e => e.product === item.product);
+            // console.log(itemIndex)
+            let html = inforProducts.map(data => {
+                if ((data.product === item.product) && (data.size === item.size)) {
+                    newQuantity = -data.quantity;
+                    let a = [
+                        ...inforProducts.slice(0, itemIndex),
+                        ...inforProducts.slice(itemIndex + 1)
+                    ]
+                    console.log(a)
+                    return setDataItems(a)
                 }
-            },
-        })
-        console.log(data.data)
+                return data
+            })
+            return html
+        }
     }
     useEffect(() => {
         setInforProducts(dataItems)
@@ -115,7 +85,8 @@ export default function CartItems() {
                 "flex flex-col max-h-[850px]"}>
                 {inforProducts?.map((item, index) => {
                     return (
-                        <div key={index} className="flex gap-[41px] items-center justify-between pb-[46px] 
+                        <div key={index} className="flex gap-[41px]
+                         items-center justify-between pb-[46px] 
                             border-b-[1px] pt-[46px] border-b-solid border-b-[#D8D8D8]">
                             <div className="max-w-[136px] shadow-md rounded-8">
                                 <img src={item?.image} className="w-full" alt="" />
@@ -124,7 +95,7 @@ export default function CartItems() {
                                 <div>
                                     <div className='mb-8 flex justify-between items-start'>
                                         <h3 className=" text-[20px] font-bold">{item.name}</h3>
-                                        <button className="active:bg-black active:rounded-full" onClick={() => removeItem(item)}>
+                                        <button className="active:bg-black active:rounded-full" onClick={() => handleQuantity(item, 'REMOVE')}>
                                             <Close />
                                         </button>
                                     </div>
@@ -133,13 +104,13 @@ export default function CartItems() {
                                 <div>
                                     <div className='flex items-center '>
                                         <button className="active:bg-black active:rounded-full"
-                                            onClick={() => subQuantity(item)}
+                                            onClick={() => handleQuantity(item, 'SUB')}
                                         >
                                             <Sub />
                                         </button>
                                         <p className="text-[20px] font-bold leading-7 w-7 text-center mx-4">{item.quantity}</p>
                                         <button className="active:bg-black active:rounded-full"
-                                            onClick={() => addQuantity(item)}>
+                                            onClick={() => handleQuantity(item, 'ADD')}>
                                             <Add />
                                         </button>
                                     </div>

@@ -8,12 +8,14 @@ import { useRouter } from 'next/router'
 import { useSetRecoilState } from 'recoil'
 import { inforProduct } from 'src/recoils/inforProduct.js'
 import Loading from 'src/components/Loading';
+import Pagination from 'src/components/Pagination/Pagination'
 export default function managementProducts() {
+  const { query } = useRouter()
   const router = useRouter()
   const setProductState = useSetRecoilState(inforProduct)
-  const { product: products } = useProducts('all')
+  const { product: products } = useProducts(`all?page=${query.page}&limit=5`)
+  console.log(products)
   const [newProduct, setNewProduct] = useState([])
-  const [checkAll, setCheckAll] = useState(false)
   const handleChange = (e) => {
     const { name, checked } = e.target
     if (name === 'checkAll') {
@@ -24,7 +26,6 @@ export default function managementProducts() {
       setNewProduct(check)
     }
   }
-  console.log(newProduct.filter(item => item?.isChecked !== true).length < 1)
   useEffect(() => {
     if (products !== undefined) {
       setNewProduct(products.product)
@@ -137,11 +138,11 @@ export default function managementProducts() {
                         </tr>
                       ))
                       }
-
                     </tbody>
                   )
                 })}
               </table>
+              <Pagination pageCount={4} />
             </div>
           </div>
         </OverLay>

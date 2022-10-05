@@ -1,20 +1,13 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
 import { RatingReview } from 'src/components/Rating';
-import FormatDate from 'src/utils/formatDate';
 import RatingProduct from './RatingProduct';
+import FeedbackContainer from '../../components/Feedbacks/FeedbackContainer';
 
 export default function MoreDetail({ product, feedbacks }) {
   const Tabs = ['Mô tả', 'Bảo hành và Hoàn trả', 'Vận chuyển', `Đánh giá`];
   const Rates = ['Tất cả', `5 Sao`, `4 Sao`, `3 Sao`, `2 Sao`, `1 Sao`];
-  const Rate1Star = feedbacks.filter((feedback) => feedback.rate == 1);
-  const Rate2Star = feedbacks.filter((feedback) => feedback.rate == 2);
-  const Rate3Star = feedbacks.filter((feedback) => feedback.rate == 3);
-  const Rate4Star = feedbacks.filter((feedback) => feedback.rate == 4);
-  const Rate5Star = feedbacks.filter((feedback) => feedback.rate == 5);
-  console.log(feedbacks)
   const [tabIndex, setTabIndex] = useState(3);
-  const [rateIndex, setRateIndex] = useState(0);
+  const [tabRateIndex, setTabRateIndex] = useState(0);
 
   return (
     <div>
@@ -153,11 +146,11 @@ export default function MoreDetail({ product, feedbacks }) {
               {Rates.map((rate, index) => (
                 <span
                   onClick={() => {
-                    setRateIndex(index);
+                    setTabRateIndex(index);
                   }}
                   key={rate}
                   className={
-                    rateIndex == index
+                    tabRateIndex == index
                       ? 'px-6 py-2 bg-white border rounded-8 border-primary/1 text-primary/1 mr-6 mb-6 cursor-not-allowed'
                       : 'px-6 py-2 bg-white border rounded-8 text-Neutral/3 border-Neutral/3 mr-6 mb-6 cursor-pointer'
                   }
@@ -168,216 +161,7 @@ export default function MoreDetail({ product, feedbacks }) {
             </div>
           </div>
           {/* tab rating star */}
-          <div className="mb-4 mt-5">
-            <div className={rateIndex == 0 ? 'block' : 'hidden'}>
-              {feedbacks.length != 0 ? (
-                feedbacks.map((feedback, index) => {
-                  return (
-                    <div key={Math.random()} className="mb-9 w-full">
-                      <div className="flex">
-                        <div className=" overflow-hidden mr-3">
-                          <Image
-                            src={feedback?.user?.avatar}
-                            width="54"
-                            height="54"
-                            placeholder="empty"
-                            objectFit="cover"
-                            className='rounded-full'
-                          />
-                        </div>
-                        <div>
-                          <p>{feedback.user.username}</p>
-                          <RatingReview value={feedback.rate} />
-                          <p>
-                            <FormatDate date={feedback.updatedAt} />
-                          </p>
-                        </div>
-                        <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                        <div>
-                          <p className="font-bold">Nội dung bình luận:</p>
-                          <p className="pl-3">{feedback.content}</p>
-                        </div>
-                      </div>
-                      <div className="ml-[270px] mt-2">
-                        {feedback.media.type == 'image' ? (
-                          <a target={'blank'} href={feedback.media.src}>
-                            <Image
-                              src={feedback.media.src}
-                              width="100"
-                              height="100"
-                              placeholder="empty"
-                              objectFit="cover"
-                            />
-                          </a>
-                        ) : (
-                          <a target={'blank'} href={feedback.media.src}>
-                            <video className="w-[100px] h-[100px]">
-                              <source src={feedback.media.src} type="video/mp4"></source>
-                            </video>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                <p className="font-bold text-32 text-yellow-500 mt-6">
-                  Hiện chưa có bình luận nào! Hãy trở thành người bình luận đầu tiên.{' '}
-                </p>
-              )}
-            </div>
-            <div className={rateIndex == 1 ? 'block' : 'hidden'}>
-              {Rate5Star.length != 0
-                ? Rate5Star.map((feedback, index) => {
-                  return (
-                    <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className=" overflow-hidden mr-3">
-                        <Image
-                          src={feedback?.user?.avatar}
-                          width="54"
-                          height="54"
-                          placeholder="empty"
-                          objectFit="cover"
-                          className='rounded-full'
-                        />
-                      </div>
-                      <div>
-                        <p>{feedback.user.username}</p>
-                        <RatingReview value={feedback.rate} />
-                        <FormatDate date={feedback.updatedAt} />
-                      </div>
-                      <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                      <div>
-                        <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback.content}</p>
-                      </div>
-                    </div>
-                  );
-                })
-                : ''}
-            </div>
-            <div className={rateIndex == 2 ? 'block' : 'hidden'}>
-              {Rate4Star.length != 0
-                ? Rate4Star.map((feedback, index) => {
-                  return (
-                    <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className=" overflow-hidden mr-3">
-                        <Image
-                          src={feedback?.user?.avatar}
-                          width="54"
-                          height="54"
-                          placeholder="empty"
-                          objectFit="cover"
-                          className='rounded-full'
-                        />
-                      </div>
-                      <div>
-                        <p>{feedback.user.username}</p>
-                        <RatingReview value={feedback.rate} />
-                        <FormatDate date={feedback.updatedAt} />
-                      </div>
-                      <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                      <div>
-                        <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback.content}</p>
-                      </div>
-                    </div>
-                  );
-                })
-                : ''}
-            </div>
-            <div className={rateIndex == 3 ? 'block' : 'hidden'}>
-              {Rate3Star.length != 0
-                ? Rate3Star.map((feedback, index) => {
-                  return (
-                    <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className=" overflow-hidden mr-3">
-                        <Image
-                          src={feedback?.user?.avatar}
-                          width="54"
-                          height="54"
-                          placeholder="empty"
-                          objectFit="cover"
-                          className='rounded-full'
-                        />
-                      </div>
-                      <div>
-                        <p>{feedback.user.username}</p>
-                        <RatingReview value={feedback.rate} />
-                        <FormatDate date={feedback.updatedAt} />
-                      </div>
-                      <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                      <div>
-                        <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback.content}</p>
-                      </div>
-                    </div>
-                  );
-                })
-                : ''}
-            </div>
-            <div className={rateIndex == 4 ? 'block' : 'hidden'}>
-              {Rate2Star.length != 0
-                ? Rate2Star.map((feedback, index) => {
-                  return (
-                    <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className=" overflow-hidden mr-3">
-                        <Image
-                          src={feedback?.user?.avatar}
-                          width="54"
-                          height="54"
-                          placeholder="empty"
-                          objectFit="cover"
-                          className='rounded-full'
-                        />
-                      </div>
-                      <div>
-                        <p>{feedback.user.username}</p>
-                        <RatingReview value={feedback.rate} />
-                        <FormatDate date={feedback.updatedAt} />
-                      </div>
-                      <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                      <div>
-                        <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback.content}</p>
-                      </div>
-                    </div>
-                  );
-                })
-                : ''}
-            </div>
-            <div className={rateIndex == 5 ? 'block' : 'hidden'}>
-              {Rate1Star.length != 0
-                ? Rate1Star.map((feedback, index) => {
-                  return (
-                    <div key={Math.random()} className="mb-9 w-full flex">
-                      <div className=" overflow-hidden mr-3">
-                        <Image
-                          src={feedback?.user?.avatar}
-                          width="54"
-                          height="54"
-                          placeholder="empty"
-                          objectFit="cover"
-                          className='rounded-full'
-                        />
-
-                      </div>
-                      <div>
-                        <p>{feedback.user.username}</p>
-                        <RatingReview value={feedback.rate} />
-                        <FormatDate date={feedback.updatedAt} />
-                      </div>
-                      <div className="w-[2px] mx-4 h-[65px] bg-Neutral/2"></div>
-                      <div>
-                        <p className="font-bold">Nội dung bình luận:</p>
-                        <p className="pl-3">{feedback.content}</p>
-                      </div>
-                    </div>
-                  );
-                })
-                : ''}
-            </div>
-          </div>
+          <FeedbackContainer feedbacks={feedbacks} tabRateIndex={tabRateIndex}  />
           <RatingProduct product={product} />
         </div>
       </div>
