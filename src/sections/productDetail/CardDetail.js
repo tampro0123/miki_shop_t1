@@ -1,33 +1,20 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'src/components/Button';
 import { Add, Sub } from 'src/components/Icons';
 import { RatingReview } from 'src/components/Rating';
 import { cartState } from 'src/recoils/cartState';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { dataUser } from 'src/recoils/dataUser.js';
 import { useRecoilValue } from 'recoil';
 import { toasts } from 'src/recoils/toasts';
 import { showToast } from 'src/utils/showToast';
 import FormatPrice from 'src/utils/formatPrice';
 import addProductToCart from 'src/utils/addProductToCart';
+import { useRouter } from 'next/router';
 
 export default function CardDetail({ product }) {
   const router = useRouter()
-
-  const inforUser = useRecoilValue(dataUser);
-  const setCartState = useSetRecoilState(cartState);
-
-  const [mainImg, setMainImg] = useState(product.images[0].src);
-
-  // State click size
-  const [sizeQuantity, setSizeQuantity] = useState(null);
-  const [stocking, setStocking] = useState(product.storage[0].quantity);
-  const [sizeIndex, setSizeChecked] = useState(null);
-
-  // const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
-
   const initProductState = {
     id: product._id,
     name: product.name,
@@ -36,27 +23,41 @@ export default function CardDetail({ product }) {
     price: product.storage[0].price,
     image: product.images[0].src,
   };
-
+  
+  const inforUser = useRecoilValue(dataUser);
+  const [cart, setCart] = useRecoilState(cartState);
+  
   const [productState, setProductState] = useState(initProductState);
+
+  const [mainImg, setMainImg] = useState(product.images[0].src);
+  
+  // State click size
+  const [sizeQuantity, setSizeQuantity] = useState(null);
+  const [stocking, setStocking] = useState(product.storage[0].quantity);
+  const [sizeIndex, setSizeChecked] = useState(null);
+  
+  // const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
+  
+  useEffect(() => {
+    setMainImg(product.images[0].src);
+    setSizeChecked(null);
+    setProductState(initProductState);
+  }, [product.slug]);
 
   // toast
   const setToast = useSetRecoilState(toasts);
 
   async function handleBuyNowProduct() {
-    addProductToCart( inforUser.id, productState, product.category, product.description, setCartState, setToast )
+    addProductToCart( inforUser.id, productState, product.category, product.description, cart, setCart, setToast )
     setTimeout( () => {
       router.push('/cart')
     }, 1000)
   }
 
   async function handleGetProduct() {
-    addProductToCart( inforUser.id, productState, product.category, product.description, setCartState, setToast )
+    addProductToCart( inforUser.id, productState, product.category, product.description,cart, setCart, setToast )
   }
-  useEffect(() => {
-    setMainImg(product.images[0].src);
-    setSizeChecked(null);
-    setProductState(initProductState);
-  }, [product.slug]);
+  
   const handleSubAmount = () => {
     productState.quantity > 0 &&
       setProductState((prev) => {
@@ -66,7 +67,6 @@ export default function CardDetail({ product }) {
         };
       });
   };
-  console.log(productState);
   const handleAddAmount = () => {
     if (!productState.size) {
       // setWarning({ ...warning, warningChooseSize: true });

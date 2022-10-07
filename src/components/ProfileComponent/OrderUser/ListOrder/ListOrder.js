@@ -5,7 +5,7 @@ import FormatPrice from 'src/utils/formatPrice'
 import { Delete } from 'src/components/Icons/icons.js';
 import { useRouter } from 'next/router';
 import Button from 'src/components/Button';
-import CartEmpty from 'src/sections/cartInfor/CartEmpty';
+import OrderEmpty from 'src/components/OrderEmpty/OrderEmpty';
 export default function ListOrder() {
     const router = useRouter()
     const data = useRecoilValue(cartState)
@@ -62,7 +62,7 @@ export default function ListOrder() {
                     </Button>
                 </div >
                 :
-                <CartEmpty />
+                <OrderEmpty title='Giỏ hàng bạn đang trống !!' />
             }
         </>
 
