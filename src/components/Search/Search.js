@@ -14,7 +14,7 @@ function Search() {
 
   const debouncedValue = useDebounce(filterText, 500);
   const [isPending, startTransition] = useTransition();
-  const inputRef = useRef();
+  const [isLoading, startLoading] = useTransition();
   const router = useRouter();
 
   useEffect(() => {
@@ -29,7 +29,9 @@ function Search() {
         data: { filterText },
       });
       const products = await result.data;
-      setSearchResult(products.product);
+      startLoading(() => {
+        setSearchResult(products.product);
+      });
     };
 
     fetchApi();
@@ -56,22 +58,25 @@ function Search() {
         visible={showResult && debouncedValue}
         placement="bottom"
         render={(attrs) => (
-          <div className="" tabIndex="-1" {...attrs}>
+          <div tabIndex="-1" {...attrs}>
             <div className={' flex flex-col relative w-[550px] bg-gray-100 border border-t-2 shadow-lg  rounded-sm'}>
               <div className="py-1 fixed top-0">
-                <h4 className="text-lg font-semibold inline-block pl-4">Sản Phẩm : {searchResult.length}</h4>
+                <h4 className="text-lg font-semibold inline-block pl-4">
+                  Sản Phẩm :{!isLoading ? `  ${searchResult.length}` : <Loading />}
+                </h4>
               </div>
               <div className="w-full h-[2px] bg-slate-500 mt-7"></div>
-              {searchResult.length > 0 && (
+              {searchResult.length > 0 && !isLoading && (
                 <div className={searchResult.length > 3 ? 'mt-3 overflow-y-scroll h-[400px]' : 'mt-3'}>
                   {searchResult.map((e) => (
                     <SearchItem key={e._id} product={e} />
                   ))}
                 </div>
-              )}
-              {searchResult.length == 0 && searchValue && (
-                <p className="text-center text-xl font-semibold text-red-500 my-3">Không tìm thấy sản phẩm nào</p>
-              )}
+              ) 
+              // : (
+              //   <p className="text-center text-xl font-semibold text-red-500 my-3">Không tìm thấy sản phẩm nào</p>
+              // )
+              }
             </div>
           </div>
         )}
@@ -79,7 +84,6 @@ function Search() {
       >
         <div className="flex items-center w-[200px]">
           <input
-            ref={inputRef}
             value={searchValue}
             placeholder="Tìm kiếm sản phẩm"
             className="h-[32px] text-[14px] px-[5px] border-0 outline-0 flex-1 w-[150px]"
@@ -87,18 +91,16 @@ function Search() {
             onChange={handleChange}
             onFocus={() => setShowResult(true)}
             onKeyDown={(e) => {
-              if(e.key === 'Enter') 
-              router.push(`/product/search?keyword=${searchValue}`)
-            } 
-            }
+              if (e.key === 'Enter') router.push(`/product/search?keyword=${searchValue}`);
+            }}
           />
 
-          {isPending && <Loading />}
+          {(isPending || isLoading) && <Loading />}
           <button
             onClick={(e) => {
-                  if (searchValue ) {
-                    router.push(`/product/search?keyword=${searchValue}`);
-                  }
+              if (searchValue) {
+                router.push(`/product/search?keyword=${searchValue}`);
+              }
             }}
           >
             <SearchIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
