@@ -1,12 +1,9 @@
-import dbConnect from 'src/utils/dbConnect.js';
-import User from 'src/models/User';
 import bcrypt from 'bcrypt';
-import RefreshToken from 'src/models/RefreshToken';
 import { serialize } from 'cookie';
-import {
-  generateAccessToken,
-  generateRefreshToken,
-} from "src/hooks/generateToken";
+import RefreshToken from 'src/models/RefreshToken';
+import User from 'src/models/User';
+import dbConnect from 'src/utils/dbConnect.js';
+import { generateAccessToken, generateRefreshToken } from 'src/utils/generateToken';
 
 async function handler(req, res) {
   const { method } = req;
@@ -20,6 +17,7 @@ async function handler(req, res) {
           return res.status(400).json({
             success: false,
             message: 'Người dùng không tồn tại trên hệ thống',
+            userNameSucc: false,
           });
         // nếu email user đã tồn tại trả về lỗi 400 và message
         const validPassword = await bcrypt.compare(password, user.password);
@@ -27,24 +25,26 @@ async function handler(req, res) {
           return res.status(401).json({
             message: 'Mật khẩu không đúng',
             success: false,
+            passwordSucc: false,
           });
         }
         if (user && validPassword) {
           const { password, ...userInfo } = user;
-
+          //Tạo refreshToken tương ứng
           const accessToken = generateAccessToken(user);
           const refreshToken = generateRefreshToken(user);
-          const newRefreshToken = new RefreshToken({
-            userId: user._id,
+          await RefreshToken.create({
+            user: user._id,
             refreshToken,
           });
-          await newRefreshToken.save();
 
           res.setHeader(
             'Set-Cookie',
-            serialize('token', refreshToken, {
+            serialize('refreshToken', refreshToken, {
               httpOnly: true,
-              maxAge: 3600 * 24 * 365 * 1000,
+              secure: false,
+              path: '/',
+              sameSite: 'strict',
             })
           );
 
@@ -60,9 +60,8 @@ async function handler(req, res) {
         return res.status(500).json(error);
       }
       break;
-
     default:
-      return method;
+      return res.status(500).json({ success: false, message: 'Faild to connect to server' });
   }
 }
 export default handler;
