@@ -61,7 +61,6 @@ export default function CardDetail({ product }) {
         })
       } else {
         const newQuantity = cart.find((item) => item.product == product._id && item.size == size);
-        console.log(newQuantity)
         const data = await axiosAuth({
           method: "POST",
           url: '/api/cart/addToCart',

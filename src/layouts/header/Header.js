@@ -150,65 +150,65 @@ export default function Header() {
           </Link>
 
           {/* <Link href={valueUser?.id ? '' : 'auth/login'}> */}
-            <div className="py-[4px] relative flex items-center group"
-              onClick={() => {
-                !valueUser && router.push({
-                  ...router,
-                  pathname: '/auth/login'
-                })
-                setActive(prev => !prev)
-              }}
-              ref={navRef}
-            >
-              {valueUser?.avatar ?
-                <Image
-                  width='30px'
-                  height='30px'
-                  className="rounded-[50%] "
-                  objectFit="cover"
-                  src={valueUser.avatar}
+          <div className="py-[4px] relative flex items-center group"
+            onClick={() => {
+              !valueUser && router.push({
+                ...router,
+                pathname: '/auth/login'
+              })
+              setActive(prev => !prev)
+            }}
+            ref={navRef}
+          >
+            {valueUser?.avatar ?
+              <Image
+                width='30px'
+                height='30px'
+                className="rounded-[50%] "
+                objectFit="cover"
+                src={valueUser.avatar}
 
-                />
-                :
-                <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
-              }
-              {valueUser?.id ?
-                <div className={active ? "absolute z-20  max-w-[900px] w-[250px] bg-bgr right-[-30px] top-[50px] block shadow-xl rounded-8 transition-500"
-                  : 'hidden'}>
-                  <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
-                    <li
-                      className="text-16 font-bold hover:text-3rd-text duration-500 ">
-                      <Link href='/profile'>
-                        <a className='flex gap-[5px] items-center'>
-                          <UserIcon classNameIcon='w-[25px] ' />
-                          <span>Thông tin cá nhân</span>
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
-                      <Bell iconClass='w-[25px]' />
-                      Thông báo
-                    </li>
-                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
-                      <History iconClass='w-[25px]' />
-                      Lịch sử mua hàng</li>
-                    {valueUser.role == 'admin' ?
-                      <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center" onClick={() => router.push('/admin')}>
-                        <Dashboard iconClass='w-[25px]' />
-                        Quản lí</li>
-                      : ''}
-                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
-                      onClick={() => handleClick()}
-                    >
-                      <Logout iconClass='w-[25px]' />
-                      Đăng xuất</li>
-                  </ul>
-                </div>
-                :
-                ''
-              }
+              />
+              :
+              <UserIcon classNameIcon="cursor-pointer hover:scale-90 duration-300 " />
+            }
+            {valueUser?.id ?
+              <div className={active ? "absolute z-20  max-w-[900px] w-[250px] bg-bgr right-[-30px] top-[50px] block shadow-xl rounded-8 transition-500"
+                : 'hidden'}>
+                <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
+                  <li
+                    className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 ">
+                    <Link href='/profile'>
+                      <a className='flex gap-[5px] items-center'>
+                        <UserIcon classNameIcon='w-[25px] ' />
+                        <span>Thông tin cá nhân</span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                    <Bell iconClass='w-[25px]' />
+                    Thông báo
+                  </li>
+                  <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                    <History iconClass='w-[25px]' />
+                    Lịch sử mua hàng</li>
+                  {valueUser.role == 'admin' ?
+                    <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center" onClick={() => router.push('/admin')}>
+                      <Dashboard iconClass='w-[25px]' />
+                      Quản lí</li>
+                    : ''}
+                  <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
+                    onClick={() => handleClick()}
+                  >
+                    <Logout iconClass='w-[25px]' />
+                    Đăng xuất</li>
+                </ul>
+              </div>
+              :
+              ''
+            }
 
-            </div>
+          </div>
           {/* </Link> */}
         </div>
       </div>}
