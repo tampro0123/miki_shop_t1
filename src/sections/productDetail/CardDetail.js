@@ -23,21 +23,93 @@ export default function CardDetail({ product }) {
     price: product.storage[0].price,
     image: product.images[0].src,
   };
-  
+
   const inforUser = useRecoilValue(dataUser);
   const [cart, setCart] = useRecoilState(cartState);
-  
+
   const [productState, setProductState] = useState(initProductState);
 
   const [mainImg, setMainImg] = useState(product.images[0].src);
-  
+
   // State click size
   const [sizeQuantity, setSizeQuantity] = useState(null);
   const [stocking, setStocking] = useState(product.storage[0].quantity);
   const [sizeIndex, setSizeChecked] = useState(null);
-  
-  // const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
-  
+  async function handleGetProduct() {
+    if (size) {
+      const check = cart.every((item) => {
+        return item.product !== product._id || item.size !== size;
+      });
+      console.log(check)
+      if (check) {
+        const data = await axiosAuth({
+          method: "POST",
+          url: '/api/cart/addToCart',
+          data: {
+            userId: inforUser.id,
+            product: {
+              id: product._id,
+              size: size,
+              quantity: amount,
+              price: price,
+              name: product.name,
+              image: product.images[0].src
+            }
+          },
+        })
+        console.log(data)
+        return setCart((prev) => {
+          return [
+            ...prev,
+            {
+              product: product._id,
+              name: product.name,
+              category: price.category,
+              size: size,
+              quantity: amount,
+              desc: product.description,
+              image: product.images[0].src,
+              price: price
+            }
+          ]
+        })
+      } else {
+        const newQuantity = cart.find((item) => item.product == product._id && item.size == size);
+        const data = await axiosAuth({
+          method: "POST",
+          url: '/api/cart/addToCart',
+          data: {
+            userId: inforUser.id,
+            product: {
+              ...newQuantity,
+              quantity: newQuantity.quantity + amount,
+              id: newQuantity.product
+            }
+          },
+        })
+        let sameProduct = {
+          ...newQuantity,
+          quantity: newQuantity.quantity + amount
+        }
+        return setCart((prev) => {
+          return [
+            ...prev.filter((item) => item.product !== product._id || item.size !== size),
+            sameProduct
+          ]
+        })
+      }
+
+    } else {
+      setWarning({ ...warning, warningChooseSize: true });
+      setTimeout(() => {
+        setWarning({ ...warning, warningChooseSize: false });
+      }, 3000);
+    }
+  }
+
+  const [warning, setWarning] = useState({ warningMaxAmount: false, warningChooseSize: false });
+
+
   useEffect(() => {
     setMainImg(product.images[0].src);
     setSizeChecked(null);
@@ -48,16 +120,16 @@ export default function CardDetail({ product }) {
   const setToast = useSetRecoilState(toasts);
 
   async function handleBuyNowProduct() {
-    addProductToCart( inforUser.id, productState, product.category, product.description, cart, setCart, setToast )
-    setTimeout( () => {
+    addProductToCart(inforUser.id, productState, product.category, product.description, cart, setCart, setToast)
+    setTimeout(() => {
       router.push('/cart')
     }, 1000)
   }
 
   async function handleGetProduct() {
-    addProductToCart( inforUser.id, productState, product.category, product.description,cart, setCart, setToast )
+    addProductToCart(inforUser.id, productState, product.category, product.description, cart, setCart, setToast)
   }
-  
+
   const handleSubAmount = () => {
     productState.quantity > 0 &&
       setProductState((prev) => {
@@ -231,7 +303,7 @@ export default function CardDetail({ product }) {
                         ...prev,
                         price: e.price,
                         size: e.size,
-                        quantity:0,
+                        quantity: 0,
                       };
                     });
                   }

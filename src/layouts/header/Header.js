@@ -101,7 +101,11 @@ export default function Header() {
                   interactive
                   placement={'bottom'}
                   render={(attrs) => (
-                    <div className="flex flex-col bg-white rounded-[4px] overflow-hidden p-2 shadow-sm" tabIndex="-1" {...attrs}>
+                    <div
+                      className="flex flex-col bg-white rounded-[4px] overflow-hidden p-2 shadow-sm"
+                      tabIndex="-1"
+                      {...attrs}
+                    >
                       <Link href="/product?category=nhan&sort=+&order=+">
                         <a className="hover:bg-Neutral/3 px-2 py-1">Nhẫn</a>
                       </Link>
@@ -119,9 +123,7 @@ export default function Header() {
                 >
                   <div className="flex items-center">
                     <Link href="/product/allProduct">
-                      <a className="mr-2 text-16 hover:text-3rd-text duration-500">
-                        Sản phẩm
-                      </a>
+                      <a className="mr-2 text-16 hover:text-3rd-text duration-500">Sản phẩm</a>
                     </Link>
                     <CaretDown classNameIcon="cursor-pointer" />
                   </div>
@@ -190,7 +192,7 @@ export default function Header() {
                   }
                 >
                   <ul className=" w-full p-[21px] text-[16px] flex flex-col gap-y-[20px]">
-                    <li className="text-16 font-bold hover:text-3rd-text duration-500 ">
+                    <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 ">
                       <Link href="/profile">
                         <a className="flex gap-[5px] items-center">
                           <UserIcon classNameIcon="w-[25px] " />
@@ -198,17 +200,17 @@ export default function Header() {
                         </a>
                       </Link>
                     </li>
-                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                    <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
                       <Bell iconClass="w-[25px]" />
                       Thông báo
                     </li>
-                    <li className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
+                    <li className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center">
                       <History iconClass="w-[25px]" />
                       Lịch sử mua hàng
                     </li>
                     {valueUser.role == 'admin' ? (
                       <li
-                        className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
+                        className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
                         onClick={() => router.push('/admin')}
                       >
                         <Dashboard iconClass="w-[25px]" />
@@ -218,7 +220,7 @@ export default function Header() {
                       ''
                     )}
                     <li
-                      className="text-16 font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
+                      className="text-16 cursor-pointer font-bold hover:text-3rd-text duration-500 flex gap-[5px] items-center"
                       onClick={() => handleClick()}
                     >
                       <Logout iconClass="w-[25px]" />
